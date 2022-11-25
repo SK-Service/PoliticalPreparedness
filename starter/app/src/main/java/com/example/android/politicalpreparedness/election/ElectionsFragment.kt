@@ -1,10 +1,13 @@
 package com.example.android.politicalpreparedness.election
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.android.politicalpreparedness.databinding.FragmentElectionBinding
+import com.example.android.politicalpreparedness.databinding.FragmentLaunchBinding
 
 class ElectionsFragment: Fragment() {
 
@@ -13,6 +16,10 @@ class ElectionsFragment: Fragment() {
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+        Log.i("ElectionFragment", "Inside onCreateView")
+        val binding = FragmentElectionBinding.inflate(inflater)
+
+        binding.lifecycleOwner = this
 
         //TODO: Add ViewModel values and create ViewModel
 
@@ -23,6 +30,7 @@ class ElectionsFragment: Fragment() {
         //TODO: Initiate recycler adapters
 
         //TODO: Populate recycler adapters
+        return binding.root
 
     }
 

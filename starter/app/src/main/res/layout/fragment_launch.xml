@@ -9,10 +9,61 @@
         tools:context="com.example.android.politicalpreparedness.MainActivity">
 
         <!-- TODO: Add image for home screen logo. -->
-
         <!-- TODO: Add Button to navigate to upcoming elections. -->
 
         <!-- TODO: Add Button to navigate to representatives. -->
+
+        <FrameLayout
+            android:id="@+id/election_voting_image_layout"
+            android:layout_width="347dp"
+            android:layout_height="355dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="76dp"
+            android:layout_marginEnd="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/election_voting_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:contentDescription="A voting image shoiwng "
+                android:foregroundGravity="center"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/ballot_logo" />
+        </FrameLayout>
+
+        <Button
+            android:id="@+id/upcoming_elections"
+            android:layout_width="256dp"
+            android:layout_height="51dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="32dp"
+            android:gravity="center"
+            android:text="Upcoming Elections"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.703"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/election_voting_image_layout" />
+
+        <Button
+            android:id="@+id/find_representatives"
+            android:layout_width="256dp"
+            android:layout_height="51dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:gravity="center"
+            android:text="Find My Representatives"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.703"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/upcoming_elections"
+            app:layout_constraintVertical_bias="0.376" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

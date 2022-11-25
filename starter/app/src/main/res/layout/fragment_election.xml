@@ -8,11 +8,29 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.example.android.politicalpreparedness.MainActivity">
+        tools:context="com.example.android.politicalpreparedness.ElectionFragment">
 
         <!-- TODO: Add Upcoming Election Recycler and Header -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            android:textStyle="bold"
+            android:textSize="40sp"
+            android:bold=true
+            android:text="Upcoming Elections"
+
+        </TextView>
 
         <!-- TODO: Add Saved Election Recycler and Header -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            android:textStyle="bold"
+            android:textSize="40sp"
+            android:bold=true
+            android:text="Saved Elections"
+
+        </TextView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -12,22 +12,23 @@
 
         <!-- TODO: Add Upcoming Election Recycler and Header -->
         <TextView
+            android:id="@+id/textView"
+            style="@style/AlternateTextStyle"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             android:textStyle="bold"
             android:textSize="40sp"
-            android:bold=true
             android:text="Upcoming Elections"
 
         </TextView>
 
         <!-- TODO: Add Saved Election Recycler and Header -->
         <TextView
+            style="@style/AlternateTextStyle"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             android:textStyle="bold"
             android:textSize="40sp"
-            android:bold=true
             android:text="Saved Elections"
 
         </TextView>

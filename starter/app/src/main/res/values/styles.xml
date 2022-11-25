@@ -10,5 +10,9 @@
     </style>
 
     <!-- TODO: Add necessary styles -->
+    <style name="AlternateTextStyle" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:textColor">@color/text_bluish_black</item>
+        <item name="android:textSize">24sp</item>
+    </style>
 
 </resources>

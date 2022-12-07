@@ -28,13 +28,13 @@ class ElectionsFragment: Fragment() {
 
         binding.lifecycleOwner = this
 
-        //Bind the ElectionRecyclerAdapter to the layout view - which references the RecyclerView
-        binding.upcomingElectionRecycler.adapter = ElectionListAdapter(
-            ElectionListener{
-                electionViewModel.displayElectiondDetails(it)
-            } )
-        Log.i("ElectionsFragment",
-                    "Adapter: ${binding.upcomingElectionRecycler.adapter ?: "value null"}")
+//        //Bind the ElectionRecyclerAdapter to the layout view - which references the RecyclerView
+//        binding.upcomingElectionRecycler.adapter = ElectionListAdapter(
+//            ElectionListener{
+//                electionViewModel.displayElectiondDetails(it)
+//            } )
+//        Log.i("ElectionsFragment",
+//                    "Adapter: ${binding.upcomingElectionRecycler.adapter ?: "value null"}")
 
         //TODO: Add ViewModel values and create ViewModel
         //Get hold of the application context

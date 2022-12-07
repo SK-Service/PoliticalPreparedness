@@ -3,6 +3,7 @@
     package="com.example.android.politicalpreparedness">
 
     <!-- >TODO: Add Permissions -->
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -18,5 +19,9 @@
             </intent-filter>
         </activity>
     </application>
+
+    <meta-data
+        android:name="com.google.android.civic.API_KEY"
+        android:value="${myCivicApiKey}" />
 
 </manifest>

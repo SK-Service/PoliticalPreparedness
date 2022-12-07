@@ -10,6 +10,7 @@ import com.example.android.politicalpreparedness.database.ElectionDao
 import com.example.android.politicalpreparedness.database.ElectionDatabase
 import com.example.android.politicalpreparedness.network.models.Division
 import com.example.android.politicalpreparedness.network.models.Election
+import com.example.android.politicalpreparedness.repository.ElectionRepo
 import com.squareup.moshi.Json
 import kotlinx.coroutines.launch
 import java.util.*
@@ -37,7 +38,7 @@ class ElectionsViewModel(datasource: ElectionDao, application: Application): And
     //init is called to populate the database or cache at the start, with the list of elections
     // and also populate the list of saved elections if there are any
     init {
-        Log.i(TAG, "inside init")
+        Log.i(TAG, "inside init - where data fetch and caching using Room DB will take place")
         viewModelScope.launch {
 
             _civicAPICallStatus.value = ElectionCivicApiStatus.LOADING
@@ -46,6 +47,9 @@ class ElectionsViewModel(datasource: ElectionDao, application: Application): And
 //                _listOfElections.value = AsteroidRepo(ElectionDatabase.getDatabase(application))
 //                    .refreshAsteroidList()
 //                    .toMutableList()
+    Log.i(TAG, "Calling ElectionRepo with Database instance")
+                    ElectionRepo(ElectionDatabase.getInstance(application)).refreshElectionList()
+                Log.i(TAG, "After calling ElectionRepo with Database instance")
 
     //for referirng the Election and Division fill @TODO DELETE
 //                @PrimaryKey val id: Int,

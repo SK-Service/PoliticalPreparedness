@@ -44,7 +44,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView"
-            app:listData="@{electionViewModel.listOfElection}"
+            app:listData="@{electionViewModel}"
             app:spanCount="1"
             tools:itemCount="10" />
 
@@ -75,7 +75,7 @@
             app:layout_constraintHorizontal_bias="0.448"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/saved_election_text_view"
-            app:listData="@{electionViewModel.listOfElection}"
+            app:listData="@{electionViewModel}"
             app:spanCount="1"
             tools:itemCount="10" />
 

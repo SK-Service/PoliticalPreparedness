@@ -20,8 +20,8 @@
         </activity>
     </application>
 
-    <meta-data
-        android:name="com.google.android.civic.API_KEY"
-        android:value="${myCivicApiKey}" />
+<!--    <meta-data-->
+<!--        android:name="com.google.android.civic.API_KEY"-->
+<!--        android:value="${myCivicApiKey}" />-->
 
 </manifest>

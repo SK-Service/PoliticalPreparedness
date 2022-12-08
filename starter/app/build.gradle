@@ -6,10 +6,7 @@ apply plugin: 'kotlinx-serialization'
 apply plugin: 'androidx.navigation.safeargs'
 
 def localProperties = new Properties()
-//localProperties.load(new FileInputStream(rootProject.file("local.properties")))
-localProperties.load(project.rootProject.file("local.properties").newDataInputStream())
-
-def googleCivicAPIKey = properties.getProperty('CIVIC_API_KEY')
+localProperties.load(new FileInputStream(rootProject.file("local.properties")))
 
 android {
     compileSdkVersion 30
@@ -22,13 +19,10 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
-//        manifestPlaceholder = [[ myCivicApiKey: googleCivicAPIKey ]]
-        buildConfigField "String", "CIVIC_API_KEY", "\"$googleCivicApiKey\""
+        buildConfigField("String", "API_KEY", "\"" + localProperties['CIVIC_API_KEY'] + "\"")
     }
     buildTypes {
-//        debug {
-//            resValue("string", "google_civic_api_key", localProperties['CIVIC_API_KEY'])
-//        }
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'

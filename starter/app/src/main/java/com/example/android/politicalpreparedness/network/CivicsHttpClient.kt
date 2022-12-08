@@ -1,7 +1,9 @@
 package com.example.android.politicalpreparedness.network
 
 
-import androidx.viewbinding.BuildConfig
+
+import android.util.Log
+import com.example.android.politicalpreparedness.BuildConfig
 import okhttp3.OkHttpClient
 
 class CivicsHttpClient: OkHttpClient() {
@@ -9,9 +11,10 @@ class CivicsHttpClient: OkHttpClient() {
     companion object {
 
          //TODO: Place your API Key Here
-        const val API_KEY = BuildConfig.CIVIC_API_KEY
+        const val API_KEY = BuildConfig.API_KEY
 
-        fun getClient(): OkHttpClient {
+         fun getClient(): OkHttpClient {
+             Log.i("CivicHttpClient", "API KEY: ${API_KEY}")
             return Builder()
                     .addInterceptor { chain ->
                         val original = chain.request()
@@ -24,6 +27,7 @@ class CivicsHttpClient: OkHttpClient() {
                                 .newBuilder()
                                 .url(url)
                                 .build()
+                        Log.i("CivicsHttpClient", "URL:${url}")
                         chain.proceed(request)
                     }
                     .build()

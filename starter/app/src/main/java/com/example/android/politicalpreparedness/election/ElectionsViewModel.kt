@@ -43,30 +43,19 @@ class ElectionsViewModel(datasource: ElectionDao, application: Application): And
 
             _civicAPICallStatus.value = ElectionCivicApiStatus.LOADING
             try {
-//@TODO Change the code to inclue the repository pattern and actual service call
-//                _listOfElections.value = AsteroidRepo(ElectionDatabase.getDatabase(application))
-//                    .refreshAsteroidList()
-//                    .toMutableList()
-    Log.i(TAG, "Calling ElectionRepo with Database instance")
-                    ElectionRepo(ElectionDatabase.getInstance(application)).refreshElectionList()
+                //Call ElectionRepo to get the latest refreshed list from source or cache
+                _listOfElections.value = ElectionRepo(ElectionDatabase.getInstance(application))
+                    .refreshElectionList()
+                    .toMutableList()
+
                 Log.i(TAG, "After calling ElectionRepo with Database instance")
+    //@TODO - TO DELETE - HARD CODED DATA
+//                val election1: Election = Election(1, "NYC State Presidency Primary",
+//                            Date("11/20/2022"), Division("011", "county1", "NYC") )
+//                val election2: Election = Election(2, "Ohio State Presidency Primary",
+//                    Date("11/29/2022"), Division("022", "county2", "Ohio") )
+//                _listOfElections.value = mutableListOf(election1, election2)
 
-    //for referirng the Election and Division fill @TODO DELETE
-//                @PrimaryKey val id: Int,
-//                @ColumnInfo(name = "name")val name: String,
-//                @ColumnInfo(name = "electionDay")val electionDay: Date,
-//                @Embedded(prefix = "division_") @Json(name="ocdDivisionId") val division: Division
-//                data class Division(
-//                    val id: String,
-//                    val country: String,
-//                    val state: String
-
-                val election1: Election = Election(1, "NYC State Presidency Primary",
-                            Date("11/20/2022"), Division("011", "county1", "NYC") )
-                val election2: Election = Election(2, "Ohio State Presidency Primary",
-                    Date("11/29/2022"), Division("022", "county2", "Ohio") )
-
-                _listOfElections.value = mutableListOf(election1, election2)
                 _civicAPICallStatus.value = ElectionCivicApiStatus.DONE
             } catch (e: Exception){
                 Log.i(TAG, "After ElectionRepo call and inside catch exception")

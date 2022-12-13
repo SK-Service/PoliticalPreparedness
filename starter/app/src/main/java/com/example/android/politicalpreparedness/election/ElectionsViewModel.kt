@@ -31,6 +31,11 @@ class ElectionsViewModel(datasource: ElectionDao, application: Application): And
     val civicAPICallStatus: LiveData<ElectionCivicApiStatus>
         get() = _civicAPICallStatus
 
+    //Managed data for controlling navigation to the Voter Information Screen
+    private val _navigateToVoterInfo = MutableLiveData<Election>()
+    val navigateToVoterInfo: LiveData<Election>
+        get() = _navigateToVoterInfo
+
     //TODO: Create live data val for saved elections
 
     //TODO: Create val and functions to populate live data for upcoming elections from the API and saved elections from local database
@@ -47,13 +52,17 @@ class ElectionsViewModel(datasource: ElectionDao, application: Application): And
                 _listOfElections.value = ElectionRepo(ElectionDatabase.getInstance(application))
                     .refreshElectionList()
                     .toMutableList()
+                Log.i(TAG, "After calling ElectionRepo with Database instance:" +
+                        "Number of Elections in the list:${_listOfElections.value?.size}")
 
-                Log.i(TAG, "After calling ElectionRepo with Database instance")
-    //@TODO - TO DELETE - HARD CODED DATA
+//    //@TODO - TO BE DELETE - HARD CODED DATA
+//        //@TODO - TO BE DELETED - Instantiating two election objects
+//            Log.i(TAG, "Instantiating election 1 NYC & election 2 Ohio")
 //                val election1: Election = Election(1, "NYC State Presidency Primary",
 //                            Date("11/20/2022"), Division("011", "county1", "NYC") )
 //                val election2: Election = Election(2, "Ohio State Presidency Primary",
 //                    Date("11/29/2022"), Division("022", "county2", "Ohio") )
+//                Log.i( TAG, "assigning list to listOfElections.value")
 //                _listOfElections.value = mutableListOf(election1, election2)
 
                 _civicAPICallStatus.value = ElectionCivicApiStatus.DONE
@@ -66,14 +75,15 @@ class ElectionsViewModel(datasource: ElectionDao, application: Application): And
         }
 
     }
-    //@TODO potentially can change
-    fun displayElectiondDetails(election: Election) {
-       // _navigateToDetail.value = asteroid
+
+    //Controller to control navigation to the Voter Info Screen
+    fun displayVoterInfo(election: Election) {
+        _navigateToVoterInfo.value = election
     }
 
-    //@TODO potentially can change
-    fun displayElectionDetailsComplete() {
-       // _navigateToDetail.value = null
+    //Controller to control navigation to the Voter Info Screen
+    fun displayVoterInfoComplete() {
+        _navigateToVoterInfo.value = null
     }
     //TODO: Create functions to navigate to saved or upcoming election voter info
 

@@ -18,7 +18,8 @@ import java.util.*
 //TODO: Construct ViewModel and provide election datasource
 enum class ElectionCivicApiStatus {LOADING, ERROR, DONE }
 const val TAG = "ElectionsViewModel"
-class ElectionsViewModel(datasource: ElectionDao, application: Application): AndroidViewModel(application) {
+class ElectionsViewModel(datasource: ElectionDao, application: Application):
+                                                    AndroidViewModel(application) {
 
     //TODO: Create live data val for upcoming elections
     //Managed data for list of elections

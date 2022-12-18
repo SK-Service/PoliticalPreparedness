@@ -51,8 +51,7 @@
         <!-- TODO: Add visual styling and content -->
         <TextView
             android:id="@+id/state_locations"
-            android:text="@{voterInfoViewModel.voterInfo.votingLocationURL}"
-            android:clickable="true"
+            app:clickableText="@{voterInfoViewModel.voterInfo.votingLocationURL}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="32dp"
@@ -64,8 +63,7 @@
         <!-- TODO: Add visual styling and content -->
         <TextView
             android:id="@+id/state_ballot"
-            android:text = "@{voterInfoViewModel.voterInfo.ballotInfoURL}"
-            android:clickable="true"
+            app:clickableText = "@{voterInfoViewModel.voterInfo.ballotInfoURL}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="32dp"

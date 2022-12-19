@@ -7,7 +7,7 @@
     tools:context=".election.WebViewActivity">
 
     <WebView
-        android:id="@+id/webview"
+        android:id="@+id/webview_voterinfo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:ignore="MissingConstraints"

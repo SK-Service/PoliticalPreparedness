@@ -10,16 +10,20 @@ import android.util.Log
 import android.view.View
 import android.webkit.WebView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.politicalpreparedness.R
 import com.example.android.politicalpreparedness.election.ElectionsViewModel
 import com.example.android.politicalpreparedness.election.WebViewActivity
 import com.example.android.politicalpreparedness.network.models.Election
+import kotlinx.android.synthetic.main.fragment_voter_info.view.*
 
-@BindingAdapter("listData")
-fun bindListData (recyclerview: RecyclerView, electionViewModel: ElectionsViewModel?) {
-    Log.i("BindngAdapter-listData", "inside bindListData")
+@BindingAdapter("listElections")
+fun bindElectionList (recyclerview: RecyclerView, electionViewModel: ElectionsViewModel?) {
+    Log.i("BindngAdapter-bindElectionList", "inside bindElectionList")
+    Log.i("BindngAdapter-listElection",
+        "list:<${electionViewModel?.listOfElection?.value?.size}>\n")
     //Bind the ElectionRecyclerAdapter to the layout view - which references the RecyclerView
     recyclerview.adapter = ElectionListAdapter(
         ElectionListener{
@@ -27,33 +31,75 @@ fun bindListData (recyclerview: RecyclerView, electionViewModel: ElectionsViewMo
         } )
 
     val adapter = recyclerview.adapter as ElectionListAdapter
-    Log.i("BindngAdapter-listData", "After getting hold of Adapter\n")
-
+    Log.i("BindngAdapter-listElection", "After getting hold of Adapter\n")
+//@TODO - Handle when there are no election - may be we can add No Election to the list
     if (electionViewModel?.listOfElection != null) {
-        Log.i("BindngAdapter-listData", "Inside list null check, " +
-                "list:<${electionViewModel?.listOfElection.value?.size}>\n")
-
+        Log.i("BindngAdapter-listElection", "election list is not null\n")
         adapter.submitList(electionViewModel?.listOfElection.value )
-        Log.i("BindngAdapter-listData", "after adapter.submitList\n")
     }
 }
 
+@BindingAdapter("listSavedElections")
+fun bindSavedElectionList (recyclerview: RecyclerView, electionViewModel: ElectionsViewModel?) {
+    Log.i("BindngAdapter-bindSavedElectionList", "inside bindSavedElectionList")
+    Log.i("BindngAdapter-listSavedElection",
+        "list:<${electionViewModel?.listOfSavedElections?.value?.size}>\n")
+    //Bind the ElectionRecyclerAdapter to the layout view - which references the RecyclerView
+    recyclerview.adapter = ElectionListAdapter(
+        ElectionListener{
+            electionViewModel?.displayVoterInfo(it)
+        } )
 
-@BindingAdapter("clickableText")
-fun bindClickableText(textView: TextView, textUrl: String?) {
-    Log.i("BindingAdapter-clickableText",
-                "TextView:${textView.id} AND textURL:${textUrl}")
+    val adapter = recyclerview.adapter as ElectionListAdapter
+    Log.i("BindngAdapter-bindSavedElectionList", "After getting hold of Adapter\n")
+
+    //@TODO - Handle when there are no saved election - may be we can add No Election to the list
+    if (electionViewModel?.listOfSavedElections != null) {
+        Log.i("BindngAdapter-listSavedElection", "Saved Elections is not null\n")
+        adapter.submitList(electionViewModel?.listOfSavedElections.value )
+    }
+}
+
+@BindingAdapter("clickableTextLocation")
+fun bindClickableTextLocation(textView: TextView, textUrl: String?) {
+    Log.i("BindingAdapter-clickableTextLocation",
+        "TextView:${textView.id}")
     if (textUrl.isNullOrEmpty())
         return
-    val spannableString = SpannableString(textUrl)
+    val text = "State Locations"
+    textView.setText(text)
+    textView.setTextColor(ContextCompat.getColor(textView.context, R.color.dark_grey))
+    val spannableString = SpannableString(text)
     val clickableSpan: ClickableSpan = object : ClickableSpan() {
         override fun onClick(widget: View) {
-             val intent = Intent(textView.context, WebViewActivity::class.java)
+            val intent = Intent(textView.context, WebViewActivity::class.java)
             intent.putExtra("URL",textUrl)
             textView.context.startActivity(intent)
         }
     }
-    spannableString.setSpan(clickableSpan, 0, textUrl.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+    spannableString.setSpan(clickableSpan, 0, text.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+    textView.setText(spannableString, TextView.BufferType.SPANNABLE)
+    textView.movementMethod = LinkMovementMethod.getInstance()
+}
+
+@BindingAdapter("clickableTextBallot")
+fun bindClickableTextBallot(textView: TextView, textUrl: String?) {
+    Log.i("BindingAdapter-clickableTextBallot",
+        "TextView:${textView.id}")
+    if (textUrl.isNullOrEmpty())
+        return
+    val text = "State Ballots"
+    textView.setText(text)
+    textView.setTextColor(ContextCompat.getColor(textView.context, R.color.dark_grey))
+    val spannableString = SpannableString(text)
+    val clickableSpan: ClickableSpan = object : ClickableSpan() {
+        override fun onClick(widget: View) {
+            val intent = Intent(textView.context, WebViewActivity::class.java)
+            intent.putExtra("URL",textUrl)
+            textView.context.startActivity(intent)
+        }
+    }
+    spannableString.setSpan(clickableSpan, 0, text.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
     textView.setText(spannableString, TextView.BufferType.SPANNABLE)
     textView.movementMethod = LinkMovementMethod.getInstance()
 }

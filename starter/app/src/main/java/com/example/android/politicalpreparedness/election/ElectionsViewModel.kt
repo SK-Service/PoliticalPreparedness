@@ -10,6 +10,8 @@ import com.example.android.politicalpreparedness.database.ElectionDao
 import com.example.android.politicalpreparedness.database.ElectionDatabase
 import com.example.android.politicalpreparedness.network.models.Division
 import com.example.android.politicalpreparedness.network.models.Election
+import com.example.android.politicalpreparedness.network.models.SavedElection
+import com.example.android.politicalpreparedness.network.models.asElectionList
 import com.example.android.politicalpreparedness.repository.ElectionRepo
 import com.squareup.moshi.Json
 import kotlinx.coroutines.launch
@@ -26,6 +28,11 @@ class ElectionsViewModel(datasource: ElectionDao, application: Application):
     private var _listOfElections = MutableLiveData<MutableList<Election>>(mutableListOf())
     val listOfElection: LiveData<MutableList<Election>>
         get() = _listOfElections
+
+    //Managed data for list of elections
+    private var _listOfSavedElections = MutableLiveData<MutableList<Election>>(mutableListOf())
+    val listOfSavedElections: LiveData<MutableList<Election>>
+        get() = _listOfSavedElections
 
     //Managed data for API retrieval status
     private var _civicAPICallStatus = MutableLiveData<ElectionCivicApiStatus>()
@@ -50,12 +57,23 @@ class ElectionsViewModel(datasource: ElectionDao, application: Application):
             _civicAPICallStatus.value = ElectionCivicApiStatus.LOADING
             try {
                 //Call ElectionRepo to get the latest refreshed list from source or cache
-                _listOfElections.value = ElectionRepo(ElectionDatabase.getInstance(application))
+                val electionLists = ElectionRepo(ElectionDatabase.getInstance(application))
                     .refreshElectionList()
-                    .toMutableList()
-                Log.i(TAG, "After calling ElectionRepo with Database instance:" +
-                        "Number of Elections in the list:${_listOfElections.value?.size}")
+                _listOfElections.value = electionLists.electionList.toMutableList()
 
+                Log.i(TAG, "Election List ${_listOfElections.value?.size}")
+
+                _listOfSavedElections.value = electionLists.savedElectionList.
+                                                    asElectionList().toMutableList()
+
+                Log.i(TAG, "Saved Elections ${_listOfSavedElections.value?.size}")
+
+//                Log.i(TAG, "Filter out the elections with isSavedAsTrue")
+//                val filteredList = listOfElection.value?.filter{it.isSaved}
+//                if (filteredList != null) {
+//                    _listOfSavedElections.value = filteredList.toMutableList()
+//                }
+//                Log.i(TAG, "completed filtering of saved list of elections")
 //    //@TODO - TO BE DELETE - HARD CODED DATA
 //        //@TODO - TO BE DELETED - Instantiating two election objects
 //            Log.i(TAG, "Instantiating election 1 NYC & election 2 Ohio")
@@ -86,6 +104,50 @@ class ElectionsViewModel(datasource: ElectionDao, application: Application):
     fun displayVoterInfoComplete() {
         _navigateToVoterInfo.value = null
     }
-    //TODO: Create functions to navigate to saved or upcoming election voter info
+
+    //function to retrieve elections from both election repo
+    fun retrieveElectionsFromRepos() {
+            Log.i(TAG, "inside retrieveElectionsFromRepos")
+            viewModelScope.launch {
+                _civicAPICallStatus.value = ElectionCivicApiStatus.LOADING
+                try {
+                    //Call ElectionRepo to get the latest refreshed list from source or cache
+                    val electionLists = ElectionRepo(ElectionDatabase.getInstance(getApplication()))
+                        .refreshElectionList()
+                    _listOfElections.value = electionLists.electionList.toMutableList()
+
+                    Log.i(TAG, "Election List ${_listOfElections.value?.size}")
+
+                    _listOfSavedElections.value = electionLists.savedElectionList.
+                    asElectionList().toMutableList()
+
+                    Log.i(TAG, "Saved Elections ${_listOfSavedElections.value?.size}")
+
+//                Log.i(TAG, "Filter out the elections with isSavedAsTrue")
+//                val filteredList = listOfElection.value?.filter{it.isSaved}
+//                if (filteredList != null) {
+//                    _listOfSavedElections.value = filteredList.toMutableList()
+//                }
+//                Log.i(TAG, "completed filtering of saved list of elections")
+//    //@TODO - TO BE DELETE - HARD CODED DATA
+//        //@TODO - TO BE DELETED - Instantiating two election objects
+//            Log.i(TAG, "Instantiating election 1 NYC & election 2 Ohio")
+//                val election1: Election = Election(1, "NYC State Presidency Primary",
+//                            Date("11/20/2022"), Division("011", "county1", "NYC") )
+//                val election2: Election = Election(2, "Ohio State Presidency Primary",
+//                    Date("11/29/2022"), Division("022", "county2", "Ohio") )
+//                Log.i( TAG, "assigning list to listOfElections.value")
+//                _listOfElections.value = mutableListOf(election1, election2)
+
+                    _civicAPICallStatus.value = ElectionCivicApiStatus.DONE
+                } catch (e: Exception){
+                    Log.i(TAG, "After ElectionRepo call and inside catch exception")
+                    e.printStackTrace()
+                    _civicAPICallStatus.value = ElectionCivicApiStatus.ERROR
+                }
+
+            }
+
+    }
 
 }

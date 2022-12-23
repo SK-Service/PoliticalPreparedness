@@ -30,8 +30,12 @@ class VoterInfoFragment : Fragment() {
         //Get hold of the ViewModelFactory
 
         val args = VoterInfoFragmentArgs.fromBundle(requireArguments())
-        val selectedElection = Election(args.argElectionId,"",
-            Date("12/16/2022"), false, args.argDivision)
+        val selectedElection = args.argElection
+        Log.i("TAG3", "Selected Election: " +
+                "ID:${selectedElection.id}, Name:${selectedElection.name}")
+
+        //@TODO - Need to check whether the election is on SAVED Election DB -
+        // then show the button accordingly
 
         val viewModelFactory = VoterInfoViewModelFactory (selectedElection,
                                                             datasource, application)
@@ -45,6 +49,24 @@ class VoterInfoFragment : Fragment() {
                     binding.voterInfoViewModel = voterInfoViewModel
                 }
         })
+        Log.i(TAG3, "followElection Value before update: " +
+                                    "${voterInfoViewModel.followElection.value}")
+
+        voterInfoViewModel.updateFollowElectionStatus(selectedElection)
+
+        Log.i(TAG3, "followElection Value after upfate: " +
+                                    "${voterInfoViewModel.followElection.value}")
+
+        voterInfoViewModel.followElection.observe(viewLifecycleOwner, Observer {
+                    if (it != null) {
+                        if (voterInfoViewModel.followElection.value == true) {
+                            binding.buttonFollowElectionToggle.text = "Unfollow Election"
+                        } else {
+                            binding.buttonFollowElectionToggle.text = "Follow Election"
+                        }
+                    }
+        })
+
         //TODO: Add binding values
 
         //TODO: Populate voter info -- hide views without provided data.
@@ -56,11 +78,29 @@ class VoterInfoFragment : Fragment() {
         //TODO: Handle loading of URLs
 
         //TODO: Handle save button UI state
+        binding.buttonFollowElectionToggle.setOnClickListener { view: View? ->
+            kotlin.run {
+                Log.i(TAG3, "inside the button follow election toggle on click listener")
+                if (voterInfoViewModel.followElection?.value == true) {
+                    Log.i(TAG3, "Change Follow to UnFollow")
+
+                    voterInfoViewModel.unFollowElection()
+                    binding.buttonFollowElectionToggle.text = "Follow Election"
+                } else if ( voterInfoViewModel.followElection?.value == false) {
+                    Log.i(TAG3, "Change UnFollow to Follow")
+
+                    voterInfoViewModel.followElection()
+                    binding.buttonFollowElectionToggle.text = "Unfollow Election"
+                }
+            }
+        }
         //TODO: cont'd Handle save button clicks
+        Log.i(TAG3, "Exiting OnCreateView")
         return binding.root
 
     }
 
     //TODO: Create method to load URL intents
+
 
 }

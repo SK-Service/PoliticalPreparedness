@@ -58,4 +58,42 @@ class VoterInfoRepo (private val database: ElectionDatabase) {
         }
         return voterInfoResponse
     }
+
+    suspend fun isElectionSaved (selectedElection: Election): Boolean {
+        var isSavedElection  = false
+        withContext(Dispatchers.IO) {
+            Log.i(TAG2, "Inside isElectionSaved")
+            Log.i(TAG2, "Election ID:${selectedElection.id}, " +
+                                    "isSaved:${selectedElection.isSaved}")
+
+             val savedElection =
+                database.savedElectionDao.getSavedElection(selectedElection.id)
+
+            if (savedElection != null ){
+                Log.i(TAG2, "Found a record in the Saved Election DB")
+                isSavedElection = true
+            }
+        }
+        return isSavedElection
+    }
+
+    suspend fun saveElectionFollowing (selectedElection: Election) {
+        withContext(Dispatchers.IO) {
+            Log.i(TAG2, "saveElectionFollowing")
+            Log.i(TAG2, "Election ID:${selectedElection.id}, isSaved:${selectedElection.isSaved}")
+            val savedElection = selectedElection.copyToSavedElection()
+            database.savedElectionDao.addSavedElection(savedElection)
+        }
+    }
+
+    suspend fun deleteElectionFollowing (selectedElection: Election) {
+        withContext(Dispatchers.IO) {
+            Log.i(TAG2, "deleteElectionFollowing")
+            Log.i(TAG2, "Election ID:${selectedElection.id}, isSaved:${selectedElection.isSaved}")
+            val savedElection = selectedElection.copyToSavedElection()
+            database.savedElectionDao.deleteSavedElection(savedElection)
+        }
+    }
+
+
 }

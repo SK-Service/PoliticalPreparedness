@@ -5,6 +5,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -29,6 +31,20 @@ class ElectionsFragment: Fragment() {
         val binding = FragmentElectionBinding.inflate(inflater)
 
         binding.lifecycleOwner = this
+
+        activity?.onBackPressedDispatcher?.addCallback(this, object: OnBackPressedCallback(true){
+            override fun handleOnBackPressed() {
+                if (shouldInterceptBackPress()) {
+                    Toast.makeText(requireContext(),
+                        "Back press intercepted in:${this@ElectionsFragment}",
+                        Toast.LENGTH_SHORT).show()
+                    electionViewModel.retrieveElectionsFromRepos()
+                }else {
+                    isEnabled = false
+                    activity?.onBackPressed()
+                }
+            }
+        })
 
 //        //Bind the ElectionRecyclerAdapter to the layout view - which references the RecyclerView
 //        binding.upcomingElectionRecycler.adapter = ElectionListAdapter(
@@ -59,6 +75,15 @@ class ElectionsFragment: Fragment() {
                 }
             })
 
+        electionViewModel.listOfSavedElections.observe(viewLifecycleOwner,
+            Observer {
+                Log.i(TAG, "Inside the ElectionViewModel.listOfSavedElections")
+                if (it != null ) {
+                    Log.i(TAG, "assigning the instantiated ElectionViewModel")
+                    binding.electionViewModel = electionViewModel
+                }
+            })
+
         //TODO: Add binding values
 
         //TODO: Link elections to voter info
@@ -68,8 +93,7 @@ class ElectionsFragment: Fragment() {
                     if(it != null) {
                         Log.i(TAG, "Election is selected and not null")
                         this.findNavController().navigate(ElectionsFragmentDirections.
-                                        actionElectionsFragmentToVoterInfoFragment(it.id,
-                                                    it.division))
+                                        actionElectionsFragmentToVoterInfoFragment(it))
                         Log.i(TAG, "After call to Navigate")
                         electionViewModel.displayVoterInfoComplete()
                         Log.i(TAG, "display voter info complete is called and set to null")
@@ -79,10 +103,14 @@ class ElectionsFragment: Fragment() {
         //TODO: Initiate recycler adapters
 
         //TODO: Populate recycler adapters
+
+
         return binding.root
 
     }
 
     //TODO: Refresh adapters when fragment loads
-
+    //Defaulting shouldInterceptBackPress() to true to ensure that back button press is always
+    //handled with special condition of retrieving the election list from the repos
+    fun shouldInterceptBackPress() = true
 }

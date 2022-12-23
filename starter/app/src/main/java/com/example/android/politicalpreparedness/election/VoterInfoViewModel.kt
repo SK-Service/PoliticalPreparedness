@@ -38,9 +38,16 @@ class VoterInfoViewModel(private val selectedElection: Election,
     val voterInfoAPICallStatus: LiveData<VoterInfoCivicApiStatus>
         get() = _voterInfoAPICallStatus
 
+    //True indicates followElection
+    // whereas false indicates Election not being followed or unfollowed
+    private var _followElection = MutableLiveData<Boolean>()
+    val followElection: LiveData<Boolean>
+        get() = _followElection
+
     lateinit var voterInfoResponse: VoterInfoResponse
     init {
         Log.i(TAG1, "inside init - where VoterInfo data is fetched from google api")
+
         viewModelScope.launch {
 
             _voterInfoAPICallStatus.value = VoterInfoCivicApiStatus.LOADING
@@ -62,8 +69,13 @@ class VoterInfoViewModel(private val selectedElection: Election,
                 Log.i(TAG1, "VoterInfo Live Data Value: Voting Location URL:" +
                         "                ${_voterInfo.value?.ballotInfoURL}")
 
+                if (!selectedElection.isSaved) {
+                    Log.i(TAG1, "Changing Follow Election to false as isSaved is not true")
+                    _followElection.value = false
+                }
+
             } catch (e: Exception){
-                Log.i(TAG, "After ElectionRepo call and inside catch exception")
+                Log.i(TAG1, "After ElectionRepo call and inside catch exception")
                 e.printStackTrace()
                 _voterInfoAPICallStatus.value = VoterInfoCivicApiStatus.ERROR
             }
@@ -90,5 +102,37 @@ class VoterInfoViewModel(private val selectedElection: Election,
     /**
      * Hint: The saved state can be accomplished in multiple ways. It is directly related to how elections are saved/removed from the database.
      */
+     fun followElection () {
+        viewModelScope.launch {
+            Log.i(TAG1, "Election ID:${selectedElection.id}, isSaved:${selectedElection.isSaved}")
+            selectedElection.isSaved = true
+            VoterInfoRepo(ElectionDatabase.getInstance(application)).
+            saveElectionFollowing(selectedElection)
+            _followElection.value = true
+        }
+    }
+
+     fun unFollowElection () {
+        viewModelScope.launch {
+            Log.i(TAG1, "Election ID:${selectedElection.id}, isSaved:${selectedElection.isSaved}")
+//            selectedElection.isSaved = false
+            VoterInfoRepo(ElectionDatabase.getInstance(application)).
+            deleteElectionFollowing(selectedElection)
+            _followElection.value = false
+        }
+    }
+
+    fun updateFollowElectionStatus(selectedElection: Election)  {
+
+        viewModelScope.launch {
+            Log.i(TAG1, "updateFollowElectionStatus - Election ID:${selectedElection.id}, " +
+                    "isSaved:${selectedElection.isSaved}")
+
+            val electionSaved = VoterInfoRepo (ElectionDatabase.getInstance(application))
+                .isElectionSaved(selectedElection)
+
+            _followElection.value = electionSaved
+        }
+    }
 
 }

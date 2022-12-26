@@ -1,20 +1,95 @@
-//package com.example.android.politicalpreparedness.representative.adapter
-//
-//import android.content.Intent
-//import android.content.Intent.ACTION_VIEW
-//import android.net.Uri
-//import android.view.LayoutInflater
-//import android.view.View
-//import android.view.ViewGroup
-//import android.widget.ImageView
-//import androidx.recyclerview.widget.DiffUtil
-//import androidx.recyclerview.widget.ListAdapter
-//import androidx.recyclerview.widget.RecyclerView
-//import com.example.android.politicalpreparedness.R
+package com.example.android.politicalpreparedness.representative.adapter
+
+import android.content.Intent
+import android.content.Intent.ACTION_VIEW
+import android.net.Uri
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
+import com.example.android.politicalpreparedness.R
+import com.example.android.politicalpreparedness.databinding.ElectionViewItemListBinding
+import com.example.android.politicalpreparedness.databinding.RepresentativesViewItemListBinding
 //import com.example.android.politicalpreparedness.databinding.ViewholderRepresentativeBinding
-//import com.example.android.politicalpreparedness.network.models.Channel
-//import com.example.android.politicalpreparedness.representative.model.Representative
-//
+import com.example.android.politicalpreparedness.network.models.Channel
+import com.example.android.politicalpreparedness.network.models.Election
+import com.example.android.politicalpreparedness.representative.model.Representative
+import com.example.android.politicalpreparedness.representative.model.RepresentativeProfile
+
+const val TAG ="RepresentativeRecycler"
+
+class RepresentativeListAdapter(private val clickListener: RepresentativeListener):
+                    ListAdapter<RepresentativeProfile, RepresentativeViewHolder>
+                                                    (RepresentativeDiffCallback) {
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepresentativeViewHolder {
+        Log.i(TAG, "inside onCreateViewHolder")
+        return RepresentativeViewHolder (
+            RepresentativesViewItemListBinding.inflate(
+            LayoutInflater.from(parent.context)))
+    }
+
+    //TODO: Bind ViewHolder
+    override fun onBindViewHolder(holder: RepresentativeViewHolder, position: Int) {
+        val representative =getItem(position)
+        Log.i(TAG, "inside onBindViewHolder")
+        holder.itemView.setOnClickListener {
+            run {
+                Log.i(TAG, "inside onBindViewHolder - Set on click listener")
+                clickListener.onClick(representative)
+                Log.i(TAG, "inside onBindViewHolder - After " +
+                        "onClickListener.onClick(election)")
+            }
+
+        }
+        holder.bind(representative)
+    }
+
+    //TODO: Add companion object to inflate ViewHolder (from)
+}
+
+//TODO: Create ElectionViewHolder
+/**The ElectionViewHolder constructor takes the binding variable from the associated Election
+List Item, which gives access to full Election **/
+class RepresentativeViewHolder(private val binding: RepresentativesViewItemListBinding) :
+    RecyclerView.ViewHolder ( binding.root){
+
+    fun bind(representative: RepresentativeProfile) {
+        Log.i(TAG, "Inside ElectionViewHOlder bind")
+        binding.representative = representative
+        //to ensure that data binding executes immediately and the Recycler calculates the size
+        binding.executePendingBindings()
+    }
+}
+
+//TODO: Create ElectionDiffCallback
+/**
+ * Allows the RecyclerView to determine which items have changed when the [List] of [Asteroid]
+ * has been updated.
+ */
+object RepresentativeDiffCallback: DiffUtil.ItemCallback<RepresentativeProfile>() {
+    override fun areItemsTheSame(oldItem: RepresentativeProfile, newItem: RepresentativeProfile): Boolean {
+        return oldItem == newItem
+    }
+    override fun areContentsTheSame(oldItem: RepresentativeProfile, newItem: RepresentativeProfile): Boolean {
+        return oldItem.id == newItem.id
+    }
+}
+
+//TODO: Create ElectionListener
+/**
+ * Click Listener to handle click on the recycler view item
+ */
+
+class RepresentativeListener(val clickListener: (representative: RepresentativeProfile) -> Unit) {
+
+    fun onClick(representative: RepresentativeProfile) =  clickListener(representative)
+}
+
 //class RepresentativeListAdapter: ListAdapter<Representative, RepresentativeViewHolder>(RepresentativeDiffCallback()){
 //
 //    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepresentativeViewHolder {

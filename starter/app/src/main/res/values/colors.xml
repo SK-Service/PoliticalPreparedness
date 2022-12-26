@@ -7,4 +7,5 @@
     <color name="gray50">#7F7F7F</color>
     <color name="dark_grey">#5C5E60</color>
     <color name="text_bluish_black">#3B499F</color>
+    <color name="error_message_red">#FF0000</color>
 </resources>

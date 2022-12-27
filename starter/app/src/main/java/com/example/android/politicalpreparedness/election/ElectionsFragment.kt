@@ -109,8 +109,14 @@ class ElectionsFragment: Fragment() {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        electionViewModel.retrieveElectionsFromRepos()
+    }
+
     //TODO: Refresh adapters when fragment loads
     //Defaulting shouldInterceptBackPress() to true to ensure that back button press is always
     //handled with special condition of retrieving the election list from the repos
     fun shouldInterceptBackPress() = true
+
 }

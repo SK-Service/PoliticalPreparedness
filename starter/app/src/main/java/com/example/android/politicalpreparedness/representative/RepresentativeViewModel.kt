@@ -62,9 +62,11 @@ class RepresentativeViewModel(datasource: ElectionDao, application: Application)
                 if (checkAddressGoodForSearch(address)) {
                     //Reset address entered check flag to false
                     _addressEnteredFlag.value = false
-                    repList = RepresentativeRepo(ElectionDatabase.getInstance(application1))
+                    repList = RepresentativeRepo(getApplication(), ElectionDatabase.getInstance(application1))
                         .refreshRepresentativeList(address)
                     _listOfRepresentatives.value = repList.toMutableList()
+                    Log.i(TAG_RVM, "Size of _listOfRepresentatives.value: " +
+                                    "${_listOfRepresentatives.value!!.size}")
                 } else {
                     _addressEnteredFlag.value = true
                 }

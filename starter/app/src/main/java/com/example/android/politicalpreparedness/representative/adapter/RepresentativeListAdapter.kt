@@ -22,7 +22,7 @@ import com.example.android.politicalpreparedness.representative.model.Representa
 
 const val TAG ="RepresentativeRecycler"
 
-class RepresentativeListAdapter(private val clickListener: RepresentativeListener):
+class RepresentativeListAdapter():
                     ListAdapter<RepresentativeProfile, RepresentativeViewHolder>
                                                     (RepresentativeDiffCallback) {
 
@@ -37,15 +37,15 @@ class RepresentativeListAdapter(private val clickListener: RepresentativeListene
     override fun onBindViewHolder(holder: RepresentativeViewHolder, position: Int) {
         val representative =getItem(position)
         Log.i(TAG, "inside onBindViewHolder")
-        holder.itemView.setOnClickListener {
-            run {
-                Log.i(TAG, "inside onBindViewHolder - Set on click listener")
-                clickListener.onClick(representative)
-                Log.i(TAG, "inside onBindViewHolder - After " +
-                        "onClickListener.onClick(election)")
-            }
-
-        }
+//        holder.itemView.setOnClickListener {
+//            run {
+//                Log.i(TAG, "inside onBindViewHolder - Set on click listener")
+//                clickListener.onClick(representative)
+//                Log.i(TAG, "inside onBindViewHolder - After " +
+//                        "onClickListener.onClick(election)")
+//            }
+//
+//        }
         holder.bind(representative)
     }
 

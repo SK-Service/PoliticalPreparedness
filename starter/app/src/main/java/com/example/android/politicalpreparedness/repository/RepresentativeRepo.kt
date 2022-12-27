@@ -1,5 +1,6 @@
 package com.example.android.politicalpreparedness.repository
 
+import android.app.Application
 import android.util.Log
 import com.example.android.politicalpreparedness.database.ElectionDatabase
 import com.example.android.politicalpreparedness.network.CivicsApi
@@ -15,15 +16,21 @@ import java.io.File
 import java.lang.Exception
 import java.util.*
 import kotlin.collections.ArrayList
+import android.content.Context
+import com.example.android.politicalpreparedness.network.jsonadapter.ElectionAdapter
+import com.example.android.politicalpreparedness.representative.RepresentativeCivicApiStatus
+import com.example.android.politicalpreparedness.representative.TAG_RVM
+import org.json.JSONArray
 
-const val TAG_Repo = "ElectionRepo"
-class RepresentativeRepo (private val database: ElectionDatabase) {
+const val TAG_Repo1 = "RepresentativeRepo"
+class RepresentativeRepo (private val application: Application,
+                          private val database: ElectionDatabase) {
 //    private lateinit var electionListDB: List<Election>
 //    private lateinit var savedElectionListDB: List<SavedElection>
     private lateinit var representativeLists: List<RepresentativeProfile>
 
     suspend fun refreshRepresentativeList (address: Address): List<RepresentativeProfile> {
-        Log.i(TAG_Repo, "inside refreshRepresentativeList")
+        Log.i(TAG_Repo1, "inside refreshRepresentativeList")
         withContext(Dispatchers.IO) {
             Log.i(TAG, "inside  the refreshRepresentativeList-Dispatcher.IO")
 
@@ -38,16 +45,9 @@ class RepresentativeRepo (private val database: ElectionDatabase) {
 //                Log.i(TAG, "No Database insert exist yet")
 
                 //TODO - TO BE DELETED - HARD CODED JSON
-                val repProfileJsonString: String = loadTestRepreentativeProfile()
+                val repProfileJsonString: String = loadTestRepreentativeProfile(application)
                 val representativeListFromCivic = getCiviRepAPIRepresentativeResponse(
                                                     JSONObject(repProfileJsonString))
-
-//                Log.i("TAG_Repo", "After call to Civic Rep API: Length of return:" +
-//                        "                               <${asteroidListNasa.length}>")
-//                Log.i("AsteroidRepo", "Before parsing the JSON String")
-//                val asteroidListNasa_arraylist = parseAsteroidsJsonResult(JSONObject(asteroidListNasa))
-//                Log.i("AsteroidRepo", "After parsing the JSON String-" +
-//                        "Number of Asteroids:<${asteroidListNasa_arraylist.size}>")
 
                 //Response has got offices and for each office,there are one ore more official
                 //object
@@ -66,71 +66,114 @@ class RepresentativeRepo (private val database: ElectionDatabase) {
 }
 //TODO - This function needs to be built
 private fun getRepresentativesProfile(representativeResponse : RepresentativeResponse): List<RepresentativeProfile> {
-    Log.i(TAG_Repo, "Inside getRepresentativesProfile")
-    var representativeProfile:RepresentativeProfile =
-        RepresentativeProfile(1,"", "", "","",
-                    listOf(Channel("","")))
-    return listOf(representativeProfile)
+    Log.i(TAG_Repo1, "Inside getRepresentativesProfile")
+//    var representativeProfile:RepresentativeProfile =
+//        RepresentativeProfile(1,"", "", "","",
+//                    listOf(Channel("","")))
+    //var representativeProfile: List<RepresentativeProfile> = mutableListOf()
+    val representativeProfileArray = ArrayList<RepresentativeProfile>()
+
+    val officials = representativeResponse.officials
+    val offices = representativeResponse.offices
+
+    var id: Int =0
+    offices.forEach {
+        val representatives = it.getRepresentatives(officials)
+        representatives.forEach {
+            val official = it.official
+            val office = it.office
+            val titleName = office.name
+            val name = official.name
+            val profileImageURL = official.photoUrl
+            val party = official.party
+            val channels = official.channels
+
+            val repProfile = RepresentativeProfile(id, profileImageURL!!,titleName,name, party!!, channels!!)
+            representativeProfileArray.add(repProfile)
+            id++
+        }
+    }
+    Log.i(TAG_Repo1, "List of Representative Profile:${representativeProfileArray.size}")
+    return representativeProfileArray.toList()
 }
 
 
-fun loadTestRepreentativeProfile(): String {
-    Log.i(TAG_Repo, "Inside loadTestRepreentativeProfile")
-//    val representativeProfileJsonString: String =
-//        File("C:\\cde\\ktln\\ndgre\\PoliticalPrep" +
-//                "\\poliprep\\starter\\app\\src\\main\\res\\representativeprofile.json").
-//                                readText(Charsets.UTF_8)
-    val representativeProfileJsonString: String =
-        File("C:/cde/ktln/ndgre/PoliticalPrep" +
-                "/poliprep/starter/app/src/main/res/representativeprofile.json").
-                                        readText(Charsets.UTF_8)
+fun loadTestRepreentativeProfile(application: Application): String {
+    Log.i(TAG_Repo1, "Inside loadTestRepreentativeProfile")
+
+    val file = File(application.filesDir, "/representativeprofile.json")
+    val representativeProfileJsonString: String = file.readText(Charsets.UTF_8)
+    Log.i(TAG_Repo1, representativeProfileJsonString)
 
     return  representativeProfileJsonString
 }
 
 fun getCiviRepAPIRepresentativeResponse(input: JSONObject) : RepresentativeResponse {
-    Log.i(TAG_Repo, "Inside getCiviRepAPIRepresentativeResponse")
+    Log.i(TAG_Repo1, "Inside getCiviRepAPIRepresentativeResponse")
 
     //Extract the Office objects from the JSON
-    var officeJsonObjects = input.getJSONObject("offices")
-    val officeJsonArray = officeJsonObjects.getJSONArray("offices")
+//    var officeJsonObjects = input.getJSONObject("offices")
+   // val officeJsonArray = officeJsonObjects.getJSONArray("offices")
+    val officeJsonArray = input.getJSONArray("offices")
     val officeArray = ArrayList<Office>()
 
-    Log.i(TAG_Repo, "Before Office For-Loop")
+    Log.i(TAG_Repo1, "Before Office For-Loop")
     for (i in 0 until officeJsonArray.length()) {
         val officeJson = officeJsonArray.getJSONObject(i)
         val officeTitle = officeJson.getString("name")
         val divisionId = officeJson.getString("divisionId")
+        val adapter = ElectionAdapter()
+        val division = adapter.divisionFromJson(divisionId)
+        val officialIndices = officeJson.getJSONArray("officialIndices")
+        Log.i(TAG_Repo1, "officialIndices array size:${officialIndices.length()}")
+        Log.i(TAG_Repo1, "officialIndices:${officialIndices.toString()}")
+        var officialIndicesArray = arrayListOf<Int>()
+        for (j in 0 until officialIndices.length()) {
+            Log.i(TAG_Repo1, "Inside the for loop to extract official index int-array:[j]=${j}")
+            val officialIndex = officialIndices.getInt(j)
+            officialIndicesArray.add(officialIndex)
+        }
 
-        val officialIndices = officeJson.getString("officialIndices")
-        Log.i(TAG_Repo, "officialIndices:${officialIndices}")
-
-        val office = Office(officeTitle,Division("","",""), listOf(1,2,3,4,5))
+        val office = Office(officeTitle,division, officialIndicesArray.toList())
         officeArray.add(office)
     }
+
     val officeList = officeArray.toList()
-    Log.i(TAG_Repo, "Size of the OfficeList:${officeList.size}")
+    Log.i(TAG_Repo1, "Size of the Office-List:${officeList.size}")
 
     //Extrat the Official objects from the JSON
-    var officialJsonObjects = input.getJSONObject("officials")
+//    var officialJsonObjects = input.getJSONObject("officials")
     val officialArray = ArrayList<Official>()
-    val officialJsonArray = officialJsonObjects.getJSONArray("officials")
+//    val officialJsonArray = officialJsonObjects.getJSONArray("officials")
+    val officialJsonArray = input.getJSONArray("officials")
 
-    Log.i(TAG_Repo, "Before Official For-Loop")
+    Log.i(TAG_Repo1, "Before Official For-Loop")
     for (i in 0 until officialJsonArray.length()) {
         val officialJson = officialJsonArray.getJSONObject(i)
         val repName = officialJson.getString("name")
         val repParty = officialJson.getString("party")
+        var profileImageURL: String = null.toString()
+        try {
+            val profileImageURL = officialJson.getString("photoUrl")
+        } catch (e: Exception){
+            Log.i(TAG_RVM, "No value for photoURL")
+        }
 
-        val official = Official(repName)
-        officialArray.add(official)
+        val channelsJsonArray = officialJson.getJSONArray("channels")
+        var channelsArray = arrayListOf<Channel>()
+        for (k in 0 until channelsJsonArray.length()) {
+            val channel = channelsJsonArray.getJSONObject(k)
+            val channelType = channel.getString("type")
+            val channelId = channel.getString("id")
+            channelsArray.add(Channel(channelType,channelId))
+        }
+        officialArray.add(Official(repName,null,repParty,
+                            null,null,profileImageURL,channelsArray.toList()))
     }
 
     val officialList = officialArray.toList()
-    Log.i(TAG_Repo, "Size of the OfficialsList:${officialList.size}")
-
+    Log.i(TAG_Repo1, "Size of the Officials-List:${officialList.size}")
 
     val representativeResponse = RepresentativeResponse(officeList, officialList)
     return representativeResponse
 }
-

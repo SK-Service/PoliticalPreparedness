@@ -73,6 +73,8 @@ fun bindDetailsStatusImage(imageView: ImageView, repProfileImageURL: String) {
 
 fun ImageView.loadImage( url: String?) {
     Log.i("BindingAdapter", "Inside loadImage<${url}>")
+//    val urlHTTPS = url?.replace("http:", "https:")
+////    Log.i("BindingAdapter", "HTTPS URL<${urlHTTPS}>")
     Picasso.get().load(url)
         .placeholder(R.drawable.ic_profile)
         .error(R.drawable.ic_profile)

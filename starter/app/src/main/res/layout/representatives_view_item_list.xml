@@ -27,11 +27,12 @@
 
         <TextView
             android:id="@+id/representative_title"
-            android:layout_width="231dp"
-            android:layout_height="42dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_margin="8dp"
+            android:textAlignment="textStart"
             android:text="@{representative.title}"
-            android:textSize="24sp"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageView"
             app:layout_constraintTop_toTopOf="parent"
@@ -42,7 +43,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/representative_title"
             app:layout_constraintTop_toBottomOf="@+id/representative_title">
 
@@ -57,7 +57,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
-                    android:layout_marginBottom="8dp"
+                    android:layout_marginBottom="4dp"
                     android:text="@{representative.name}"
                     android:textAlignment="textStart"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -81,25 +81,26 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:textAlignment="viewEnd">
 
                 <ImageView
                     android:id="@+id/imageView2"
-                    android:layout_width="50dp"
+                    android:layout_width="32dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     app:srcCompat="@drawable/ic_www" />
 
                 <ImageView
                     android:id="@+id/imageView3"
-                    android:layout_width="50dp"
+                    android:layout_width="32dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     app:srcCompat="@drawable/ic_facebook" />
 
                 <ImageView
                     android:id="@+id/imageView4"
-                    android:layout_width="50dp"
+                    android:layout_width="32dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     app:srcCompat="@drawable/ic_twitter" />

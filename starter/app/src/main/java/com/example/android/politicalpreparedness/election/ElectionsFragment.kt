@@ -32,19 +32,19 @@ class ElectionsFragment: Fragment() {
 
         binding.lifecycleOwner = this
 
-        activity?.onBackPressedDispatcher?.addCallback(this, object: OnBackPressedCallback(true){
-            override fun handleOnBackPressed() {
-                if (shouldInterceptBackPress()) {
-                    Toast.makeText(requireContext(),
-                        "Back press intercepted in:${this@ElectionsFragment}",
-                        Toast.LENGTH_SHORT).show()
-                    electionViewModel.retrieveElectionsFromRepos()
-                }else {
-                    isEnabled = false
-                    activity?.onBackPressed()
-                }
-            }
-        })
+//        activity?.onBackPressedDispatcher?.addCallback(this, object: OnBackPressedCallback(true){
+//            override fun handleOnBackPressed() {
+//                if (shouldInterceptBackPress()) {
+////                    Toast.makeText(requireContext(),
+////                        "Back press intercepted in:${this@ElectionsFragment}",
+////                        Toast.LENGTH_SHORT).show()
+//                    electionViewModel.retrieveElectionsFromRepos()
+//                }else {
+//                    isEnabled = false
+//                    activity?.onBackPressed()
+//                }
+//            }
+//        })
 
 //        //Bind the ElectionRecyclerAdapter to the layout view - which references the RecyclerView
 //        binding.upcomingElectionRecycler.adapter = ElectionListAdapter(

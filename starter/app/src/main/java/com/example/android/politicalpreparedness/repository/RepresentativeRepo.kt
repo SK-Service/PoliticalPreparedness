@@ -154,13 +154,20 @@ fun getCiviRepAPIRepresentativeResponse(input: JSONObject) : RepresentativeRespo
         val repParty = officialJson.getString("party")
         var profileImageURL: String = null.toString()
         try {
-            val profileImageURL = officialJson.getString("photoUrl")
+            profileImageURL = officialJson.getString("photoUrl")
         } catch (e: Exception){
             Log.i(TAG_RVM, "No value for photoURL")
         }
 
-        val channelsJsonArray = officialJson.getJSONArray("channels")
+        var channelsJsonArray = JSONArray()
+        try {
+            channelsJsonArray = officialJson.getJSONArray("channels")
+        } catch (e: Exception){
+            Log.i(TAG_RVM, "No value for channels")
+        }
+
         var channelsArray = arrayListOf<Channel>()
+
         for (k in 0 until channelsJsonArray.length()) {
             val channel = channelsJsonArray.getJSONObject(k)
             val channelType = channel.getString("type")

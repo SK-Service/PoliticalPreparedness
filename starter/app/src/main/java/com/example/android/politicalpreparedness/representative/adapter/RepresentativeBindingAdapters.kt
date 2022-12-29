@@ -39,7 +39,7 @@ inline fun <reified T> toTypedAdapter(adapter: ArrayAdapter<*>): ArrayAdapter<T>
 @BindingAdapter("listRepresentatives")
 fun bindRepresentativeList (recyclerview: RecyclerView, representativeViewModel: RepresentativeViewModel?) {
     Log.i("BindngAdapter-listRepresentatives", "inside bindRepresentativeList")
-    Log.i("BindngAdapter-listSavedElection",
+    Log.i("BindngAdapter-listRepresentatives",
         "list:<${representativeViewModel?.listOfRepresentatives?.value?.size}>\n")
     //Bind the ElectionRecyclerAdapter to the layout view - which references the RecyclerView
     recyclerview.adapter = RepresentativeListAdapter()
@@ -49,7 +49,7 @@ fun bindRepresentativeList (recyclerview: RecyclerView, representativeViewModel:
 
     //@TODO - Handle when there are no saved election - may be we can add No Election to the list
     if (representativeViewModel?.listOfRepresentatives?.value != null) {
-        Log.i("BindngAdapter-listRepresentatives", "Saved Elections is not null\n")
+        Log.i("BindngAdapter-listRepresentatives", "List of representatives is not null\n")
         adapter.submitList(representativeViewModel?.listOfRepresentatives.value )
     }
 }

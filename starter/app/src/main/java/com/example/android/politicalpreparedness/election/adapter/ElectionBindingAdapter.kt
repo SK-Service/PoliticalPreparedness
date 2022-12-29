@@ -103,3 +103,4 @@ fun bindClickableTextBallot(textView: TextView, textUrl: String?) {
     textView.setText(spannableString, TextView.BufferType.SPANNABLE)
     textView.movementMethod = LinkMovementMethod.getInstance()
 }
+

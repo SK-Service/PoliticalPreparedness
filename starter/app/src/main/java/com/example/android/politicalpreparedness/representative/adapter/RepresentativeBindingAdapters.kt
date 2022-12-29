@@ -7,10 +7,12 @@ import android.widget.Spinner
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.android.politicalpreparedness.R
 import com.example.android.politicalpreparedness.election.ElectionsViewModel
 import com.example.android.politicalpreparedness.election.adapter.ElectionListAdapter
 import com.example.android.politicalpreparedness.election.adapter.ElectionListener
 import com.example.android.politicalpreparedness.representative.RepresentativeViewModel
+import com.squareup.picasso.Picasso
 
 @BindingAdapter("profileImage")
 fun fetchImage(view: ImageView, src: String?) {
@@ -52,4 +54,27 @@ fun bindRepresentativeList (recyclerview: RecyclerView, representativeViewModel:
         Log.i("BindngAdapter-listRepresentatives", "List of representatives is not null\n")
         adapter.submitList(representativeViewModel?.listOfRepresentatives.value )
     }
+}
+
+@BindingAdapter("repProfileImage")
+fun bindDetailsStatusImage(imageView: ImageView, repProfileImageURL: String) {
+    Log.i("BindingAdapter-repProfileImage", "Inside bindDetailsStatusImage")
+    Log.i("BindingAdapter-repProfileImage", "repProfileImageURL:<${repProfileImageURL}>")
+    if (repProfileImageURL!= null) {
+        Log.i("BindingAdapter-repProfileImage", "Profile URL is not null")
+        imageView.loadImage(repProfileImageURL)
+        imageView.contentDescription = "Image of the representative"
+    } else {
+        Log.i("BindingAdapter-repProfileImage", "Profile URL is null")
+        imageView.setImageResource(R.drawable.ic_profile)
+        imageView.contentDescription = "There is no image available for this representative"
+    }
+}
+
+fun ImageView.loadImage( url: String?) {
+    Log.i("BindingAdapter", "Inside loadImage<${url}>")
+    Picasso.get().load(url)
+        .placeholder(R.drawable.ic_profile)
+        .error(R.drawable.ic_profile)
+        .into(this)
 }

@@ -81,4 +81,7 @@ dependencies {
 
     // Location
     implementation "com.google.android.gms:play-services-location:$version_play_services_location"
+
+    //Image loader
+    implementation 'com.squareup.picasso:picasso:2.8'
 }

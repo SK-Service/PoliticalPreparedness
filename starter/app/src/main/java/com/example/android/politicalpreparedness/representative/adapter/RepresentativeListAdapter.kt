@@ -59,7 +59,7 @@ class RepresentativeViewHolder(private val binding: RepresentativesViewItemListB
     RecyclerView.ViewHolder ( binding.root){
 
     fun bind(representative: RepresentativeProfile) {
-        Log.i(TAG, "Inside ElectionViewHOlder bind")
+        Log.i(TAG, "Inside RepresentativeViewHolder bind")
         binding.representative = representative
         //to ensure that data binding executes immediately and the Recycler calculates the size
         binding.executePendingBindings()

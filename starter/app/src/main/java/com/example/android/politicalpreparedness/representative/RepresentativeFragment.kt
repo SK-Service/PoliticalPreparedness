@@ -45,7 +45,9 @@ class RepresentativeFragment: Fragment() {
         //Get hold of the ViewModel
         val repViewModel = ViewModelProvider(this, viewModelFactory).get(RepresentativeViewModel::class.java)
 
-//        binding.electionViewModel = electionViewModel
+        binding.repviewmodel = repViewModel
+        binding.inputaddress = Address("","","","","")
+
         Log.i(TAG_R, "Setting the listOfElection Observer")
         repViewModel.listOfRepresentatives.observe(viewLifecycleOwner,
             Observer {

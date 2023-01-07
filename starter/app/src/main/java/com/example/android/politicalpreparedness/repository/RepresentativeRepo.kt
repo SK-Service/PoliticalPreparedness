@@ -36,16 +36,15 @@ class RepresentativeRepo (private val application: Application,
 
             try {
                 Log.i(TAG, "Before call to Civic Representative API")
+                Log.i(TAG, "Formatted Address:<${address.toFormattedString()}>")
                 //TODO - This is has to be further anlyzed to ensure that the complex Json object is dealt with
-//                val representativeListFromCivic = CivicsApi.electionRetrofitService.
-//                                getCivicRepresentatives(address.toFormattedString(),
-//                                            true)
-//                Log.i(TAG, "After the Civic API call")
-//                Log.i(TAG, "RepresentativeOfficesLength:${representativeListFromCivic.offices.size}")
-//                Log.i(TAG, "No Database insert exist yet")
+                val repProfileJsonString = CivicsApi.electionRetrofitService.
+                                getCivicRepresentatives(address.toFormattedString())
+                Log.i(TAG, "After the Civic API call")
+                Log.i(TAG, "No Database insert exist yet")
 
                 //TODO - TO BE DELETED - HARD CODED JSON
-                val repProfileJsonString: String = loadTestRepreentativeProfile(application)
+//                val repProfileJsonString: String = loadTestRepreentativeProfile(application)
                 val representativeListFromCivic = getCiviRepAPIRepresentativeResponse(
                                                     JSONObject(repProfileJsonString))
 
@@ -101,7 +100,7 @@ private fun getRepresentativesProfile(representativeResponse : RepresentativeRes
 fun loadTestRepreentativeProfile(application: Application): String {
     Log.i(TAG_Repo1, "Inside loadTestRepreentativeProfile")
 
-    val file = File(application.filesDir, "/representativeprofile.json")
+    val file = File(application.filesDir, "/representativeprofileOK.json")
     val representativeProfileJsonString: String = file.readText(Charsets.UTF_8)
     Log.i(TAG_Repo1, representativeProfileJsonString)
 

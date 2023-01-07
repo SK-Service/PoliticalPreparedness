@@ -1,0 +1,1652 @@
+{
+  "normalizedInput": {
+    "line1": "North Walker Avenue",
+    "city": "Oklahoma City",
+    "state": "OK",
+    "zip": "73102"
+  },
+  "kind": "civicinfo#representativeInfoResponse",
+  "divisions": {
+    "ocd-division/country:us": {
+      "name": "United States",
+      "officeIndices": [
+        0,
+        1
+      ]
+    },
+    "ocd-division/country:us/state:ok/place:oklahoma_city": {
+      "name": "Oklahoma City city",
+      "officeIndices": [
+        20
+      ]
+    },
+    "ocd-division/country:us/state:ok/cd:5": {
+      "name": "Oklahoma's 5th congressional district",
+      "officeIndices": [
+        3
+      ]
+    },
+    "ocd-division/country:us/state:ok/county:oklahoma": {
+      "name": "Oklahoma County",
+      "officeIndices": [
+        15,
+        16,
+        17,
+        18,
+        19
+      ]
+    },
+    "ocd-division/country:us/state:ok": {
+      "name": "Oklahoma",
+      "officeIndices": [
+        2,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ]
+    }
+  },
+  "offices": [
+    {
+      "name": "President of the United States",
+      "divisionId": "ocd-division/country:us",
+      "levels": [
+        "country"
+      ],
+      "roles": [
+        "headOfGovernment",
+        "headOfState"
+      ],
+      "officialIndices": [
+        0
+      ]
+    },
+    {
+      "name": "Vice President of the United States",
+      "divisionId": "ocd-division/country:us",
+      "levels": [
+        "country"
+      ],
+      "roles": [
+        "deputyHeadOfGovernment"
+      ],
+      "officialIndices": [
+        1
+      ]
+    },
+    {
+      "name": "U.S. Senator",
+      "divisionId": "ocd-division/country:us/state:ok",
+      "levels": [
+        "country"
+      ],
+      "roles": [
+        "legislatorUpperBody"
+      ],
+      "officialIndices": [
+        2,
+        3
+      ]
+    },
+    {
+      "name": "U.S. Representative",
+      "divisionId": "ocd-division/country:us/state:ok/cd:5",
+      "levels": [
+        "country"
+      ],
+      "roles": [
+        "legislatorLowerBody"
+      ],
+      "officialIndices": [
+        4
+      ]
+    },
+    {
+      "name": "Governor of Oklahoma",
+      "divisionId": "ocd-division/country:us/state:ok",
+      "levels": [
+        "administrativeArea1"
+      ],
+      "roles": [
+        "headOfGovernment"
+      ],
+      "officialIndices": [
+        5
+      ]
+    },
+    {
+      "name": "Lieutenant Governor of Oklahoma",
+      "divisionId": "ocd-division/country:us/state:ok",
+      "levels": [
+        "administrativeArea1"
+      ],
+      "roles": [
+        "deputyHeadOfGovernment"
+      ],
+      "officialIndices": [
+        6
+      ]
+    },
+    {
+      "name": "OK State Commissioner of Insurance",
+      "divisionId": "ocd-division/country:us/state:ok",
+      "levels": [
+        "administrativeArea1"
+      ],
+      "roles": [
+        "governmentOfficer"
+      ],
+      "officialIndices": [
+        7
+      ]
+    },
+    {
+      "name": "OK State Attorney General",
+      "divisionId": "ocd-division/country:us/state:ok",
+      "levels": [
+        "administrativeArea1"
+      ],
+      "roles": [
+        "governmentOfficer"
+      ],
+      "officialIndices": [
+        8
+      ]
+    },
+    {
+      "name": "OK State Auditor and Inspector",
+      "divisionId": "ocd-division/country:us/state:ok",
+      "levels": [
+        "administrativeArea1"
+      ],
+      "roles": [
+        "governmentOfficer"
+      ],
+      "officialIndices": [
+        9
+      ]
+    },
+    {
+      "name": "OK State Commissioner of Labor",
+      "divisionId": "ocd-division/country:us/state:ok",
+      "levels": [
+        "administrativeArea1"
+      ],
+      "roles": [
+        "governmentOfficer"
+      ],
+      "officialIndices": [
+        10
+      ]
+    },
+    {
+      "name": "OK State Treasurer",
+      "divisionId": "ocd-division/country:us/state:ok",
+      "levels": [
+        "administrativeArea1"
+      ],
+      "roles": [
+        "governmentOfficer"
+      ],
+      "officialIndices": [
+        11
+      ]
+    },
+    {
+      "name": "OK State Corporation Commissioner",
+      "divisionId": "ocd-division/country:us/state:ok",
+      "levels": [
+        "administrativeArea1"
+      ],
+      "roles": [
+        "governmentOfficer"
+      ],
+      "officialIndices": [
+        12,
+        13,
+        14
+      ]
+    },
+    {
+      "name": "OK State Superintendent of Public Instruction",
+      "divisionId": "ocd-division/country:us/state:ok",
+      "levels": [
+        "administrativeArea1"
+      ],
+      "roles": [
+        "governmentOfficer"
+      ],
+      "officialIndices": [
+        15
+      ]
+    },
+    {
+      "name": "OK State Court of Criminal Appeals Judge",
+      "divisionId": "ocd-division/country:us/state:ok",
+      "levels": [
+        "administrativeArea1"
+      ],
+      "roles": [
+        "judge"
+      ],
+      "officialIndices": [
+        16,
+        17,
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "name": "OK State Supreme Court Justice",
+      "divisionId": "ocd-division/country:us/state:ok",
+      "levels": [
+        "administrativeArea1"
+      ],
+      "roles": [
+        "judge"
+      ],
+      "officialIndices": [
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29
+      ]
+    },
+    {
+      "name": "Oklahoma County Sheriff",
+      "divisionId": "ocd-division/country:us/state:ok/county:oklahoma",
+      "levels": [
+        "administrativeArea2"
+      ],
+      "roles": [
+        "governmentOfficer"
+      ],
+      "officialIndices": [
+        30
+      ]
+    },
+    {
+      "name": "Oklahoma County Assessor",
+      "divisionId": "ocd-division/country:us/state:ok/county:oklahoma",
+      "levels": [
+        "administrativeArea2"
+      ],
+      "roles": [
+        "governmentOfficer"
+      ],
+      "officialIndices": [
+        31
+      ]
+    },
+    {
+      "name": "Oklahoma County Court Clerk",
+      "divisionId": "ocd-division/country:us/state:ok/county:oklahoma",
+      "levels": [
+        "administrativeArea2"
+      ],
+      "roles": [
+        "governmentOfficer"
+      ],
+      "officialIndices": [
+        32
+      ]
+    },
+    {
+      "name": "Oklahoma County Clerk",
+      "divisionId": "ocd-division/country:us/state:ok/county:oklahoma",
+      "levels": [
+        "administrativeArea2"
+      ],
+      "roles": [
+        "governmentOfficer"
+      ],
+      "officialIndices": [
+        33
+      ]
+    },
+    {
+      "name": "Oklahoma County Treasurer",
+      "divisionId": "ocd-division/country:us/state:ok/county:oklahoma",
+      "levels": [
+        "administrativeArea2"
+      ],
+      "roles": [
+        "governmentOfficer"
+      ],
+      "officialIndices": [
+        34
+      ]
+    },
+    {
+      "name": "Mayor of Oklahoma City",
+      "divisionId": "ocd-division/country:us/state:ok/place:oklahoma_city",
+      "levels": [
+        "locality"
+      ],
+      "roles": [
+        "headOfGovernment"
+      ],
+      "officialIndices": [
+        35
+      ]
+    }
+  ],
+  "officials": [
+    {
+      "name": "Joseph R. Biden",
+      "address": [
+        {
+          "line1": "1600 Pennsylvania Avenue Northwest",
+          "city": "Washington",
+          "state": "DC",
+          "zip": "20500"
+        }
+      ],
+      "party": "Democratic Party",
+      "phones": [
+        "(202) 456-1111"
+      ],
+      "urls": [
+        "https://www.whitehouse.gov/",
+        "https://en.wikipedia.org/wiki/Joe_Biden"
+      ],
+      "channels": [
+        {
+          "type": "Twitter",
+          "id": "potus"
+        }
+      ],
+      "geocodingSummaries": [
+        {
+          "queryString": "The White House 1600 Pennsylvania Avenue NW Washington, DC 20500",
+          "featureId": {
+            "cellId": "9923602325795527449",
+            "fprint": "11513381022022344111"
+          },
+          "featureType": "typeCompoundBuilding",
+          "positionPrecisionMeters": 126.14545494347092,
+          "addressUnderstood": true
+        }
+      ]
+    },
+    {
+      "name": "Kamala D. Harris",
+      "address": [
+        {
+          "line1": "1600 Pennsylvania Avenue Northwest",
+          "city": "Washington",
+          "state": "DC",
+          "zip": "20500"
+        }
+      ],
+      "party": "Democratic Party",
+      "phones": [
+        "(202) 456-1111"
+      ],
+      "urls": [
+        "https://www.whitehouse.gov/",
+        "https://en.wikipedia.org/wiki/Kamala_Harris"
+      ],
+      "channels": [
+        {
+          "type": "Twitter",
+          "id": "VP"
+        }
+      ],
+      "geocodingSummaries": [
+        {
+          "queryString": "The White House 1600 Pennsylvania Avenue NW Washington, DC 20500",
+          "featureId": {
+            "cellId": "9923602325795527449",
+            "fprint": "11513381022022344111"
+          },
+          "featureType": "typeCompoundBuilding",
+          "positionPrecisionMeters": 126.14545494347092,
+          "addressUnderstood": true
+        }
+      ]
+    },
+    {
+      "name": "James Lankford",
+      "address": [
+        {
+          "line1": "120 Constitution Avenue Northeast",
+          "city": "Washington",
+          "state": "DC",
+          "zip": "20510"
+        }
+      ],
+      "party": "Republican Party",
+      "phones": [
+        "(202) 224-5754"
+      ],
+      "urls": [
+        "https://www.lankford.senate.gov/",
+        "https://en.wikipedia.org/wiki/James_Lankford"
+      ],
+      "photoUrl": "http://bioguide.congress.gov/bioguide/photo/L/L000575.jpg",
+      "channels": [
+        {
+          "type": "Facebook",
+          "id": "SenatorLankford"
+        },
+        {
+          "type": "Twitter",
+          "id": "SenatorLankford"
+        }
+      ],
+      "geocodingSummaries": [
+        {
+          "queryString": "316 Hart Senate Office Building, 120 Constitution Ave NE, Washington DC 20510",
+          "featureId": {
+            "cellId": "9923602788763978871",
+            "fprint": "2526607997683318429"
+          },
+          "featureType": "typeGeocodedAddress",
+          "positionPrecisionMeters": 0,
+          "addressUnderstood": true
+        }
+      ]
+    },
+    {
+      "name": "James M. Inhofe",
+      "address": [
+        {
+          "line1": "2 Constitution Avenue Northeast",
+          "city": "Washington",
+          "state": "DC",
+          "zip": "20510"
+        }
+      ],
+      "party": "Republican Party",
+      "phones": [
+        "(202) 224-4721"
+      ],
+      "urls": [
+        "https://www.inhofe.senate.gov/",
+        "https://en.wikipedia.org/wiki/Jim_Inhofe"
+      ],
+      "photoUrl": "http://bioguide.congress.gov/bioguide/photo/I/I000024.jpg",
+      "channels": [
+        {
+          "type": "Facebook",
+          "id": "jiminhofe"
+        },
+        {
+          "type": "Twitter",
+          "id": "jiminhofe"
+        }
+      ],
+      "geocodingSummaries": [
+        {
+          "queryString": "205 Russell Senate Office Building, 2 Constitution Ave NE, Washington DC 20510",
+          "featureId": {
+            "cellId": "9923602777983093035",
+            "fprint": "16754435804240149550"
+          },
+          "featureType": "typeCompoundBuilding",
+          "positionPrecisionMeters": 154.99767133790925,
+          "addressUnderstood": true
+        }
+      ]
+    },
+    {
+      "name": "Stephanie Bice",
+      "address": [
+        {
+          "line1": "1223",
+          "line2": "15 Independence Avenue Southeast",
+          "city": "Washington",
+          "state": "DC",
+          "zip": "20515"
+        }
+      ],
+      "party": "Republican Party",
+      "phones": [
+        "(202) 225-2132"
+      ],
+      "urls": [
+        "https://bice.house.gov/",
+        "https://en.wikipedia.org/wiki/Stephanie_Bice"
+      ],
+      "channels": [
+        {
+          "type": "Facebook",
+          "id": "RepStephanieBice"
+        },
+        {
+          "type": "Twitter",
+          "id": "RepBice"
+        }
+      ],
+      "geocodingSummaries": [
+        {
+          "queryString": "1223 Longworth House Office Building, 15 Independence Ave SE, Washington, DC 20515-3601",
+          "featureId": {
+            "cellId": "9923602795423060423",
+            "fprint": "18411854889169102830"
+          },
+          "featureType": "typeCompoundBuilding",
+          "positionPrecisionMeters": 123.49476568652042,
+          "addressUnderstood": false
+        }
+      ]
+    },
+    {
+      "name": "Kevin Stitt",
+      "address": [
+        {
+          "line1": "2300 North Lincoln Boulevard",
+          "city": "Oklahoma City",
+          "state": "OK",
+          "zip": "73105"
+        }
+      ],
+      "party": "Republican Party",
+      "phones": [
+        "(405) 521-2342"
+      ],
+      "urls": [
+        "https://www.governor.ok.gov/",
+        "https://en.wikipedia.org/wiki/Kevin_Stitt"
+      ],
+      "channels": [
+        {
+          "type": "Facebook",
+          "id": "GovStitt"
+        },
+        {
+          "type": "Twitter",
+          "id": "GovStitt"
+        }
+      ],
+      "geocodingSummaries": [
+        {
+          "queryString": "2300 N Lincoln Blvd, Oklahoma City, OK 73105",
+          "featureId": {
+            "cellId": "9777903313363530365",
+            "fprint": "15316281302150211036"
+          },
+          "featureType": "typeCompoundBuilding",
+          "positionPrecisionMeters": 117.58920545976876,
+          "addressUnderstood": true
+        }
+      ]
+    },
+    {
+      "name": "Matt Pinnell",
+      "address": [
+        {
+          "line1": "2300 North Lincoln Boulevard",
+          "city": "Oklahoma City",
+          "state": "OK",
+          "zip": "73105"
+        }
+      ],
+      "party": "Republican Party",
+      "phones": [
+        "(405) 521-2161"
+      ],
+      "urls": [
+        "https://www.ok.gov/ltgovpinnell/",
+        "https://en.wikipedia.org/wiki/Matt_Pinnell"
+      ],
+      "channels": [
+        {
+          "type": "Facebook",
+          "id": "LtGovPinnell"
+        },
+        {
+          "type": "Twitter",
+          "id": "LtGovPinnell"
+        }
+      ],
+      "geocodingSummaries": [
+        {
+          "queryString": "2300 N Lincoln Blvd, Rm 211, Oklahoma City, OK 73105",
+          "featureId": {
+            "cellId": "9777903313409161759",
+            "fprint": "5579782484412514177"
+          },
+          "featureType": "typeCompoundSection",
+          "positionPrecisionMeters": 0,
+          "addressUnderstood": true
+        }
+      ]
+    },
+    {
+      "name": "Glen Mulready",
+      "address": [
+        {
+          "line1": "400 Northeast 50th Street",
+          "city": "Oklahoma City",
+          "state": "OK",
+          "zip": "73105"
+        }
+      ],
+      "party": "Republican Party",
+      "phones": [
+        "(405) 521-2828"
+      ],
+      "urls": [
+        "https://www.oid.ok.gov/",
+        "https://en.wikipedia.org/wiki/Glen_Mulready"
+      ],
+      "channels": [
+        {
+          "type": "Facebook",
+          "id": "CommissionerGlenMulready"
+        },
+        {
+          "type": "Twitter",
+          "id": "glen_mulready"
+        }
+      ],
+      "geocodingSummaries": [
+        {
+          "queryString": "400 NE 50th St, Oklahoma City, OK 73105",
+          "featureId": {
+            "cellId": "9777906232726365879",
+            "fprint": "1628590111148927792"
+          },
+          "featureType": "typeCompoundBuilding",
+          "positionPrecisionMeters": 37.495076132324108,
+          "addressUnderstood": true
+        }
+      ]
+    },
+    {
+      "name": "John O'Connor",
+      "address": [
+        {
+          "line1": "313 Northeast 21st Street",
+          "city": "Oklahoma City",
+          "state": "OK",
+          "zip": "73105"
+        }
+      ],
+      "party": "Republican Party",
+      "phones": [
+        "(405) 521-3921"
+      ],
+      "urls": [
+        "http://www.oag.ok.gov/",
+        "https://en.wikipedia.org/wiki/John_M._O%2527Connor"
+      ],
+      "emails": [
+        "media@oag.ok.gov"
+      ],
+      "channels": [
+        {
+          "type": "Facebook",
+          "id": "AttorneyGeneralofOklahoma"
+        },
+        {
+          "type": "Twitter",
+          "id": "Okla_OAG"
+        }
+      ],
+      "geocodingSummaries": [
+        {
+          "queryString": "313 NE 21st Street, Oklahoma City, OK 73105",
+          "featureId": {
+            "cellId": "9777903321035920351",
+            "fprint": "391921380507688387"
+          },
+          "featureType": "typeCompoundBuilding",
+          "positionPrecisionMeters": 39.185161668167709,
+          "addressUnderstood": true
+        }
+      ]
+    },
+    {
+      "name": "Cindy Byrd",
+      "address": [
+        {
+          "line1": "2300 North Lincoln Boulevard",
+          "city": "Oklahoma City",
+          "state": "OK",
+          "zip": "73105"
+        }
+      ],
+      "party": "Republican Party",
+      "phones": [
+        "(405) 521-3495"
+      ],
+      "urls": [
+        "https://www.sai.ok.gov/",
+        "https://en.wikipedia.org/wiki/Cindy_Byrd"
+      ],
+      "emails": [
+        "auditor@sai.ok.gov"
+      ],
+      "geocodingSummaries": [
+        {
+          "queryString": "2300 N Lincoln Blvd, Rm 123, Oklahoma City, OK 73105",
+          "featureId": {
+            "cellId": "9777903313363530365",
+            "fprint": "1372763467886331931"
+          },
+          "featureType": "typeCompoundSection",
+          "positionPrecisionMeters": 117.58920545976876,
+          "addressUnderstood": true
+        }
+      ]
+    },
+    {
+      "name": "Leslie Osborn",
+      "address": [
+        {
+          "line1": "3017 North Stiles Avenue",
+          "city": "Oklahoma City",
+          "state": "OK",
+          "zip": "73105"
+        }
+      ],
+      "party": "Republican Party",
+      "phones": [
+        "(405) 521-6100"
+      ],
+      "urls": [
+        "https://www.ok.gov/odol/",
+        "https://en.wikipedia.org/wiki/Leslie_Osborn"
+      ],
+      "emails": [
+        "labor.info@labor.ok.gov"
+      ],
+      "geocodingSummaries": [
+        {
+          "queryString": "3017 N Stiles Ave, Ste 100, Oklahoma City, OK 73105",
+          "featureId": {
+            "cellId": "9777903426170376959",
+            "fprint": "1145825129579869785"
+          },
+          "featureType": "typeCompoundSection",
+          "positionPrecisionMeters": 55.579898180296482,
+          "addressUnderstood": true
+        }
+      ]
+    },
+    {
+      "name": "Randy McDaniel",
+      "address": [
+        {
+          "line1": "9520 N May Ave Lower Level",
+          "city": "Oklahoma City",
+          "state": "OK",
+          "zip": "73120"
+        }
+      ],
+      "party": "Republican Party",
+      "phones": [
+        "(405) 521-3191"
+      ],
+      "urls": [
+        "https://www.ok.gov/treasurer/",
+        "https://en.wikipedia.org/wiki/Randy_McDaniel"
+      ],
+      "channels": [
+        {
+          "type": "Facebook",
+          "id": "TreasurerMcDaniel"
+        },
+        {
+          "type": "Twitter",
+          "id": "OKTreasurer"
+        }
+      ],
+      "geocodingSummaries": [
+        {
+          "queryString": "9520 N May Ave, Lower Level, Oklahoma City, OK 73120",
+          "featureId": {
+            "cellId": "9777908115994921067",
+            "fprint": "14826996799587387810"
+          },
+          "featureType": "typeCompoundBuilding",
+          "positionPrecisionMeters": 49.686609258180141,
+          "addressUnderstood": false
+        }
+      ]
+    },
+    {
+      "name": "Bob Anthony",
+      "party": "Republican Party",
+      "phones": [
+        "(405) 521-2211"
+      ],
+      "urls": [
+        "http://www.occeweb.com/Comm/Anthony/Bob_Anthony_Bio.html",
+        "https://en.wikipedia.org/wiki/Bob_Anthony"
+      ],
+      "emails": [
+        "bob.anthony@occ.ok.gov"
+      ],
+      "channels": [
+        {
+          "type": "Facebook",
+          "id": "occpud"
+        },
+        {
+          "type": "Twitter",
+          "id": "PUDOCC"
+        }
+      ],
+      "geocodingSummaries": [
+        {
+          "queryString": "P.O. Box 52000, Oklahoma City, OK 73152-2000",
+          "featureId": {
+            "cellId": "9777903332942985305",
+            "fprint": "5889144771386879667"
+          },
+          "featureType": "typePostalCode",
+          "positionPrecisionMeters": 500,
+          "addressUnderstood": true
+        }
+      ]
+    },
+    {
+      "name": "Dana Murphy",
+      "party": "Republican Party",
+      "phones": [
+        "(405) 521-2211"
+      ],
+      "urls": [
+        "http://www.occeweb.com/Comm/Murphy/MurphyBio_11-25-19.html",
+        "https://en.wikipedia.org/wiki/Dana_Murphy"
+      ],
+      "emails": [
+        "contactdanamurphy@occ.ok.gov"
+      ],
+      "channels": [
+        {
+          "type": "Facebook",
+          "id": "occpud"
+        },
+        {
+          "type": "Twitter",
+          "id": "PUDOCC"
+        }
+      ],
+      "geocodingSummaries": [
+        {
+          "queryString": "P.O. Box 52000, Oklahoma City, OK 73152-2000",
+          "featureId": {
+            "cellId": "9777903332942985305",
+            "fprint": "5889144771386879667"
+          },
+          "featureType": "typePostalCode",
+          "positionPrecisionMeters": 500,
+          "addressUnderstood": true
+        }
+      ]
+    },
+    {
+      "name": "Todd Hiett",
+      "party": "Republican Party",
+      "phones": [
+        "(405) 521-2211"
+      ],
+      "urls": [
+        "http://www.occeweb.com/Comm/Hiett/ToddHiettBio.html",
+        "https://en.wikipedia.org/wiki/Todd_Hiett"
+      ],
+      "emails": [
+        "contacttoddhiett@occ.ok.gov"
+      ],
+      "channels": [
+        {
+          "type": "Facebook",
+          "id": "occpud"
+        },
+        {
+          "type": "Twitter",
+          "id": "PUDOCC"
+        }
+      ],
+      "geocodingSummaries": [
+        {
+          "queryString": "P.O. Box 52000, Oklahoma City, OK 73152-2000",
+          "featureId": {
+            "cellId": "9777903332942985305",
+            "fprint": "5889144771386879667"
+          },
+          "featureType": "typePostalCode",
+          "positionPrecisionMeters": 500,
+          "addressUnderstood": true
+        }
+      ]
+    },
+    {
+      "name": "Joy Hofmeister",
+      "address": [
+        {
+          "line1": "2500 North Lincoln Boulevard",
+          "city": "Oklahoma City",
+          "state": "OK",
+          "zip": "73105"
+        }
+      ],
+      "party": "Democratic Party",
+      "phones": [
+        "(405) 521-3301"
+      ],
+      "urls": [
+        "https://sde.ok.gov/",
+        "https://en.wikipedia.org/wiki/Joy_Hofmeister"
+      ],
+      "channels": [
+        {
+          "type": "Facebook",
+          "id": "OklaSDE"
+        },
+        {
+          "type": "Twitter",
+          "id": "oksde"
+        }
+      ],
+      "geocodingSummaries": [
+        {
+          "queryString": "2500 N Lincoln Blvd, Oklahoma City, OK 73105",
+          "featureId": {
+            "cellId": "9777903315914990441",
+            "fprint": "2415442391528225860"
+          },
+          "featureType": "typeCompoundBuilding",
+          "positionPrecisionMeters": 62.910466135155936,
+          "addressUnderstood": true
+        }
+      ]
+    },
+    {
+      "name": "David D. Lewis",
+      "address": [
+        {
+          "line1": "2100 North Lincoln Boulevard",
+          "city": "Oklahoma City",
+          "state": "OK",
+          "zip": "73105"
+        }
+      ],
+      "party": "Nonpartisan",
+      "phones": [
+        "(405) 556-9400"
+      ],
+      "urls": [
+        "http://www.okcca.net/",
+        "https://en.wikipedia.org/wiki/David_B._Lewis"
+      ],
+      "geocodingSummaries": [
+        {
+          "queryString": "2100 N Lincoln Blvd, Ste 2, Oklahoma City, OK 73105",
+          "featureId": {
+            "cellId": "9777903485299993521",
+            "fprint": "11233779040424947788"
+          },
+          "featureType": "typeCompoundSection",
+          "positionPrecisionMeters": 0,
+          "addressUnderstood": true
+        }
+      ]
+    },
+    {
+      "name": "Gary L. Lumpkin",
+      "address": [
+        {
+          "line1": "2100 North Lincoln Boulevard",
+          "city": "Oklahoma City",
+          "state": "OK",
+          "zip": "73105"
+        }
+      ],
+      "party": "Nonpartisan",
+      "phones": [
+        "(405) 556-9400"
+      ],
+      "urls": [
+        "http://www.okcca.net/",
+        "https://en.wikipedia.org/wiki/Gary_L._Lumpkin"
+      ],
+      "geocodingSummaries": [
+        {
+          "queryString": "2100 N Lincoln Blvd, Ste 2, Oklahoma City, OK 73105",
+          "featureId": {
+            "cellId": "9777903485299993521",
+            "fprint": "11233779040424947788"
+          },
+          "featureType": "typeCompoundSection",
+          "positionPrecisionMeters": 0,
+          "addressUnderstood": true
+        }
+      ]
+    },
+    {
+      "name": "Robert L. Hudson",
+      "address": [
+        {
+          "line1": "2100 North Lincoln Boulevard",
+          "city": "Oklahoma City",
+          "state": "OK",
+          "zip": "73105"
+        }
+      ],
+      "party": "Nonpartisan",
+      "phones": [
+        "(405) 556-9400"
+      ],
+      "urls": [
+        "http://www.okcca.net/",
+        "https://en.wikipedia.org/wiki/Robert_L._Hudson"
+      ],
+      "geocodingSummaries": [
+        {
+          "queryString": "2100 N Lincoln Blvd, Ste 2, Oklahoma City, OK 73105",
+          "featureId": {
+            "cellId": "9777903485299993521",
+            "fprint": "11233779040424947788"
+          },
+          "featureType": "typeCompoundSection",
+          "positionPrecisionMeters": 0,
+          "addressUnderstood": true
+        }
+      ]
+    },
+    {
+      "name": "Scott Rowland",
+      "address": [
+        {
+          "line1": "2100 North Lincoln Boulevard",
+          "city": "Oklahoma City",
+          "state": "OK",
+          "zip": "73105"
+        }
+      ],
+      "party": "Nonpartisan",
+      "phones": [
+        "(405) 556-9400"
+      ],
+      "urls": [
+        "http://www.okcca.net/",
+        "https://en.wikipedia.org/wiki/Scott_Rowland"
+      ],
+      "geocodingSummaries": [
+        {
+          "queryString": "2100 N Lincoln Blvd, Ste 2, Oklahoma City, OK 73105",
+          "featureId": {
+            "cellId": "9777903485299993521",
+            "fprint": "11233779040424947788"
+          },
+          "featureType": "typeCompoundSection",
+          "positionPrecisionMeters": 0,
+          "addressUnderstood": true
+        }
+      ]
+    },
+    {
+      "name": "William Musseman, Jr.",
+      "address": [
+        {
+          "line1": "2100 North Lincoln Boulevard",
+          "city": "Oklahoma City",
+          "state": "OK",
+          "zip": "73105"
+        }
+      ],
+      "party": "Nonpartisan",
+      "phones": [
+        "(405) 556-9400"
+      ],
+      "urls": [
+        "http://www.okcca.net/"
+      ],
+      "geocodingSummaries": [
+        {
+          "queryString": "2100 N Lincoln Blvd, Ste 2, Oklahoma City, OK 73105",
+          "featureId": {
+            "cellId": "9777903485299993521",
+            "fprint": "11233779040424947788"
+          },
+          "featureType": "typeCompoundSection",
+          "positionPrecisionMeters": 0,
+          "addressUnderstood": true
+        }
+      ]
+    },
+    {
+      "name": "Dana Kuehn",
+      "address": [
+        {
+          "line1": "2100 North Lincoln Boulevard",
+          "city": "Oklahoma City",
+          "state": "OK",
+          "zip": "73105"
+        }
+      ],
+      "party": "Nonpartisan",
+      "phones": [
+        "(405) 556-9400"
+      ],
+      "urls": [
+        "https://www.oscn.net/v4/",
+        "https://en.wikipedia.org/wiki/Dana_Kuehn"
+      ],
+      "geocodingSummaries": [
+        {
+          "queryString": "2100 N Lincoln Blvd, Ste 1, Oklahoma City, OK 73105",
+          "featureId": {
+            "cellId": "9777903486047095361",
+            "fprint": "6649030700374832144"
+          },
+          "featureType": "typeCompoundSection",
+          "positionPrecisionMeters": 69.064476728354535,
+          "addressUnderstood": true
+        }
+      ]
+    },
+    {
+      "name": "Douglas L. Combs",
+      "address": [
+        {
+          "line1": "2100 North Lincoln Boulevard",
+          "city": "Oklahoma City",
+          "state": "OK",
+          "zip": "73105"
+        }
+      ],
+      "party": "Nonpartisan",
+      "phones": [
+        "(405) 556-9400"
+      ],
+      "urls": [
+        "https://www.oscn.net/v4/",
+        "https://en.wikipedia.org/wiki/Doug_Combs"
+      ],
+      "geocodingSummaries": [
+        {
+          "queryString": "2100 N Lincoln Blvd, Ste 1, Oklahoma City, OK 73105",
+          "featureId": {
+            "cellId": "9777903486047095361",
+            "fprint": "6649030700374832144"
+          },
+          "featureType": "typeCompoundSection",
+          "positionPrecisionMeters": 69.064476728354535,
+          "addressUnderstood": true
+        }
+      ]
+    },
+    {
+      "name": "Dustin P. Rowe",
+      "address": [
+        {
+          "line1": "2100 North Lincoln Boulevard",
+          "city": "Oklahoma City",
+          "state": "OK",
+          "zip": "73105"
+        }
+      ],
+      "party": "Nonpartisan",
+      "phones": [
+        "(405) 556-9400"
+      ],
+      "urls": [
+        "https://www.oscn.net/v4/",
+        "https://en.wikipedia.org/wiki/Dustin_Rowe"
+      ],
+      "geocodingSummaries": [
+        {
+          "queryString": "2100 N Lincoln Blvd, Ste 1, Oklahoma City, OK 73105",
+          "featureId": {
+            "cellId": "9777903486047095361",
+            "fprint": "6649030700374832144"
+          },
+          "featureType": "typeCompoundSection",
+          "positionPrecisionMeters": 69.064476728354535,
+          "addressUnderstood": true
+        }
+      ]
+    },
+    {
+      "name": "James E. Edmondson",
+      "address": [
+        {
+          "line1": "2100 North Lincoln Boulevard",
+          "city": "Oklahoma City",
+          "state": "OK",
+          "zip": "73105"
+        }
+      ],
+      "party": "Nonpartisan",
+      "phones": [
+        "(405) 556-9400"
+      ],
+      "urls": [
+        "https://www.oscn.net/v4/",
+        "https://en.wikipedia.org/wiki/James_E._Edmondson"
+      ],
+      "geocodingSummaries": [
+        {
+          "queryString": "2100 N Lincoln Blvd, Ste 1, Oklahoma City, OK 73105",
+          "featureId": {
+            "cellId": "9777903486047095361",
+            "fprint": "6649030700374832144"
+          },
+          "featureType": "typeCompoundSection",
+          "positionPrecisionMeters": 69.064476728354535,
+          "addressUnderstood": true
+        }
+      ]
+    },
+    {
+      "name": "James R. Winchester",
+      "address": [
+        {
+          "line1": "2100 North Lincoln Boulevard",
+          "city": "Oklahoma City",
+          "state": "OK",
+          "zip": "73105"
+        }
+      ],
+      "party": "Nonpartisan",
+      "phones": [
+        "(405) 556-9400"
+      ],
+      "urls": [
+        "https://www.oscn.net/v4/",
+        "https://en.wikipedia.org/wiki/James_R._Winchester"
+      ],
+      "geocodingSummaries": [
+        {
+          "queryString": "2100 N Lincoln Blvd, Ste 1, Oklahoma City, OK 73105",
+          "featureId": {
+            "cellId": "9777903486047095361",
+            "fprint": "6649030700374832144"
+          },
+          "featureType": "typeCompoundSection",
+          "positionPrecisionMeters": 69.064476728354535,
+          "addressUnderstood": true
+        }
+      ]
+    },
+    {
+      "name": "M. John Kane IV",
+      "address": [
+        {
+          "line1": "2100 North Lincoln Boulevard",
+          "city": "Oklahoma City",
+          "state": "OK",
+          "zip": "73105"
+        }
+      ],
+      "party": "Nonpartisan",
+      "phones": [
+        "(405) 556-9400"
+      ],
+      "urls": [
+        "https://www.oscn.net/v4/",
+        "https://en.wikipedia.org/wiki/M._John_Kane_IV"
+      ],
+      "geocodingSummaries": [
+        {
+          "queryString": "2100 N Lincoln Blvd, Ste 1, Oklahoma City, OK 73105",
+          "featureId": {
+            "cellId": "9777903486047095361",
+            "fprint": "6649030700374832144"
+          },
+          "featureType": "typeCompoundSection",
+          "positionPrecisionMeters": 69.064476728354535,
+          "addressUnderstood": true
+        }
+      ]
+    },
+    {
+      "name": "Noma Gurich",
+      "address": [
+        {
+          "line1": "2100 North Lincoln Boulevard",
+          "city": "Oklahoma City",
+          "state": "OK",
+          "zip": "73105"
+        }
+      ],
+      "party": "Nonpartisan",
+      "phones": [
+        "(405) 556-9400"
+      ],
+      "urls": [
+        "https://www.oscn.net/v4/",
+        "https://en.wikipedia.org/wiki/Noma_Gurich"
+      ],
+      "geocodingSummaries": [
+        {
+          "queryString": "2100 N Lincoln Blvd, Ste 1, Oklahoma City, OK 73105",
+          "featureId": {
+            "cellId": "9777903486047095361",
+            "fprint": "6649030700374832144"
+          },
+          "featureType": "typeCompoundSection",
+          "positionPrecisionMeters": 69.064476728354535,
+          "addressUnderstood": true
+        }
+      ]
+    },
+    {
+      "name": "Richard Darby",
+      "address": [
+        {
+          "line1": "2100 North Lincoln Boulevard",
+          "city": "Oklahoma City",
+          "state": "OK",
+          "zip": "73105"
+        }
+      ],
+      "party": "Nonpartisan",
+      "phones": [
+        "(405) 556-9400"
+      ],
+      "urls": [
+        "https://www.oscn.net/v4/",
+        "https://en.wikipedia.org/wiki/Richard_Darby"
+      ],
+      "geocodingSummaries": [
+        {
+          "queryString": "2100 N Lincoln Blvd, Ste 1, Oklahoma City, OK 73105",
+          "featureId": {
+            "cellId": "9777903486047095361",
+            "fprint": "6649030700374832144"
+          },
+          "featureType": "typeCompoundSection",
+          "positionPrecisionMeters": 69.064476728354535,
+          "addressUnderstood": true
+        }
+      ]
+    },
+    {
+      "name": "Yvonne Kauger",
+      "address": [
+        {
+          "line1": "2100 North Lincoln Boulevard",
+          "city": "Oklahoma City",
+          "state": "OK",
+          "zip": "73105"
+        }
+      ],
+      "party": "Nonpartisan",
+      "phones": [
+        "(405) 556-9400"
+      ],
+      "urls": [
+        "https://www.oscn.net/v4/",
+        "https://en.wikipedia.org/wiki/Yvonne_Kauger"
+      ],
+      "geocodingSummaries": [
+        {
+          "queryString": "2100 N Lincoln Blvd, Ste 1, Oklahoma City, OK 73105",
+          "featureId": {
+            "cellId": "9777903486047095361",
+            "fprint": "6649030700374832144"
+          },
+          "featureType": "typeCompoundSection",
+          "positionPrecisionMeters": 69.064476728354535,
+          "addressUnderstood": true
+        }
+      ]
+    },
+    {
+      "name": "Tommie Johnson III",
+      "address": [
+        {
+          "line1": "2101 Northeast 36th Street",
+          "city": "Oklahoma City",
+          "state": "OK",
+          "zip": "73111"
+        }
+      ],
+      "party": "Republican Party",
+      "phones": [
+        "(405) 713-1000"
+      ],
+      "urls": [
+        "https://sheriff.oklahomacounty.org/"
+      ],
+      "emails": [
+        "goodnews@oklahomacounty.org"
+      ],
+      "channels": [
+        {
+          "type": "Facebook",
+          "id": "OCSO911"
+        },
+        {
+          "type": "Twitter",
+          "id": "OkCountySheriff"
+        }
+      ],
+      "geocodingSummaries": [
+        {
+          "queryString": "2101 NE 36th St, Oklahoma City, OK 73111",
+          "featureId": {
+            "cellId": "9777903610905723369",
+            "fprint": "4745876231474455959"
+          },
+          "featureType": "typeCompoundBuilding",
+          "positionPrecisionMeters": 59.378881819790827,
+          "addressUnderstood": true
+        }
+      ]
+    },
+    {
+      "name": "Larry Stein",
+      "address": [
+        {
+          "line1": "320 Robert S Kerr Avenue",
+          "city": "Oklahoma City",
+          "state": "OK",
+          "zip": "73102"
+        }
+      ],
+      "party": "Republican Party",
+      "phones": [
+        "(405) 713-1200"
+      ],
+      "urls": [
+        "https://assessor.oklahomacounty.org/"
+      ],
+      "emails": [
+        "larste@oklahomacounty.org"
+      ],
+      "channels": [
+        {
+          "type": "Facebook",
+          "id": "okcountyassessor"
+        }
+      ],
+      "geocodingSummaries": [
+        {
+          "queryString": "320 Robert S Kerr Ave, #313 Oklahoma City, OK 73102",
+          "featureId": {
+            "cellId": "9777903230038545899",
+            "fprint": "10562868432075618386"
+          },
+          "featureType": "typeCompoundSection",
+          "positionPrecisionMeters": 80.113828201687767,
+          "addressUnderstood": true
+        }
+      ]
+    },
+    {
+      "name": "Rick Warren",
+      "address": [
+        {
+          "line1": "320 Robert S Kerr Avenue",
+          "city": "Oklahoma City",
+          "state": "OK",
+          "zip": "73102"
+        }
+      ],
+      "party": "Republican Party",
+      "phones": [
+        "(405) 713-1705"
+      ],
+      "urls": [
+        "https://www.oklahomacounty.org/Elected-Offices/Court-Clerk"
+      ],
+      "emails": [
+        "okccc@oscn.net"
+      ],
+      "channels": [
+        {
+          "type": "Twitter",
+          "id": "OKCOCourtClerk"
+        }
+      ],
+      "geocodingSummaries": [
+        {
+          "queryString": "320 Robert S. Kerr Ave, Room 409, Oklahoma City, OK 73102",
+          "featureId": {
+            "cellId": "9777903230040967943",
+            "fprint": "3235468001556452757"
+          },
+          "featureType": "typeCompoundSection",
+          "positionPrecisionMeters": 0,
+          "addressUnderstood": true
+        }
+      ]
+    },
+    {
+      "name": "VACANT",
+      "address": [
+        {
+          "line1": "320 Robert S Kerr Avenue",
+          "city": "Oklahoma City",
+          "state": "OK",
+          "zip": "73102"
+        }
+      ],
+      "party": "Unaffiliated",
+      "phones": [
+        "(405) 713-1540"
+      ],
+      "urls": [
+        "https://www.oklahomacounty.org/Elected-Offices/County-Clerk"
+      ],
+      "channels": [
+        {
+          "type": "Facebook",
+          "id": "oklahomacountyclerk"
+        },
+        {
+          "type": "Twitter",
+          "id": "OklahomaClerk"
+        }
+      ],
+      "geocodingSummaries": [
+        {
+          "queryString": "320 Robert S. Kerr Ave, Room 203, Oklahoma City, OK 73102",
+          "featureId": {
+            "cellId": "9777903229867759625",
+            "fprint": "3841735361974986355"
+          },
+          "featureType": "typeCompoundSection",
+          "positionPrecisionMeters": 0,
+          "addressUnderstood": true
+        }
+      ]
+    },
+    {
+      "name": "Forrest \"Butch\" Freeman",
+      "address": [
+        {
+          "line1": "320 Robert S Kerr Avenue",
+          "city": "Oklahoma City",
+          "state": "OK",
+          "zip": "73102"
+        }
+      ],
+      "party": "Republican Party",
+      "phones": [
+        "(405) 713-1300"
+      ],
+      "urls": [
+        "https://www.oklahomacounty.org/Elected-Offices/Treasurer"
+      ],
+      "emails": [
+        "forfre@oklahomacounty.org"
+      ],
+      "channels": [
+        {
+          "type": "Facebook",
+          "id": "OKCountyTreasurer"
+        }
+      ],
+      "geocodingSummaries": [
+        {
+          "queryString": "320 Robert S. Kerr Ave Room 307 Oklahoma City, OK 73102",
+          "featureId": {
+            "cellId": "9777903230040381649",
+            "fprint": "9004914784129692514"
+          },
+          "featureType": "typeCompoundSection",
+          "positionPrecisionMeters": 0,
+          "addressUnderstood": true
+        }
+      ]
+    },
+    {
+      "name": "David Holt",
+      "address": [
+        {
+          "line1": "200 North Walker Avenue",
+          "city": "Oklahoma City",
+          "state": "OK",
+          "zip": "73102"
+        }
+      ],
+      "party": "Nonpartisan",
+      "phones": [
+        "(405) 297-2424"
+      ],
+      "urls": [
+        "https://www.okc.gov/government/mayor",
+        "https://en.wikipedia.org/wiki/David_Holt_%28politician%29"
+      ],
+      "emails": [
+        "mayor@okc.gov"
+      ],
+      "channels": [
+        {
+          "type": "Facebook",
+          "id": "MayorDavidHolt"
+        },
+        {
+          "type": "Twitter",
+          "id": "davidfholt"
+        }
+      ],
+      "geocodingSummaries": [
+        {
+          "queryString": "200 N Walker Ave, 3rd Floor Oklahoma City, OK 73102",
+          "featureId": {
+            "cellId": "9777903219035122829",
+            "fprint": "13182483831549919801"
+          },
+          "featureType": "typeCompoundSection",
+          "positionPrecisionMeters": 39.772304505008876,
+          "addressUnderstood": true
+        }
+      ]
+    }
+  ]
+}

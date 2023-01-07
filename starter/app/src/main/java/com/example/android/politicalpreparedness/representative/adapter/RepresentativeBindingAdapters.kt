@@ -52,7 +52,14 @@ fun bindRepresentativeList (recyclerview: RecyclerView, representativeViewModel:
     //@TODO - Handle when there are no saved election - may be we can add No Election to the list
     if (representativeViewModel?.listOfRepresentatives?.value != null) {
         Log.i("BindngAdapter-listRepresentatives", "List of representatives is not null\n")
-        adapter.submitList(representativeViewModel?.listOfRepresentatives.value )
+        if(!representativeViewModel?.listOfRepresentatives?.value!!.isEmpty()) {
+            Log.i("BindngAdapter-listRepresentatives", "List of representatives is not null and not empty\n")
+            Log.i("BindngAdapter-listRepresentatives",
+                "Value:<${representativeViewModel?.listOfRepresentatives?.value}>\n")
+
+            adapter.submitList(representativeViewModel?.listOfRepresentatives.value )
+        }
+
     }
 }
 
@@ -74,7 +81,7 @@ fun bindDetailsStatusImage(imageView: ImageView, repProfileImageURL: String) {
 fun ImageView.loadImage( url: String?) {
     Log.i("BindingAdapter", "Inside loadImage<${url}>")
 //    val urlHTTPS = url?.replace("http:", "https:")
-////    Log.i("BindingAdapter", "HTTPS URL<${urlHTTPS}>")
+//    Log.i("BindingAdapter", "HTTPS URL<${urlHTTPS}>")
     Picasso.get().load(url)
         .placeholder(R.drawable.ic_profile)
         .error(R.drawable.ic_profile)

@@ -33,9 +33,10 @@ class RepresentativeViewModel(datasource: ElectionDao, application: Application)
         get() = _address
 
     //Manage addressEntered Flag
-    private var _addressEnteredFlag = MutableLiveData<Boolean>()
+    private var _addressEnteredFlag = MutableLiveData<Boolean>(true)
     val addressEnteredFlag: LiveData<Boolean>
         get() = _addressEnteredFlag
+
 
     fun checkAddressGoodForSearch(address: Address) : Boolean {
         var addressValidity = false
@@ -49,26 +50,29 @@ class RepresentativeViewModel(datasource: ElectionDao, application: Application)
         return addressValidity
     }
 
-    fun searchMyRepresentative() {
-        val line1 = "Amphitheatre Parkway"
-        val line2 = "1600"
-        val address = Address(line1, "", "" ,"","")
+    fun searchMyRepresentative(line1:String, line2: String, city: String,
+                               state: String, zip:String) {
+        Log.i(TAG_RVM, "inside searchMyRepresentative")
+//        val line1 = "Amphitheatre Parkway"
+//        val line2 = "1600"
+//        val address = Address(line1, line2, "Mountain View" ,"California","94043")
+        val address = Address(line1, line2, city ,state,zip)
+        Log.i(TAG_RVM, "Address: ${address.toFormattedString()}")
         viewModelScope.launch {
             var repList: List<RepresentativeProfile>
             _civicRepAPICallStatus.value = RepresentativeCivicApiStatus.LOADING
             try {
-                //Call ElectionRepo to get the latest refreshed list from source or cache
-                //TODO - need to pass Address - address is captured in the fragment
                 if (checkAddressGoodForSearch(address)) {
-                    //Reset address entered check flag to false
-                    _addressEnteredFlag.value = false
+                    //Reset address entered check flag to true, which is the initial state
+                    _addressEnteredFlag.value = true
                     repList = RepresentativeRepo(getApplication(), ElectionDatabase.getInstance(application1))
                         .refreshRepresentativeList(address)
                     _listOfRepresentatives.value = repList.toMutableList()
                     Log.i(TAG_RVM, "Size of _listOfRepresentatives.value: " +
                                     "${_listOfRepresentatives.value!!.size}")
                 } else {
-                    _addressEnteredFlag.value = true
+                    //addressEnteredFlag value is false when button is clicked without address line 1
+                    _addressEnteredFlag.value = false
                 }
 
                 Log.i(TAG_RVM, "Representative List ${_listOfRepresentatives.value?.size}")

@@ -49,10 +49,18 @@ class RepresentativeFragment: Fragment() {
         Log.i(TAG_R, "Setting the listOfElection Observer")
         repViewModel.listOfRepresentatives.observe(viewLifecycleOwner,
             Observer {
-                Log.i(TAG, "Inside the RepresentativeViewModel.listOfRepresentatives.observe")
+                Log.i(TAG_R, "Inside the RepresentativeViewModel.listOfRepresentatives.observe")
                 if (it != null ) {
                     Log.i(TAG, "assigning the instantiated RepresentativeViewModel")
                     binding.repviewmodel = repViewModel
+                }
+            })
+
+        repViewModel.addressEnteredFlag.observe(viewLifecycleOwner,
+            Observer {
+                Log.i(TAG_R, "Inside addressEnteredFlag.observe")
+                if ( it == false ) {
+                    binding.message.text = "Enter a valid address for line 1"
                 }
             })
 

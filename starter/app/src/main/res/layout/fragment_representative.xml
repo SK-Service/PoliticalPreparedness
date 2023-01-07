@@ -1,25 +1,33 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?><!--<layout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:motion="http://schemas.android.com/tools"-->
+<!--    xmlns:tools="http://schemas.android.com/tools">-->
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:motion="http://schemas.android.com/tools"
     xmlns:tools="http://schemas.android.com/tools">
 
     <!-- TODO: Add data binding node -->
     <data>
+
         <variable
             name="repviewmodel"
             type="com.example.android.politicalpreparedness.representative.RepresentativeViewModel" />
+
         <variable
             name="inputaddress"
             type="com.example.android.politicalpreparedness.network.models.Address" />
     </data>
 
     <!-- TODO: Add motion scene to hide form on vertical scroll. -->
-    <androidx.constraintlayout.motion.widget.MotionLayout
+    <!--    <androidx.constraintlayout.motion.widget.MotionLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        tools:context="com.example.android.politicalpreparedness.representative.RepresentativeFragment"-->
+    <!--        app:layoutDescription="@xml/fragment_representative_scene">-->
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layoutDescription="@xml/fragment_representative_scene">
-
+        tools:context="com.example.android.politicalpreparedness.representative.RepresentativeFragment">
         <!-- TODO: Add visual styling and content -->
 
         <!-- TODO: Add data binding value -->
@@ -27,98 +35,90 @@
 
         <!-- TODO: Add data binding value -->
         <!-- TODO: Add visual styling and content -->
+
+        <!--        <TextView-->
+        <!--            android:id="@+id/message"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:textColor="@color/error_message_red"-->
+        <!--            android:textSize="12sp"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            motion:layout_editor_absoluteY="24dp"-->
+        <!--            tools:text="At least first line of address is required" />-->
+        <!--            <TextView-->
+        <!--                android:id="@+id/message"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_margin="30dp"-->
+        <!--                android:layout_marginStart="32dp"-->
+        <!--                android:layout_marginEnd="24dp"-->
+        <!--                android:textColor="@color/error_message_red"-->
+        <!--                android:textSize="12sp"-->
+        <!--                app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--                app:layout_constraintEnd_toEndOf="parent"-->
+        <!--                app:layout_constraintStart_toStartOf="parent"-->
+        <!--                app:layout_constraintTop_toBottomOf="@id/search_title"-->
+        <!--                tools:text="At least first line of address is required" />-->
+
 
         <TextView
             android:id="@+id/search_title"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
             android:text="Representative Search"
-            android:textSize="20sp"
+            android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/message"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="Representative Search" />
 
         <TextView
             android:id="@+id/message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/error_message_red"
-            android:textSize="12sp"
+            android:layout_marginTop="4dp"
+            android:text=""
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            motion:layout_editor_absoluteY="24dp"
-            tools:text="At least first line of address is required" />
+            app:layout_constraintTop_toBottomOf="@+id/search_title"
+            tools:text="Error Message" />
 
         <EditText
             android:id="@+id/address_line_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:autofillHints=""
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:hint="Enter Street Name - No number"
             android:inputType="textPostalAddress"
+            android:minHeight="48dp"
+            android:text="@={inputaddress.line1}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/search_title" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/representative_list_recycler"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="24dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/representative_list_title"
-            app:listRepresentatives="@{repviewmodel}"
-            app:spanCount="1"
-            tools:itemCount="10" />
-
-        <TextView
-            android:id="@+id/representative_list_title"
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/text_bluish_black"
-            android:textSize="24dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/button_location"
-            tools:text="My Representatives" />
-
-        <Button
-            android:id="@+id/button_location"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="USE MY LOCATION"
-            app:layout_constraintTop_toBottomOf="@id/button_search" />
-
-        <Button
-            android:id="@+id/button_search"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="@{()->repviewmodel.searchMyRepresentative()}"
-            android:text="FIND MY REPRESENTATIVES"
-            app:layout_constraintTop_toBottomOf="@id/zip" />
-
         <EditText
-            android:id="@+id/zip"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:autofillHints=""
-            android:inputType="number"
-            android:maxLength="5"
-            app:layout_constraintEnd_toEndOf="@id/city"
+            android:id="@+id/address_line_2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:hint="Enter Street Number"
+            android:inputType="textPostalAddress"
+            android:text="@={inputaddress.line2}"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/city" />
+            app:layout_constraintTop_toBottomOf="@id/address_line_1"
+            tools:ignore="TouchTargetSizeCheck" />
 
         <EditText
             android:id="@+id/city"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:autofillHints=""
+            android:hint="City Name"
             android:inputType="textPostalAddress"
+            android:text="@={inputaddress.city}"
             app:layout_constraintEnd_toStartOf="@id/state"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/address_line_2" />
+
 
         <Spinner
             android:id="@+id/state"
@@ -131,14 +131,63 @@
             app:layout_constraintStart_toEndOf="@id/city"
             app:layout_constraintTop_toTopOf="@id/city" />
 
+
         <EditText
-            android:id="@+id/address_line_2"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:autofillHints=""
-            android:inputType="textPostalAddress"
+            android:id="@+id/zip"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="26783"
+            android:inputType="number"
+            android:maxLength="5"
+            android:text="@={inputaddress.zip}"
+            app:layout_constraintEnd_toEndOf="@id/city"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/address_line_1" />
+            app:layout_constraintTop_toBottomOf="@id/city" />
+
+        <Button
+            android:id="@+id/button_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="USE MY LOCATION"
+            app:layout_constraintTop_toBottomOf="@id/button_search" />
+
+        <Button
+            android:id="@+id/button_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{()->repviewmodel.searchMyRepresentative(inputaddress.line1,inputaddress.line2,inputaddress.city,inputaddress.state,inputaddress.zip)}"
+            android:text="FIND MY REPRESENTATIVES"
+            app:layout_constraintTop_toBottomOf="@id/zip" />
+
+        <TextView
+            android:id="@+id/representative_list_title"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_bluish_black"
+            android:textSize="24dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/button_location"
+            tools:text="My Representatives" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/representative_list_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/representative_list_title"
+            app:layout_constraintVertical_bias="0.095"
+            app:listRepresentatives="@{repviewmodel}"
+            app:spanCount="1"
+            tools:itemCount="10" />
 
         <!-- TODO: Add data binding value -->
         <!-- TODO: Add visual styling and content -->
@@ -160,5 +209,6 @@
 
         <!-- TODO: Add visual styling and content -->
 
-    </androidx.constraintlayout.motion.widget.MotionLayout>
+        <!--    </androidx.constraintlayout.motion.widget.MotionLayout>-->
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

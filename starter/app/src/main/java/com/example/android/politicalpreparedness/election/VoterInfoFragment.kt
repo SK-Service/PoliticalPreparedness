@@ -34,9 +34,6 @@ class VoterInfoFragment : Fragment() {
         Log.i("TAG3", "Selected Election: " +
                 "ID:${selectedElection.id}, Name:${selectedElection.name}")
 
-        //@TODO - Need to check whether the election is on SAVED Election DB -
-        // then show the button accordingly
-
         val viewModelFactory = VoterInfoViewModelFactory (selectedElection,
                                                             datasource, application)
         //Create ViewModel
@@ -52,6 +49,8 @@ class VoterInfoFragment : Fragment() {
         Log.i(TAG3, "followElection Value before update: " +
                                     "${voterInfoViewModel.followElection.value}")
 
+        //Check whether the selected election whether from the upcoming list or the saved election
+        //list is already present in the database of saved election
         voterInfoViewModel.updateFollowElectionStatus(selectedElection)
 
         Log.i(TAG3, "followElection Value after upfate: " +

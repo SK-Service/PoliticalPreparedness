@@ -7,6 +7,7 @@ import com.example.android.politicalpreparedness.network.models.VoterInfoRespons
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import org.json.JSONObject
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
@@ -29,6 +30,7 @@ private val retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .build()
 
+
 /**
  *  Documentation for the Google Civics API Service can be found at https://developers.google.com/civic-information/docs/v2
  */
@@ -46,7 +48,7 @@ interface CivicsApiService {
 
     //TODO: Add representatives API Call
     @GET("representatives")
-    suspend fun getCivicRepresentatives(@Query("address") address: String) : String
+    suspend fun getCivicRepresentatives(@Query("address") address: String) : JSONObject
 
 //    suspend fun getCivicRepresentatives(@Query("address") address: String,
 //                                        @Query("includeOffices") includeOffices: Boolean) :

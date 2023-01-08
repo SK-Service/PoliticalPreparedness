@@ -38,13 +38,14 @@ class RepresentativeRepo (private val application: Application,
                 Log.i(TAG, "Before call to Civic Representative API")
                 Log.i(TAG, "Formatted Address:<${address.toFormattedString()}>")
                 //TODO - This is has to be further anlyzed to ensure that the complex Json object is dealt with
-//                val repProfileJsonString = CivicsApi.electionRetrofitService.
-//                                getCivicRepresentatives(address.toFormattedString())
-//                Log.i(TAG, "After the Civic API call")
-//                Log.i(TAG, "No Database insert exist yet")
+                val repProfileJsonString = CivicsApi.electionRetrofitService.
+                                getCivicRepresentatives(address.toFormattedString())
+                Log.i(TAG, "After the Civic API call")
+                Log.i(TAG, "No Database insert exist yet")
 
                 //TODO - TO BE DELETED - HARD CODED JSON
-                val repProfileJsonString: String = loadTestRepreentativeProfile(application)
+//                val repProfileJsonString: String = loadTestRepreentativeProfile(application)
+
                 val representativeListFromCivic = getCiviRepAPIRepresentativeResponse(
                                                     JSONObject(repProfileJsonString))
 

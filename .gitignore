@@ -1,3 +1,4 @@
+.gradle
 starter/*.iml
 starter/.gradle
 starter/local.properties

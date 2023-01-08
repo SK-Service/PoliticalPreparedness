@@ -9,9 +9,9 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class RepresentativeProfile (
         val id: Int,
-        val profileImageURL: String,
-        val title: String,
-        val name: String,
-        val party: String,
-        val channels: List<Channel>
+        val profileImageURL: String?,
+        val title: String?,
+        val name: String?,
+        val party: String?,
+        val channels: List<Channel>?
 ): Parcelable

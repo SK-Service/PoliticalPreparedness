@@ -38,21 +38,24 @@ class RepresentativeRepo (private val application: Application,
                 Log.i(TAG, "Before call to Civic Representative API")
                 Log.i(TAG, "Formatted Address:<${address.toFormattedString()}>")
                 //TODO - This is has to be further anlyzed to ensure that the complex Json object is dealt with
-                val responseJSONObject = CivicsApi.electionRetrofitService.
+                val representativeResponse = CivicsApi.electionRetrofitService.
                                 getCivicRepresentatives(address.toFormattedString())
+//                val responseJSONObject = CivicsApi.electionRetrofitService.
+//                getCivicRepresentatives(address.toFormattedString())
                 Log.i(TAG, "After the Civic API call")
                 Log.i(TAG, "No Database insert exist yet")
 
                 //TODO - TO BE DELETED - HARD CODED JSON
 //                val repProfileJsonString: String = loadTestRepreentativeProfile(application)
 
-                val repProfileJsonString = responseJSONObject.toString()
-                val representativeListFromCivic = getCiviRepAPIRepresentativeResponse(
-                                                    JSONObject(repProfileJsonString))
+//                val repProfileJsonString = responseJSONObject.toString()
+//                val representativeListFromCivic = getCiviRepAPIRepresentativeResponse(
+//                                                    JSONObject(repProfileJsonString))
 
                 //Response has got offices and for each office,there are one ore more official
                 //object
-                representativeLists = getRepresentativesProfile (representativeListFromCivic)
+//                representativeLists = getRepresentativesProfile (representativeListFromCivic)
+                representativeLists = getRepresentativesProfile (representativeResponse)
             } catch (e: Exception) {
                 //HTTP Exception are not reflected back to the caller
                 // Any other system error the caller should handle
@@ -74,13 +77,20 @@ private fun getRepresentativesProfile(representativeResponse : RepresentativeRes
     //var representativeProfile: List<RepresentativeProfile> = mutableListOf()
     val representativeProfileArray = ArrayList<RepresentativeProfile>()
 
+    Log.i(TAG_Repo1, "Check point # 1")
+
     val officials = representativeResponse.officials
+    Log.i(TAG_Repo1, "Check point # 2")
     val offices = representativeResponse.offices
+    Log.i(TAG_Repo1, "Check point # 3")
 
     var id: Int =0
     offices.forEach {
+        Log.i(TAG_Repo1, "Check point # 4")
         val representatives = it.getRepresentatives(officials)
+        Log.i(TAG_Repo1, "Check point # 5")
         representatives.forEach {
+            Log.i(TAG_Repo1, "Check point # 6")
             val official = it.official
             val office = it.office
             val titleName = office.name
@@ -89,10 +99,15 @@ private fun getRepresentativesProfile(representativeResponse : RepresentativeRes
             val party = official.party
             val channels = official.channels
 
+            Log.i(TAG_Repo1, "Check point # 7")
+
             val repProfile = RepresentativeProfile(id, profileImageURL!!,titleName,name, party!!, channels!!)
+            Log.i(TAG_Repo1, "Check point # 8")
             representativeProfileArray.add(repProfile)
+            Log.i(TAG_Repo1, "Check point # 9")
             id++
         }
+        Log.i(TAG_Repo1, "Check point # 10")
     }
     Log.i(TAG_Repo1, "List of Representative Profile:${representativeProfileArray.size}")
     return representativeProfileArray.toList()

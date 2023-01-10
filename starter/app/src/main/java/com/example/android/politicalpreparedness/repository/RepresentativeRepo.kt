@@ -136,8 +136,12 @@ private fun getRepresentativesProfile(representativeResponse : RepresentativeRes
             if (official.channels != null ) {
                 channels = official.channels
             }
+            var urls = emptyList<String>()
+            if(official.urls != null ) {
+                urls = official.urls
+            }
 
-            val repProfile = RepresentativeProfile(id, profileImageURL!!,titleName,name, party!!, channels!!)
+            val repProfile = RepresentativeProfile(id, profileImageURL!!,titleName,name, party!!, channels!!, urls)
             representativeProfileArray.add(repProfile)
             id++
         }

@@ -13,5 +13,6 @@ data class RepresentativeProfile (
         val title: String?,
         val name: String?,
         val party: String?,
-        val channels: List<Channel>?
+        val channels: List<Channel>?,
+        val urls: List<String>?
 ): Parcelable

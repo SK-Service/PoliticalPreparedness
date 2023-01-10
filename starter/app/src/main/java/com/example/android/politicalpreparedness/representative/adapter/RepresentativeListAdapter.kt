@@ -24,11 +24,10 @@ class RepresentativeListAdapter() :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepresentativeViewHolder {
         Log.i(TAG, "inside onCreateViewHolder")
-        return RepresentativeViewHolder(
-            RepresentativesViewItemListBinding.inflate(
-                LayoutInflater.from(parent.context)
-            )
-        )
+        val binding =  RepresentativesViewItemListBinding.inflate(
+            LayoutInflater.from(parent.context))
+
+        return RepresentativeViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: RepresentativeViewHolder, position: Int) {
@@ -49,7 +48,12 @@ class RepresentativeViewHolder(private val binding: RepresentativesViewItemListB
         Log.i(TAG, "Inside RepresentativeViewHolder bind")
         binding.representative = representative
         //to ensure that data binding executes immediately and the Recycler calculates the size
-
+        if (representative.channels != null) {
+            showSocialLinks(representative.channels)
+        }
+        if (representative.urls != null) {
+            showWWWLinks(representative.urls)
+        }
         binding.executePendingBindings()
     }
 

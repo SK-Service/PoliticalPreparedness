@@ -131,6 +131,7 @@
                         android:layout_height="32dp"
                         android:layout_weight="1"
                         android:clickable="true"
+                        android:visibility="invisible"
                         app:layout_constraintStart_toStartOf="parent"
                         app:srcCompat="@drawable/ic_www" />
 
@@ -140,6 +141,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:clickable="true"
+                        android:visibility="invisible"
                         app:layout_constraintStart_toStartOf="@id/imageView_fb"
                         app:srcCompat="@drawable/ic_twitter" />
 
@@ -149,6 +151,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:clickable="true"
+                        android:visibility="invisible"
                         app:layout_constraintStart_toStartOf="@id/imageView_www"
                         app:srcCompat="@drawable/ic_facebook" />
 

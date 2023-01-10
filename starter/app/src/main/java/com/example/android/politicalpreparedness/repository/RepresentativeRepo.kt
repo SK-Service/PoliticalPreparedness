@@ -66,45 +66,74 @@ class RepresentativeRepo (private val application: Application,
         return representativeLists
     }
 
+    suspend fun saveAddress(address: Address) {
+        Log.i(TAG_Repo1, "inside saveAddress")
+        withContext(Dispatchers.IO) {
+            Log.i(TAG_Repo1, "inside  the saveAddress-Dispatcher.IO")
+            try {
+                    //Remove all existing address to ensure that there is only one registered address
+                    database.savedAddressDao.removeAllAddress()
+                    //add the new address
+                    database.savedAddressDao.addAddress(address)
+
+            } catch (e: Exception) {
+                //Saving the address for the purpose of caching is not an important function
+                // In case there is an error, app will absorb it here
+                e.printStackTrace()
+            }
+        }
+    }
+
+    suspend fun retrieveSavedAddress(): Address {
+        Log.i(TAG_Repo1, "inside retrieveSavedAddress")
+        var address = Address("","","","","")
+        withContext(Dispatchers.IO) {
+            Log.i(TAG_Repo1, "inside  the retrieveSavedAddress-Dispatcher.IO")
+            try {
+                //Retrieve address - since only one address is present on the table all the time
+                // only one address is going to be returned
+                address = database.savedAddressDao.getAddress()
+            } catch (e: Exception) {
+                //Saving the address for the purpose of caching is not an important function
+                // In case there is an error, app will absorb it here
+                e.printStackTrace()
+            }
+        }
+        return  address
+    }
+
 
 }
-//TODO - This function needs to be built
+
 private fun getRepresentativesProfile(representativeResponse : RepresentativeResponse): List<RepresentativeProfile> {
     Log.i(TAG_Repo1, "Inside getRepresentativesProfile")
-//    var representativeProfile:RepresentativeProfile =
-//        RepresentativeProfile(1,"", "", "","",
-//                    listOf(Channel("","")))
-    //var representativeProfile: List<RepresentativeProfile> = mutableListOf()
+
     val representativeProfileArray = ArrayList<RepresentativeProfile>()
 
-    Log.i(TAG_Repo1, "Check point # 1")
-
     val officials = representativeResponse.officials
-    Log.i(TAG_Repo1, "Check point # 2")
     val offices = representativeResponse.offices
-    Log.i(TAG_Repo1, "Check point # 3")
 
     var id: Int =0
     offices.forEach {
-        Log.i(TAG_Repo1, "Check point # 4")
         val representatives = it.getRepresentatives(officials)
-        Log.i(TAG_Repo1, "Check point # 5")
+
         representatives.forEach {
-            Log.i(TAG_Repo1, "Check point # 6")
             val official = it.official
             val office = it.office
             val titleName = office.name
             val name = official.name
-            val profileImageURL = official.photoUrl
+            var profileImageURL = ""
+            if (official.photoUrl != null) {
+                profileImageURL = official.photoUrl
+            }
             val party = official.party
-            val channels = official.channels
-
-            Log.i(TAG_Repo1, "Check point # 7")
+            var channels = emptyList<Channel>()
+            if (official.channels != null ) {
+                channels = official.channels
+            }
 
             val repProfile = RepresentativeProfile(id, profileImageURL!!,titleName,name, party!!, channels!!)
-            Log.i(TAG_Repo1, "Check point # 8")
             representativeProfileArray.add(repProfile)
-            Log.i(TAG_Repo1, "Check point # 9")
             id++
         }
         Log.i(TAG_Repo1, "Check point # 10")
@@ -200,3 +229,4 @@ fun getCiviRepAPIRepresentativeResponse(input: JSONObject) : RepresentativeRespo
     val representativeResponse = RepresentativeResponse(officeList, officialList)
     return representativeResponse
 }
+

@@ -1,15 +1,19 @@
 package com.example.android.politicalpreparedness.network.models
 
 import android.os.Parcelable
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
+@Entity(tableName = "address_table")
 data class Address (
-        var line1: String,
-        var line2: String? = null,
-        var city: String,
-        var state: String,
-        var zip: String
+    @ColumnInfo(name = "address_line1")var line1: String,
+    @ColumnInfo(name = "address_line2")var line2: String? = null,
+    @ColumnInfo(name = "city")var city: String,
+    @ColumnInfo(name = "state")var state: String,
+    @PrimaryKey @ColumnInfo(name = "zip")var zip: String
 ): Parcelable
 {
     fun toFormattedString(): String {

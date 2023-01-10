@@ -67,7 +67,7 @@ fun bindRepresentativeList (recyclerview: RecyclerView, representativeViewModel:
 fun bindDetailsStatusImage(imageView: ImageView, repProfileImageURL: String) {
     Log.i("BindingAdapter-repProfileImage", "Inside bindDetailsStatusImage")
     Log.i("BindingAdapter-repProfileImage", "repProfileImageURL:<${repProfileImageURL}>")
-    if (repProfileImageURL != "null") {
+    if (!repProfileImageURL.isNullOrEmpty()) {
         Log.i("BindingAdapter-repProfileImage", "Profile URL is not null")
         imageView.loadImage(repProfileImageURL)
         imageView.contentDescription = "Image of the representative"

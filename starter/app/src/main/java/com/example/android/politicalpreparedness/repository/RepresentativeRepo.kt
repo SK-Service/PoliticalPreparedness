@@ -36,8 +36,13 @@ class RepresentativeRepo (private val application: Application,
 
             try {
                 Log.i(TAG, "Before call to Civic Representative API")
+                //The state in this app is represented as "State - Abbreviation"
+                // Example: Oklahoma - OK
+                //This to extract the OK
+                val address1 = address.copy()
+                address1.state = address1.state.takeLast(2)
                 Log.i(TAG, "Formatted Address:<${address.toFormattedString()}>")
-                //TODO - This is has to be further anlyzed to ensure that the complex Json object is dealt with
+                //Call Google CIVIC API
                 val representativeResponse = CivicsApi.electionRetrofitService.
                                 getCivicRepresentatives(address.toFormattedString())
 //                val responseJSONObject = CivicsApi.electionRetrofitService.
@@ -67,7 +72,7 @@ class RepresentativeRepo (private val application: Application,
     }
 
     suspend fun saveAddress(address: Address) {
-        Log.i(TAG_Repo1, "inside saveAddress")
+        Log.i(TAG_Repo1, "inside saveAddress: address.state:${address.state}")
         withContext(Dispatchers.IO) {
             Log.i(TAG_Repo1, "inside  the saveAddress-Dispatcher.IO")
             try {

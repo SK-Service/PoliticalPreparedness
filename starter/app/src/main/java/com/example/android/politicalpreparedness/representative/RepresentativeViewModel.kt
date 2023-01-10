@@ -69,7 +69,7 @@ class RepresentativeViewModel(datasource: ElectionDao, application: Application)
                                state: String, zip:String) {
         Log.i(TAG_RVM, "inside searchMyRepresentative")
 
-        val address = Address(line1, line2, city ,state.takeLast(2),zip)
+        val address = Address(line1, line2, city ,state,zip)
         Log.i(TAG_RVM, "Address: ${address.toFormattedString()}")
         viewModelScope.launch {
             var repList: List<RepresentativeProfile>

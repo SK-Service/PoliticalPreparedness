@@ -41,6 +41,21 @@ class RepresentativeFragment: Fragment() , AdapterView.OnItemSelectedListener {
 
         binding.lifecycleOwner = this
 
+        //Setting up the spinner Adapter and binding
+        val stateSpinner = binding.state
+        stateSpinner.onItemSelectedListener = this
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        val adapter = ArrayAdapter.createFromResource(
+            requireNotNull(this.activity),
+            R.array.usa_state,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            // Specify the layout to use when the list of choices appears
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            // Apply the adapter to the spinner
+            stateSpinner.adapter = adapter
+        }
+
         //TODO: Add ViewModel values and create ViewModel
         //Get hold of the application context
         val application = requireNotNull(this.activity).application
@@ -89,43 +104,32 @@ class RepresentativeFragment: Fragment() , AdapterView.OnItemSelectedListener {
                 Log.i(TAG_R, "Inside addressCacheAvailableFlag.observe")
                 if ( it == true ) {
                     if(!repViewModel.address.value?.line1.isNullOrEmpty()) {
-//                        binding.addressLine1.text = repViewModel.address.value?.line1
+                        binding.addressLine1.setText(repViewModel.address.value?.line1 ?: "")
                         Log.i(TAG_R, "Show Line 1")
                     }
                     if(!repViewModel.address.value?.city.isNullOrEmpty()) {
-//                        binding.addressLine1.text = repViewModel.address.value?.city
+                        binding.city.setText(repViewModel.address.value?.city ?: "")
                         Log.i(TAG_R, "Show city")
                     }
                     if(!repViewModel.address.value?.zip.isNullOrEmpty()) {
-//                        binding.addressLine1.text = repViewModel.address.value?.zip
+                        binding.zip.setText(repViewModel.address.value?.zip?: "")
                         Log.i(TAG_R, "Show zip")
                     }
                     if(!repViewModel.address.value?.line2.isNullOrEmpty()) {
-//                        binding.addressLine1.text = repViewModel.address.value?.line2
+                        binding.addressLine2.setText(repViewModel.address.value?.line2?: "")
                         Log.i(TAG_R, "Show Line 2")
                     }
                     if(!repViewModel.address.value?.state.isNullOrEmpty()) {
-//                        binding.addressLine1.text = repViewModel.address.value?.state
-                        Log.i(TAG_R, "State")
+                        val stateSelection = repViewModel.address.value?.state
+                        val spinnerPosition: Int = adapter.getPosition(stateSelection)
+                        stateSpinner.setSelection(spinnerPosition)
+                        Log.i(TAG_R, "StateSelection:${stateSelection}, " +
+                                "spinnerPosition:${spinnerPosition}, " +
+                                "stateSpinner.Selection:${stateSpinner.selectedItem}")
                     }
                 }
             })
 
-
-        //handling state spinner
-        val stateSpinner = binding.state
-        stateSpinner.onItemSelectedListener = this
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter.createFromResource(
-            requireNotNull(this.activity),
-            R.array.usa_state,
-            android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            // Specify the layout to use when the list of choices appears
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            // Apply the adapter to the spinner
-            stateSpinner.adapter = adapter
-        }
 
         return binding.root
 

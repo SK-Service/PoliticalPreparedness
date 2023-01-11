@@ -61,16 +61,30 @@ class RepresentativeViewHolder(private val binding: RepresentativesViewItemListB
         val facebookUrl = getFacebookUrl(channels)
         if (!facebookUrl.isNullOrBlank()) {
             enableLink(binding.imageViewFb, facebookUrl)
+        } else {
+            disableLink(binding.imageViewFb)
         }
 
         val twitterUrl = getTwitterUrl(channels)
         if (!twitterUrl.isNullOrBlank()) {
             enableLink(binding.imageViewTwt, twitterUrl)
+        }else {
+            disableLink(binding.imageViewTwt)
         }
     }
 
     private fun showWWWLinks(urls: List<String>) {
-        enableLink(binding.imageViewWww, urls.first())
+        val wwwUrl = getWWWUrl(urls)
+        if(!wwwUrl.isNullOrBlank()) {
+            enableLink(binding.imageViewWww, urls.first())
+        } else {
+            disableLink(binding.imageViewWww)
+        }
+
+    }
+
+    private fun getWWWUrl(urls: List<String>): String? {
+        return urls.firstOrNull()
     }
 
     private fun getFacebookUrl(channels: List<Channel>): String? {
@@ -88,6 +102,10 @@ class RepresentativeViewHolder(private val binding: RepresentativesViewItemListB
     private fun enableLink(view: ImageView, url: String) {
         view.visibility = View.VISIBLE
         view.setOnClickListener { setIntent(url) }
+    }
+
+    private fun disableLink(view: ImageView) {
+        view.visibility = View.INVISIBLE
     }
 
     private fun setIntent(url: String) {

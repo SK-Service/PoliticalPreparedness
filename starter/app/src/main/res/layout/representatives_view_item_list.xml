@@ -37,17 +37,20 @@
 
         <TextView
             android:id="@+id/representative_title"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:text="@{representative.title}"
             android:textAlignment="textStart"
             android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toEndOf="@+id/image_card"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="President of the United States" />
 
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -84,81 +87,61 @@
                     tools:text="Democratic Party" />
 
             </LinearLayout>
-
-<!--            <LinearLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:orientation="horizontal"-->
-<!--                android:textAlignment="viewEnd">-->
-
-<!--                <ImageView-->
-<!--                    android:id="@+id/imageView_www"-->
-<!--                    android:clickable="true"-->
-<!--                    android:layout_width="32dp"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:layout_weight="1"-->
-<!--                    app:srcCompat="@drawable/ic_www" />-->
-
-<!--                <ImageView-->
-<!--                    android:id="@+id/imageView_fb"-->
-<!--                    android:clickable="true"-->
-<!--                    android:layout_width="32dp"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:layout_weight="1"-->
-<!--                    app:srcCompat="@drawable/ic_facebook" />-->
-
-<!--                <ImageView-->
-<!--                    android:id="@+id/imageView_twt"-->
-<!--                    android:clickable="true"-->
-<!--                    android:layout_width="32dp"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:layout_weight="1"-->
-<!--                    app:srcCompat="@drawable/ic_twitter" />-->
-<!--            </LinearLayout>-->
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="209dp"
-                android:layout_height="wrap_content">
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:id="@+id/imageView_www"
-                        android:layout_width="24dp"
-                        android:layout_height="32dp"
-                        android:layout_weight="1"
-                        android:clickable="true"
-                        android:visibility="invisible"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:srcCompat="@drawable/ic_www" />
-
-                    <ImageView
-                        android:id="@+id/imageView_twt"
-                        android:layout_width="24dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:clickable="true"
-                        android:visibility="invisible"
-                        app:layout_constraintStart_toStartOf="@id/imageView_fb"
-                        app:srcCompat="@drawable/ic_twitter" />
-
-                    <ImageView
-                        android:id="@+id/imageView_fb"
-                        android:layout_width="24dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:clickable="true"
-                        android:visibility="invisible"
-                        app:layout_constraintStart_toStartOf="@id/imageView_www"
-                        app:srcCompat="@drawable/ic_facebook" />
-
-                </LinearLayout>
-            </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:layout_constraintEnd_toEndOf="@+id/representative_title"
+            app:layout_constraintTop_toTopOf="@+id/linearLayout">
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imageView_www"
+                    android:layout_width="24dp"
+                    android:layout_height="32dp"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:padding="4dp"
+                    android:visibility="invisible"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:srcCompat="@drawable/ic_www"
+                    tools:visibility="visible" />
+
+                <ImageView
+                    android:id="@+id/imageView_twt"
+                    android:layout_width="24dp"
+                    android:layout_height="32dp"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:padding="4dp"
+                    android:visibility="invisible"
+                    app:layout_constraintStart_toStartOf="@id/imageView_fb"
+                    app:srcCompat="@drawable/ic_twitter"
+                    tools:visibility="visible" />
+
+                <ImageView
+                    android:id="@+id/imageView_fb"
+                    android:layout_width="24dp"
+                    android:layout_height="32dp"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:padding="4dp"
+                    android:visibility="invisible"
+                    app:layout_constraintStart_toStartOf="@id/imageView_www"
+                    app:srcCompat="@drawable/ic_facebook"
+                    tools:visibility="visible" />
+            </LinearLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -25,7 +25,7 @@ class RepresentativeListAdapter() :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepresentativeViewHolder {
         Log.i(TAG, "inside onCreateViewHolder")
         val binding =  RepresentativesViewItemListBinding.inflate(
-            LayoutInflater.from(parent.context))
+            LayoutInflater.from(parent.context), parent, false)
 
         return RepresentativeViewHolder(binding)
     }

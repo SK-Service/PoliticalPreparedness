@@ -22,8 +22,9 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/election_name"
             android:background="@color/cardview_dark_background"
-            android:textColor="@color/white"
-            android:textSize="24sp"
+            app:titleTextColor="@color/white"
+            android:textSize="20sp"
+            app:title="@{election.name}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="8dp"
@@ -34,6 +35,7 @@
         <!-- TODO: Add visual styling -->
         <TextView
             android:id="@+id/election_date"
+            android:text="@{election.electionDay.toGMTString()}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -45,13 +47,15 @@
         <!-- TODO: Add visual styling and content -->
         <TextView
             android:id="@+id/state_header"
+            android:text="@{voterInfoViewModel.voterInfo.stateName}"
+            android:textSize="16sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="@id/election_date"
             app:layout_constraintTop_toBottomOf="@id/election_date"
-            tools:text="OH" />
+            tools:text="Ohio" />
 
         <!-- TODO: Add click binding to open web URL -->
         <!-- TODO: Add visual styling and content -->
@@ -101,6 +105,7 @@
         <!-- TODO: Add data binding -->
         <TextView
             android:id="@+id/address"
+            android:text="@{voterInfoViewModel.voterInfo.address}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"

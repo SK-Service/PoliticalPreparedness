@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.android.politicalpreparedness.database.ElectionDao
 import com.example.android.politicalpreparedness.database.ElectionDatabase
+import com.example.android.politicalpreparedness.network.models.Address
 import com.example.android.politicalpreparedness.network.models.Election
 import com.example.android.politicalpreparedness.network.models.VoterInfo
 import com.example.android.politicalpreparedness.network.models.VoterInfoResponse
@@ -44,7 +45,7 @@ class VoterInfoViewModel(private val selectedElection: Election,
     val followElection: LiveData<Boolean>
         get() = _followElection
 
-    lateinit var voterInfoResponse: VoterInfoResponse
+    lateinit var address: Address
     init {
         Log.i(TAG1, "inside init - where VoterInfo data is fetched from google api")
 
@@ -52,52 +53,35 @@ class VoterInfoViewModel(private val selectedElection: Election,
 
             _voterInfoAPICallStatus.value = VoterInfoCivicApiStatus.LOADING
             try {
+                    address= VoterInfoRepo(ElectionDatabase.getInstance(application))
+                    .retrieveAddress()
+            } catch (e: Exception){
+                Log.i(TAG1, "After VoterInfoRepo call and inside catch exception")
+                e.printStackTrace()
+                _voterInfoAPICallStatus.value = VoterInfoCivicApiStatus.ERROR
+            }
+
+            try {
                 //Call ElectionRepo to get the latest refreshed list from source or cache
-                voterInfoResponse  = VoterInfoRepo(ElectionDatabase.getInstance(application))
-                    .refreshVoterInfo()
-                Log.i(TAG1, "BallotInfoURL: " +
-                  "${voterInfoResponse.state?.get(0)?.electionAdministrationBody?.ballotInfoUrl}")
-                _voterInfoAPICallStatus.value = VoterInfoCivicApiStatus.DONE
-
-                val voterInfo = VoterInfo (selectedElection.id, "XYZ Election", Date("12/16/2022"),
-                    voterInfoResponse.state?.get(0)?.
-                    electionAdministrationBody?.votingLocationFinderUrl.toString(),
-                    voterInfoResponse.state?.get(0)?.
-                    electionAdministrationBody?.ballotInfoUrl.toString())
-                _voterInfo.value = voterInfo
-
-                Log.i(TAG1, "VoterInfo Live Data Value: Voting Location URL:" +
-                        "                ${_voterInfo.value?.ballotInfoURL}")
+                _voterInfo.value  = VoterInfoRepo(ElectionDatabase.getInstance(application))
+                    .refreshVoterInfo(selectedElection, address.toFormattedString())
 
                 if (!selectedElection.isSaved) {
                     Log.i(TAG1, "Changing Follow Election to false as isSaved is not true")
                     _followElection.value = false
                 }
 
+                _voterInfoAPICallStatus.value = VoterInfoCivicApiStatus.DONE
+
             } catch (e: Exception){
-                Log.i(TAG1, "After ElectionRepo call and inside catch exception")
+                Log.i(TAG1, "After VoterInfoRepo call and inside catch exception")
                 e.printStackTrace()
                 _voterInfoAPICallStatus.value = VoterInfoCivicApiStatus.ERROR
             }
 
         }
-//        Log.i(TAG1, "VoterInfoCivicApiStatus:${_voterInfoAPICallStatus.value}")
-//        if (_voterInfoAPICallStatus.value == VoterInfoCivicApiStatus.DONE ) {
-//            Log.i(TAG1, "Inside if check VoterInfoCivicApiStatus:" +
-//                    "${_voterInfoAPICallStatus.value}")
-//            _voterInfo.value?.votingLocationURL  = voterInfoResponse.state?.get(0)?.
-//                            electionAdministrationBody?.votingLocationFinderUrl.toString()
-//            _voterInfo.value?.ballotInfoURL  = voterInfoResponse.state?.get(0)?.
-//                                        electionAdministrationBody?.ballotInfoUrl.toString()
-//        }
+
     }
-
-    //TODO: Add var and methods to populate voter info
-
-    //TODO: Add var and methods to support loading URLs
-
-    //TODO: Add var and methods to save and remove elections to local database
-    //TODO: cont'd -- Populate initial state of save button to reflect proper action based on election saved status
 
     /**
      * Hint: The saved state can be accomplished in multiple ways. It is directly related to how elections are saved/removed from the database.

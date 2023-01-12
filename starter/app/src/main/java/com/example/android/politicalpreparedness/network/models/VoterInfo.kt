@@ -6,8 +6,7 @@ import java.util.*
 
 @Parcelize
 data class VoterInfo (
-    val electionID: Int,
-    val electionTitle: String,
-    val electionDay: Date,
+    var stateName : String,
     var votingLocationURL: String,
-    var ballotInfoURL: String) : Parcelable
+    var ballotInfoURL: String,
+    var address: String) : Parcelable

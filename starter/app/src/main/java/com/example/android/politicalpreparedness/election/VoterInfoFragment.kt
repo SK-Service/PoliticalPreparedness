@@ -31,6 +31,8 @@ class VoterInfoFragment : Fragment() {
 
         val args = VoterInfoFragmentArgs.fromBundle(requireArguments())
         val selectedElection = args.argElection
+        binding.election = selectedElection
+
         Log.i("TAG3", "Selected Election: " +
                 "ID:${selectedElection.id}, Name:${selectedElection.name}")
 

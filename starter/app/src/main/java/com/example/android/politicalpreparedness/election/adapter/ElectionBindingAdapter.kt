@@ -1,11 +1,13 @@
 package com.example.android.politicalpreparedness.election.adapter
 
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
+import android.text.style.ForegroundColorSpan
 import android.util.Log
 import android.view.View
 import android.webkit.WebView
@@ -68,7 +70,7 @@ fun bindClickableTextLocation(textView: TextView, textUrl: String?) {
         return
     val text = "State Locations"
     textView.setText(text)
-    textView.setTextColor(ContextCompat.getColor(textView.context, R.color.dark_grey))
+    textView.setTextColor(ContextCompat.getColor(textView.context, R.color.error_message_red))
     val spannableString = SpannableString(text)
     val clickableSpan: ClickableSpan = object : ClickableSpan() {
         override fun onClick(widget: View) {
@@ -77,7 +79,9 @@ fun bindClickableTextLocation(textView: TextView, textUrl: String?) {
             textView.context.startActivity(intent)
         }
     }
+    val foregroundColorSpanBlue = ForegroundColorSpan(Color.RED)
     spannableString.setSpan(clickableSpan, 0, text.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+
     textView.setText(spannableString, TextView.BufferType.SPANNABLE)
     textView.movementMethod = LinkMovementMethod.getInstance()
 }

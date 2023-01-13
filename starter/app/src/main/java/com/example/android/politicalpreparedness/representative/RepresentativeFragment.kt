@@ -1,33 +1,23 @@
 package com.example.android.politicalpreparedness.representative
 
 import android.content.Context
-import android.location.Geocoder
-import android.location.Location
+import android.location.LocationManager
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.view.inputmethod.InputMethodManager
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import com.example.android.politicalpreparedness.R
 import com.example.android.politicalpreparedness.database.ElectionDatabase
-import com.example.android.politicalpreparedness.databinding.FragmentElectionBinding
-import com.example.android.politicalpreparedness.databinding.FragmentLaunchBinding
 import com.example.android.politicalpreparedness.databinding.FragmentRepresentativeBinding
-import com.example.android.politicalpreparedness.election.ElectionsFragmentDirections
-import com.example.android.politicalpreparedness.election.ElectionsViewModel
-import com.example.android.politicalpreparedness.election.ElectionsViewModelFactory
 import com.example.android.politicalpreparedness.election.TAG
 import com.example.android.politicalpreparedness.network.models.Address
-import kotlinx.android.synthetic.main.fragment_representative.*
-import kotlinx.android.synthetic.main.fragment_voter_info.*
-import java.util.Locale
+import com.google.android.gms.location.LocationServices
+
 
 const val TAG_R = "RepresentativeFragment"
 class RepresentativeFragment: Fragment() , AdapterView.OnItemSelectedListener {
@@ -130,8 +120,18 @@ class RepresentativeFragment: Fragment() , AdapterView.OnItemSelectedListener {
                 }
             })
 
+        binding.buttonLocation.setOnClickListener {
+            Log.i(TAG_R, "Inside USE MY LOCATION Button click listener")
+            retrieveAddressFromLocationDetection()
+        }
 
         return binding.root
+
+    }
+
+    private fun retrieveAddressFromLocationDetection() {
+        val mFusedLocationClient = LocationServices.getFusedLocationProviderClient(
+                                                    this.requireActivity())
 
     }
 
@@ -144,5 +144,14 @@ class RepresentativeFragment: Fragment() , AdapterView.OnItemSelectedListener {
     override fun onNothingSelected(p0: AdapterView<*>?) {
 
     }
+
+//    private fun isLocationEnabled(): Boolean {
+//        val locationManager: LocationManager =
+//            getSystemService(Context.LOCATION_SERVICE) as LocationManager
+//        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
+//                                        locationManager.isProviderEnabled(
+//            LocationManager.NETWORK_PROVIDER
+//        )
+//    }
 
 }

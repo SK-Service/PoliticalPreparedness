@@ -170,6 +170,7 @@ class RepresentativeFragment: Fragment() , AdapterView.OnItemSelectedListener {
                             Log.i(TAG_R,"Address Line 1:${locationBasedAddress.line1}")
                             Log.i(TAG_R, "LOCALITY: ${geoAddress.locality}")
                             Log.i(TAG_R, "PostalCode: ${geoAddress.postalCode}")
+                            locationBasedAddress.zip = geoAddress.postalCode
                         }
                     }
                 }

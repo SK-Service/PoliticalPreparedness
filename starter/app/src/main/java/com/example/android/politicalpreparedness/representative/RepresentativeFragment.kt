@@ -155,25 +155,25 @@ class RepresentativeFragment: Fragment() , AdapterView.OnItemSelectedListener {
         var locationBasedAddress = Address("","","","","")
         if (checkPermissions()) {
             if (isLocationEnabled()) {
-                    mFusedLocationClient.lastLocation.addOnCompleteListener(requireActivity())) { task ->
+                    mFusedLocationClient.lastLocation.addOnCompleteListener (requireActivity()){task  ->
                         val location: Location? = task.result
-                    if (location != null) {
-                        val geocoder = Geocoder(requireContext(), Locale.getDefault())
-                        val addressList =
-                            geocoder.getFromLocation(location.latitude, location.longitude, 1)
-                        if ((addressList != null && addressList.size > 0)) {
-                            val geoAddress = addressList.get(0)
-                            val line1 = StringBuilder()
-                            for (i in 0 until geoAddress.maxAddressLineIndex) {
-                                line1.append(geoAddress.getAddressLine(i)).append("")
+                        if (location != null) {
+                            val geocoder = Geocoder(requireContext(), Locale.getDefault())
+                            val addressList =
+                                geocoder.getFromLocation(location.latitude, location.longitude, 1)
+                            if ((addressList != null && addressList.size > 0)) {
+                                val geoAddress = addressList.get(0)
+                                val line1 = StringBuilder()
+                                for (i in 0 until geoAddress.maxAddressLineIndex) {
+                                    line1.append(geoAddress.getAddressLine(i)).append("")
+                                }
+                                locationBasedAddress.line1 = line1.toString()
+                                Log.i(TAG_R, "Address Line 1:${locationBasedAddress.line1}")
+                                Log.i(TAG_R, "LOCALITY: ${geoAddress.locality}")
+                                Log.i(TAG_R, "PostalCode: ${geoAddress.postalCode}")
+                                locationBasedAddress.zip = geoAddress.postalCode
                             }
-                            locationBasedAddress.line1 = line1.toString()
-                            Log.i(TAG_R,"Address Line 1:${locationBasedAddress.line1}")
-                            Log.i(TAG_R, "LOCALITY: ${geoAddress.locality}")
-                            Log.i(TAG_R, "PostalCode: ${geoAddress.postalCode}")
-                            locationBasedAddress.zip = geoAddress.postalCode
                         }
-                    }
                 }
             }else {
                 Toast.makeText(requireContext(),

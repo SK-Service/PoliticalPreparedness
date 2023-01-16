@@ -156,7 +156,6 @@
             android:id="@+id/button_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="@{()->repviewmodel.searchMyRepresentative(inputaddress.line1,inputaddress.line2,inputaddress.city,inputaddress.state,inputaddress.zip)}"
             android:text="FIND MY REPRESENTATIVES"
             app:layout_constraintTop_toBottomOf="@id/zip" />
 
@@ -176,7 +175,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="2dp"
             android:layout_marginBottom="8dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"

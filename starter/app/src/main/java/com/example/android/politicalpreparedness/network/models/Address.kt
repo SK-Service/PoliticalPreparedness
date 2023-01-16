@@ -1,9 +1,14 @@
 package com.example.android.politicalpreparedness.network.models
 
+import android.content.Intent
 import android.os.Parcelable
+import android.provider.Settings
+import android.util.Log
+import android.widget.Toast
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.example.android.politicalpreparedness.representative.TAG_R
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
@@ -23,3 +28,6 @@ data class Address (
         return output
     }
 }
+
+
+

@@ -27,7 +27,8 @@ class RepresentativeRepo (private val application: Application,
                           private val database: ElectionDatabase) {
 //    private lateinit var electionListDB: List<Election>
 //    private lateinit var savedElectionListDB: List<SavedElection>
-    private lateinit var representativeLists: List<RepresentativeProfile>
+//    private lateinit var representativeLists: List<RepresentativeProfile>
+    private var representativeLists = emptyList<RepresentativeProfile>()
 
     suspend fun refreshRepresentativeList (address: Address): List<RepresentativeProfile> {
         Log.i(TAG_Repo1, "inside refreshRepresentativeList")
@@ -64,7 +65,9 @@ class RepresentativeRepo (private val application: Application,
             } catch (e: Exception) {
                 //HTTP Exception are not reflected back to the caller
                 // Any other system error the caller should handle
-                e.printStackTrace()
+                    Log.i(TAG_Repo1, "Exception has occurred after Civic API call")
+                    throw e
+
             }
 
         }

@@ -20,9 +20,8 @@
 
         <!-- TODO: Add title to toolbar -->
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/election_name"
-            android:background="@color/cardview_dark_background"
-            app:titleTextColor="@color/white"
+            android:id="@+id/election_name_toolbar"
+            android:background="#B9BBB6"
             android:textSize="20sp"
             app:title="@{election.name}"
             android:layout_width="match_parent"
@@ -35,86 +34,112 @@
         <!-- TODO: Add visual styling -->
         <TextView
             android:id="@+id/election_date"
-            android:text="@{election.electionDay.toGMTString()}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
+            android:text="@{election.electionDay.toGMTString()}"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/election_name"
+            app:layout_constraintTop_toBottomOf="@id/election_name_toolbar"
             tools:text="Wed Dec 15 00:00:00 EDT 2022" />
 
         <!-- TODO: Add visual styling and content -->
-        <TextView
-            android:id="@+id/state_header"
-            android:text="@{voterInfoViewModel.voterInfo.stateName}"
-            android:textSize="16sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintStart_toStartOf="@id/election_date"
-            app:layout_constraintTop_toBottomOf="@id/election_date"
-            tools:text="Ohio" />
 
         <!-- TODO: Add click binding to open web URL -->
         <!-- TODO: Add visual styling and content -->
+
+        <!-- TODO: Add click binding to open web URL -->
+        <!-- TODO: Add visual styling and content -->
+
+        <LinearLayout
+            android:id="@+id/state_header_block"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="@id/election_date"
+            app:layout_constraintTop_toBottomOf="@id/election_date">
+
+            <TextView
+                android:id="@+id/state_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@{voterInfoViewModel.voterInfo.stateName}"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                tools:text="Ohio" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:clickable="true"
+                android:tooltipText="Edit Registered Address - if information is not relevant"
+                app:srcCompat="@android:drawable/ic_menu_edit" />
+
+        </LinearLayout>
+
         <TextView
             android:id="@+id/state_locations"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="4dp"
             app:clickableTextLocation="@{voterInfoViewModel.voterInfo.votingLocationURL}"
             app:layout_constraintStart_toStartOf="@id/election_date"
-            app:layout_constraintTop_toBottomOf="@id/state_header"
+            app:layout_constraintTop_toBottomOf="@+id/state_header_block"
             tools:text="https://www.poll.com/votinglocations" />
 
-        <!-- TODO: Add click binding to open web URL -->
-        <!-- TODO: Add visual styling and content -->
         <TextView
             android:id="@+id/state_ballot"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="4dp"
             app:clickableTextBallot="@{voterInfoViewModel.voterInfo.ballotInfoURL}"
             app:layout_constraintStart_toStartOf="@id/election_date"
             app:layout_constraintTop_toBottomOf="@id/state_locations"
             tools:text="https://www.poll.com/ballotinformation" />
 
+        <!-- TODO: Add visual styling and content -->
+
+        <!-- TODO: Add data binding -->
+
+        <!-- TODO: Add button to save election to Room -->
         <androidx.constraintlayout.widget.Group
             android:id="@+id/address_group"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:constraint_referenced_ids="state_correspondence_header,address" />
+            app:constraint_referenced_ids="state_correspondence_header,address"
+            app:layout_constraintStart_toStartOf="@id/election_date"/>
 
         <!-- TODO: Add visual styling and content -->
+
+        <!-- TODO: Add data binding -->
         <TextView
             android:id="@+id/state_correspondence_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
             android:text="Correspondence Address"
             android:textSize="16sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/election_date"
             app:layout_constraintTop_toBottomOf="@id/state_ballot"
             tools:text="Correspondence Address" />
 
-        <!-- TODO: Add data binding -->
         <TextView
             android:id="@+id/address"
-            android:text="@{voterInfoViewModel.voterInfo.address}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="4dp"
+            android:text="@{voterInfoViewModel.voterInfo.address}"
             app:layout_constraintStart_toStartOf="@+id/election_date"
             app:layout_constraintTop_toBottomOf="@+id/state_correspondence_header"
             tools:text="1500 11th Street, 5th Floor, " />
 
-        <!-- TODO: Add button to save election to Room -->
         <Button
             android:id="@+id/button_follow_election_toggle"
             android:layout_width="359dp"

@@ -13,7 +13,7 @@ import com.example.android.politicalpreparedness.repository.RepresentativeRepo
 import com.example.android.politicalpreparedness.representative.model.RepresentativeProfile
 import kotlinx.coroutines.launch
 
-enum class RepresentativeCivicApiStatus {LOADING, ERROR, DONE }
+enum class RepresentativeCivicApiStatus {LOADING, ERROR, ERROR_404, DONE }
 const val TAG_RVM = "RepresentativeViewModel"
 class RepresentativeViewModel(datasource: ElectionDao, application: Application):
     AndroidViewModel(application) {
@@ -45,6 +45,22 @@ class RepresentativeViewModel(datasource: ElectionDao, application: Application)
     val addressCacheAvailableFlag: LiveData<Boolean>
         get() = _addressCacheAvailableFlag
 
+    //Manage location address retrieval complete - false indicates location retrieval is not complete
+    private var _locationAddressRetrievalCompleteFlag = MutableLiveData<Boolean>(false)
+    val locationAddressRetrievalCompleteFlag: LiveData<Boolean>
+        get() = _locationAddressRetrievalCompleteFlag
+
+    //Manage location services and app location usage permission -
+    // false indicates permission is not granted
+    private var _locationPermissionGranted = MutableLiveData<Boolean>(false)
+    val locationPermissionGranted: LiveData<Boolean>
+        get() = _locationPermissionGranted
+
+    //Manage button flag to distinguish between which button is selected
+    private var _repButtonClickedType = MutableLiveData<String>()
+    val repButtonClickedType: LiveData<String>
+        get() = _repButtonClickedType
+
     init {
         Log.i(TAG_RVM, "inside the Representative ViewModel init")
         viewModelScope.launch {
@@ -65,18 +81,16 @@ class RepresentativeViewModel(datasource: ElectionDao, application: Application)
         }
     }
 
-    fun searchMyRepresentative(line1:String, line2: String, city: String,
-                               state: String, zip:String) {
+    fun searchMyRepresentative(address: Address) {
         Log.i(TAG_RVM, "inside searchMyRepresentative")
 
-        val address = Address(line1, line2, city ,state,zip)
         Log.i(TAG_RVM, "Address: ${address.toFormattedString()}")
         viewModelScope.launch {
             var repList: List<RepresentativeProfile>
             _civicRepAPICallStatus.value = RepresentativeCivicApiStatus.LOADING
             try {
-                Log.i(TAG_RVM, "Address Validity:${checkAddressGoodForSearch(address)}")
-                if (checkAddressGoodForSearch(address)) {
+//                Log.i(TAG_RVM, "Address Validity:${checkAddressGoodForSearch(address)}")
+//                if (checkAddressGoodForSearch(address)) {
                     //Reset address entered check flag to true, which is the initial state
                     _addressEnteredFlag.value = true
                     repList = RepresentativeRepo(getApplication(), ElectionDatabase.getInstance(application1))
@@ -86,15 +100,14 @@ class RepresentativeViewModel(datasource: ElectionDao, application: Application)
                                     "${_listOfRepresentatives.value!!.size}")
 
                     //TODO - Save the address in a table and also add the address to the LiveData
-                    _address.value = address
-                    //Cache the address for future use
-                    saveAddress()
+                    //Consider it a valid address if list of representatives are returned
 
-                } else {
-                    //addressEnteredFlag value is false when button is clicked without zip
-                        // or address line 1 or city
-                    _addressEnteredFlag.value = false
-                }
+
+//                } else {
+//                    //addressEnteredFlag value is false when button is clicked without zip
+//                        // or address line 1 or city
+//                    _addressEnteredFlag.value = false
+//                }
 
                 Log.i(TAG_RVM, "Representative List ${_listOfRepresentatives.value?.size}")
 
@@ -102,17 +115,23 @@ class RepresentativeViewModel(datasource: ElectionDao, application: Application)
             } catch (e: Exception){
                 Log.i(TAG_RVM, "After RepresentativeRepo call and inside catch exception")
                 e.printStackTrace()
-                _civicRepAPICallStatus.value = RepresentativeCivicApiStatus.ERROR
+                if (e.message?.contains("404") == true) {
+                      _civicRepAPICallStatus.value = RepresentativeCivicApiStatus.ERROR_404
+                } else {
+                    _civicRepAPICallStatus.value = RepresentativeCivicApiStatus.ERROR
+                }
             }
 
         }
     }
 
-    private suspend fun saveAddress() {
-        Log.i(TAG_RVM, "inside saveAddress")
-        RepresentativeRepo(getApplication(), ElectionDatabase.getInstance(application1)).saveAddress(
-            _address.value!!
-        )
+    fun saveAddress(address: Address) {
+        viewModelScope.launch {
+            Log.i(TAG_RVM, "inside saveAddress")
+            _address.value = address
+            RepresentativeRepo(getApplication(),
+                ElectionDatabase.getInstance(application1)).saveAddress( address)
+        }
     }
 
     private suspend fun retrieveSavedAddress(): Address {
@@ -123,7 +142,7 @@ class RepresentativeViewModel(datasource: ElectionDao, application: Application)
         return  address
     }
 
-    private fun checkAddressGoodForSearch(address: Address) : Boolean {
+    fun checkAddressGoodForSearch(address: Address) : Boolean {
         var addressValidity = false
         Log.i(TAG_RVM, "Address Line1:<${address.line1}>")
         Log.i(TAG_RVM, "City1:<${address.city}>")
@@ -180,4 +199,49 @@ class RepresentativeViewModel(datasource: ElectionDao, application: Application)
     fun resetRepCivicAPICallStatusToDone() {
         _civicRepAPICallStatus.value = RepresentativeCivicApiStatus.DONE
     }
+
+    fun locationAddressRetrievalComplete() {
+        _locationAddressRetrievalCompleteFlag.value = true
+    }
+
+    fun resetLocationAddressRetrievalComplete() {
+        _locationAddressRetrievalCompleteFlag.value = false
+    }
+
+    fun resetRepresentativeList() {
+        _listOfRepresentatives.value = mutableListOf<RepresentativeProfile>()
+    }
+
+    fun addressIsIncomplete() {
+        _addressEnteredFlag.value = false
+    }
+
+    fun resetAddressIsIncomplete() {
+        _addressEnteredFlag.value = true
+    }
+
+    fun setAddressCacheAvailableFlag() {
+        _addressCacheAvailableFlag.value = true
+    }
+
+    fun resetAddressCacheAvailableFlag() {
+        _addressCacheAvailableFlag.value = false
+    }
+
+    fun locationPermissionGranted() {
+        _locationPermissionGranted.value = true
+    }
+
+    fun locationPermissionNotGranted() {
+        _locationPermissionGranted.value = false
+    }
+
+    fun setRepButtonClickedTypeToManual()  {
+        _repButtonClickedType.value = "MANUAL"
+    }
+
+    fun setRepButtonClickedTypeToLocation()  {
+        _repButtonClickedType.value = "LOCATION"
+    }
+
 }

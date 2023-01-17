@@ -70,7 +70,7 @@
                 tools:text="Ohio" />
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/state_edit_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="8dp"

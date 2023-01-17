@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.android.politicalpreparedness.database.ElectionDatabase
 import com.example.android.politicalpreparedness.databinding.FragmentLaunchBinding
 import com.example.android.politicalpreparedness.databinding.FragmentVoterInfoBinding
@@ -96,6 +97,13 @@ class VoterInfoFragment : Fragment() {
                 }
             }
         }
+
+        binding.stateEditIcon.setOnClickListener {
+            Log.i(TAG3, "After Address Edit click, navigating to Registered Address")
+            this.findNavController().navigate(
+                VoterInfoFragmentDirections.actionVoterInfoFragmentToRegisteredAddressFragment())
+        }
+
         //TODO: cont'd Handle save button clicks
         Log.i(TAG3, "Exiting OnCreateView")
         return binding.root

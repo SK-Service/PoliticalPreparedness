@@ -117,16 +117,16 @@ class RegisteredAddressFragment : Fragment(), AdapterView.OnItemSelectedListener
 
         }
 
-        binding.buttonSave.setOnClickListener {
-                this.findNavController().navigate(RegisteredAddressFragmentDirections.actionRegisteredAddressFragmentToVoterInfoFragment())
-                                            }
+        binding.buttonDone.setOnClickListener {
+            Log.i(TAG_R, "Inside DONE Button click listener")
+//                this.findNavController().navigate(RegisteredAddressFragmentDirections.actionRegisteredAddressFragmentToVoterInfoFragment())
 
+        }
 
         Log.i(TAG4, "Exiting OnCreateView")
         return binding.root
 
     }
-
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, pos: Int, id: Long) {
         val stateString = parent?.getItemAtPosition(pos).toString()

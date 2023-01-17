@@ -32,6 +32,9 @@
         <argument
             android:name="arg_election"
             app:argType="com.example.android.politicalpreparedness.network.models.Election" />
+        <action
+            android:id="@+id/action_voterInfoFragment_to_registeredAddressFragment"
+            app:destination="@id/registeredAddressFragment" />
     </fragment>
     <fragment
         android:id="@+id/electionsFragment"
@@ -40,6 +43,15 @@
         tools:layout="@layout/fragment_election">
         <action
             android:id="@+id/action_electionsFragment_to_voterInfoFragment"
+            app:destination="@id/voterInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registeredAddressFragment"
+        android:name="com.example.android.politicalpreparedness.election.RegisteredAddressFragment"
+        android:label="fragment_registered_address"
+        tools:layout="@layout/fragment_registered_address">
+        <action
+            android:id="@+id/action_registeredAddressFragment_to_voterInfoFragment3"
             app:destination="@id/voterInfoFragment" />
     </fragment>
 

@@ -161,7 +161,7 @@ class RepresentativeFragment: Fragment() , AdapterView.OnItemSelectedListener {
             val address = Address(binding.addressLine1.text.toString(),
                                 binding.addressLine2.text.toString(),
                                 binding.city.text.toString(),
-                                binding.state.toString(),
+                                binding.state.getSelectedItem().toString(),
                                 binding.zip.text.toString())
             val isAddresGood = repViewModel.checkAddressGoodForSearch(address)
             if (isAddresGood) {

@@ -8,11 +8,6 @@
 
     <!-- TODO: Add data binding node -->
     <data>
-
-        <variable
-            name="repviewmodel"
-            type="com.example.android.politicalpreparedness.representative.RepresentativeViewModel" />
-
         <variable
             name="inputaddress"
             type="com.example.android.politicalpreparedness.network.models.Address" />
@@ -109,11 +104,18 @@
 
 
         <Button
-            android:id="@+id/button_search"
+            android:id="@+id/button_save"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SAVE"
+            app:layout_constraintTop_toBottomOf="@id/zip" />
+
+        <Button
+            android:id="@+id/button_done"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="DONE"
-            app:layout_constraintTop_toBottomOf="@id/zip" />
+            app:layout_constraintTop_toBottomOf="@id/button_save" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

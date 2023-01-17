@@ -40,8 +40,8 @@ class RepresentativeRepo (private val application: Application,
                 //The state in this app is represented as "State - Abbreviation"
                 // Example: Oklahoma - OK
                 //This to extract the OK
-                val address1 = address.copy()
-                address1.state = address1.state.takeLast(2)
+//                val address1 = address.copy()
+//                address1.state = address1.state
                 Log.i(TAG, "Formatted Address:<${address.toFormattedString()}>")
                 //Call Google CIVIC API
                 val representativeResponse = CivicsApi.electionRetrofitService.

@@ -51,8 +51,10 @@
         android:label="fragment_registered_address"
         tools:layout="@layout/fragment_registered_address">
         <action
-            android:id="@+id/action_registeredAddressFragment_to_voterInfoFragment3"
-            app:destination="@id/voterInfoFragment" />
+            android:id="@+id/action_registeredAddressFragment_to_voterInfoFragment"
+            app:destination="@id/voterInfoFragment"
+            app:popUpTo="@+id/voterInfoFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
 
 </navigation>

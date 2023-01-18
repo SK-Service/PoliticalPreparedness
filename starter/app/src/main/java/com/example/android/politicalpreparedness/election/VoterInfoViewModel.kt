@@ -45,7 +45,7 @@ class VoterInfoViewModel(private val selectedElection: Election,
     val followElection: LiveData<Boolean>
         get() = _followElection
 
-    lateinit var address: Address
+    var address = Address("","","","","")
     init {
         Log.i(TAG1, "inside init - where VoterInfo data is fetched from google api")
 

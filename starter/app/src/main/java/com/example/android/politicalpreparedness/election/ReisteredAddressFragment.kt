@@ -119,7 +119,7 @@ class RegisteredAddressFragment : Fragment(), AdapterView.OnItemSelectedListener
 
         binding.buttonDone.setOnClickListener {
             Log.i(TAG_R, "Inside DONE Button click listener")
-//                this.findNavController().navigate(RegisteredAddressFragmentDirections.actionRegisteredAddressFragmentToVoterInfoFragment())
+            this.findNavController().navigate(R.id.)
 
         }
 

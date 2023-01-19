@@ -8,6 +8,7 @@ import android.content.pm.PackageManager
 import android.location.Geocoder
 import android.location.Location
 import android.location.LocationManager
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -27,8 +28,8 @@ import com.example.android.politicalpreparedness.network.models.Address
 import com.google.android.gms.location.LocationServices
 import android.provider.Settings
 import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.material.snackbar.Snackbar
 import java.util.*
-
 
 const val TAG_R = "RepresentativeFragment"
 class RepresentativeFragment: Fragment() , AdapterView.OnItemSelectedListener {
@@ -204,14 +205,13 @@ class RepresentativeFragment: Fragment() , AdapterView.OnItemSelectedListener {
 //        repViewModel.locationPermissionGranted.observe(viewLifecycleOwner, Observer {
 //            run {
 //                Log.i(TAG_R, "inside locationPermissionGranted.observe")
-//                if (it == false &&
-//                    repViewModel.repButtonClickedType.value.equals("LOCATION") &&
-//                    requestPermissionCount != 0
-//                ) {
-//                    retrieveAddressFromLocationDetection()
+//                if (it == true &&
+//                    repViewModel.repButtonClickedType.value.equals("LOCATION")) {
+//                    retrieveLocationAddress()
 //                }
 //            }
 //        })
+
         return binding.root
 
     }
@@ -227,7 +227,7 @@ class RepresentativeFragment: Fragment() , AdapterView.OnItemSelectedListener {
             }else {
                 Log.i(TAG_R, "Location services enabled but no permission granted - request permission")
                 requestPermissions()
-//            repViewModel.locationPermissionNotGranted()
+//                repViewModel.locationPermissionNotGranted()
                 Log.i(TAG_R, "After requesting permission - retrieveLocationAddress")
                 retrieveLocationAddress()
             }
@@ -239,20 +239,19 @@ class RepresentativeFragment: Fragment() , AdapterView.OnItemSelectedListener {
                 "Please turn on location and then click to use your location",
                 Toast.LENGTH_LONG).show()
             val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
-            Log.i(TAG_R, "Start Setting Activity")
-            startActivity(intent)
+            Log.i(TAG_R, "Start startActivityForResult")
+            startActivityForResult(intent,222)
             //repViewModel.locationPermissionNotGranted()
-            Log.i(TAG_R, "Second call for checkPermissions() after setting start activity")
-            if (!checkPermissions()) {
-                Log.i(TAG_R, "After Location Services Permission set in the Settings")
-                requestPermissions()
-            }
+
         }
 
     }
 
     @SuppressLint("MissingPermission")
     private fun retrieveLocationAddress() {
+        Log.i(TAG_R, "Inside retrieveLocationAddress()")
+        Log.i(TAG_R, "CheckPermission:<${checkPermissions()}>")
+        Log.i(TAG_R, "isLocationEnabled:<${isLocationEnabled()}>")
         if (checkPermissions() && (isLocationEnabled())) {
             mFusedLocationClient.lastLocation.addOnCompleteListener(requireActivity()) { task ->
                 val location: Location? = task.result
@@ -338,6 +337,58 @@ class RepresentativeFragment: Fragment() , AdapterView.OnItemSelectedListener {
             ),
             permissionId
         )
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        Log.i(TAG_R, "Inside onActivityResult")
+        Log.i(TAG_R, "Input to this: requestCode:${requestCode},  resultCode:${resultCode}")
+        Log.i(TAG_R, "CheckAppPermission:<${checkPermissions()}>")
+        if(requestCode == 222 ) {
+            if (!checkPermissions()) {
+                Log.i(TAG_R, "After Location Services Permission set in the Settings")
+                requestPermissions()
+//                repViewModel.locationPermissionNotGranted()
+            }
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
+        Log.i(TAG_R, "Inside onRequestPermissionsResult")
+        Log.i(TAG_R, "requestCode:<${requestCode}>")
+        Log.i(TAG_R, "Permissions:<${permissions}>")
+        Log.i(TAG_R, "Permissions:<${grantResults}>")
+
+//        if (
+//            grantResults.isEmpty() ||
+//            grantResults[LOCATION_PERMISSION_INDEX] == PackageManager.PERMISSION_DENIED ||
+//            (requestCode == REQUEST_FOREGROUND_AND_BACKGROUND_PERMISSION_RESULT_CODE &&
+//                    grantResults[BACKGROUND_LOCATION_PERMISSION_INDEX] ==
+//                    PackageManager.PERMISSION_DENIED))
+//        {
+//            Log.i("SaveReminderFrag", "Access is denied and snackbar will be thrown" +
+//                    "Location services must be enabled to use the app")
+//            Snackbar.make(
+//                binding.saveReminder,
+//                com.google.android.gms.location.R.string.location_required_error,
+//                Snackbar.LENGTH_INDEFINITE
+//            )
+//                .setAction(com.google.android.gms.location.R.string.settings) {
+//                    startActivity(Intent().apply {
+//                        action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+//                        data = Uri.fromParts("package", BuildConfig.APPLICATION_ID, null)
+//                        flags = Intent.FLAG_ACTIVITY_NEW_TASK
+//                    })
+//                }.show()
+//        } else {
+//            Log.i("SaveReminderFrag", "Permission is not denied - check location setting " +
+//                    "and start Geofence")
+//            checkDeviceLocationSettingsAndStartGeofence()
+//        }
     }
 
 }

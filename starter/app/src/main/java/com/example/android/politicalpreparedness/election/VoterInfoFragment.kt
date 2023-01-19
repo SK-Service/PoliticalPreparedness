@@ -94,12 +94,13 @@ class VoterInfoFragment : Fragment() {
         }
 
         voterInfoViewModel.voterInfoAPICallStatus.observe(viewLifecycleOwner, Observer {
-            if(it == null && it == VoterInfoCivicApiStatus.ERROR) {
+            if(it != null && it == VoterInfoCivicApiStatus.ERROR) {
                 binding.buttonFollowElectionToggle.visibility = View.INVISIBLE
+                binding.electionDate.visibility = View.INVISIBLE
                 binding.stateEditIcon.visibility = View.INVISIBLE
                 binding.stateCorrespondenceHeader.visibility= View.INVISIBLE
                 binding.voterInfoErrorMessage.visibility = View.VISIBLE
-                binding.voterInfoErrorMessage.text = "At this time not able to load voting location and ballot information"
+                binding.voterInfoErrorMessage.text = "At this time we are not able to load voting location and ballot information"
                 voterInfoViewModel.resetVoterInfoAPICallStatus()
 
             }

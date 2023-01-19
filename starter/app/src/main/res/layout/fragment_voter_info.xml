@@ -77,7 +77,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@{voterInfoViewModel.voterInfo.stateName}"
-                android:textSize="16sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 tools:text="Ohio" />
 
@@ -135,7 +135,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:text="Correspondence Address"
-            android:textSize="16sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/election_date"
             app:layout_constraintTop_toBottomOf="@id/state_ballot"

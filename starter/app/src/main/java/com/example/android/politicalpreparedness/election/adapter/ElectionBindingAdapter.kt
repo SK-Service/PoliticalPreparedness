@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.net.Uri
 import android.text.SpannableString
 import android.text.Spanned
+import android.text.TextPaint
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
@@ -70,13 +71,17 @@ fun bindClickableTextLocation(textView: TextView, textUrl: String?) {
         return
     val text = "State Locations"
     textView.setText(text)
-    textView.setTextColor(ContextCompat.getColor(textView.context, R.color.error_message_red))
+
     val spannableString = SpannableString(text)
     val clickableSpan: ClickableSpan = object : ClickableSpan() {
         override fun onClick(widget: View) {
             val intent = Intent(textView.context, WebViewActivity::class.java)
             intent.putExtra("URL",textUrl)
             textView.context.startActivity(intent)
+        }
+        override fun updateDrawState(ds: TextPaint) {
+            super.updateDrawState(ds)
+            ds.color = ContextCompat.getColor(textView.context, R.color.hyperlink)
         }
     }
     val foregroundColorSpanBlue = ForegroundColorSpan(Color.RED)
@@ -94,13 +99,17 @@ fun bindClickableTextBallot(textView: TextView, textUrl: String?) {
         return
     val text = "State Ballots"
     textView.setText(text)
-    textView.setTextColor(ContextCompat.getColor(textView.context, R.color.dark_grey))
+
     val spannableString = SpannableString(text)
     val clickableSpan: ClickableSpan = object : ClickableSpan() {
         override fun onClick(widget: View) {
             val intent = Intent(textView.context, WebViewActivity::class.java)
             intent.putExtra("URL",textUrl)
             textView.context.startActivity(intent)
+        }
+        override fun updateDrawState(ds: TextPaint) {
+            super.updateDrawState(ds)
+            ds.color = ContextCompat.getColor(textView.context, R.color.hyperlink)
         }
     }
     spannableString.setSpan(clickableSpan, 0, text.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)

@@ -70,17 +70,6 @@ class VoterInfoFragment : Fragment() {
                     }
         })
 
-        //TODO: Add binding values
-
-        //TODO: Populate voter info -- hide views without provided data.
-        /**
-        Hint: You will need to ensure proper data is provided from previous fragment.
-        */
-
-
-        //TODO: Handle loading of URLs
-
-        //TODO: Handle save button UI state
         binding.buttonFollowElectionToggle.setOnClickListener { view: View? ->
             kotlin.run {
                 Log.i(TAG3, "inside the button follow election toggle on click listener")
@@ -104,13 +93,21 @@ class VoterInfoFragment : Fragment() {
                 VoterInfoFragmentDirections.actionVoterInfoFragmentToRegisteredAddressFragment())
         }
 
-        //TODO: cont'd Handle save button clicks
+        voterInfoViewModel.voterInfoAPICallStatus.observe(viewLifecycleOwner, Observer {
+            if(it == null && it == VoterInfoCivicApiStatus.ERROR) {
+                binding.buttonFollowElectionToggle.visibility = View.INVISIBLE
+                binding.stateEditIcon.visibility = View.INVISIBLE
+                binding.stateCorrespondenceHeader.visibility= View.INVISIBLE
+                binding.voterInfoErrorMessage.visibility = View.VISIBLE
+                binding.voterInfoErrorMessage.text = "At this time not able to load voting location and ballot information"
+                voterInfoViewModel.resetVoterInfoAPICallStatus()
+
+            }
+        })
+
         Log.i(TAG3, "Exiting OnCreateView")
         return binding.root
 
     }
-
-    //TODO: Create method to load URL intents
-
 
 }

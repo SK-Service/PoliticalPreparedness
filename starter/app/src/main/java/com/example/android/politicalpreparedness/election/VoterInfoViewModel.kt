@@ -56,13 +56,13 @@ class VoterInfoViewModel(private val selectedElection: Election,
                     address= VoterInfoRepo(ElectionDatabase.getInstance(application))
                     .retrieveAddress()
             } catch (e: Exception){
-                Log.i(TAG1, "After VoterInfoRepo call and inside catch exception")
+                Log.i(TAG1, "After VoterInfoRepo retrieve address call and inside catch exception")
                 e.printStackTrace()
                 _voterInfoAPICallStatus.value = VoterInfoCivicApiStatus.ERROR
             }
 
             try {
-                //Call ElectionRepo to get the latest refreshed list from source or cache
+                //Call VoterInfoRepo to get the latest voter info from google civic api
                 _voterInfo.value  = VoterInfoRepo(ElectionDatabase.getInstance(application))
                     .refreshVoterInfo(selectedElection, address.toFormattedString())
 
@@ -74,9 +74,9 @@ class VoterInfoViewModel(private val selectedElection: Election,
                 _voterInfoAPICallStatus.value = VoterInfoCivicApiStatus.DONE
 
             } catch (e: Exception){
-                Log.i(TAG1, "After VoterInfoRepo call and inside catch exception")
-                e.printStackTrace()
+                Log.i(TAG1, "After VoterInfoRepo civic api call and inside catch exception")
                 _voterInfoAPICallStatus.value = VoterInfoCivicApiStatus.ERROR
+                e.printStackTrace()
             }
 
         }
@@ -117,6 +117,10 @@ class VoterInfoViewModel(private val selectedElection: Election,
 
             _followElection.value = electionSaved
         }
+    }
+
+    fun resetVoterInfoAPICallStatus() {
+        _voterInfoAPICallStatus.value = VoterInfoCivicApiStatus.DONE
     }
 
 }

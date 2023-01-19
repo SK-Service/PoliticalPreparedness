@@ -31,6 +31,18 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Virgina Presidency Primary Election" />
 
+        <TextView
+            android:id="@+id/voter_info_error_message"
+            android:visibility="gone"
+            android:textColor="@color/error_message_red"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/election_name_toolbar"
+            tools:text="Error Message" />
+
         <!-- TODO: Add visual styling -->
         <TextView
             android:id="@+id/election_date"

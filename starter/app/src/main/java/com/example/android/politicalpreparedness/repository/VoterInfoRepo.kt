@@ -64,6 +64,7 @@ class VoterInfoRepo (private val database: ElectionDatabase) {
                 //HTTP Exception are not reflected back to the caller
                 // Any other system error the caller should handle
                 e.printStackTrace()
+                throw e
             }
 
         }

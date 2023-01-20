@@ -32,6 +32,8 @@ class RegisteredAddressFragment : Fragment(), AdapterView.OnItemSelectedListener
         binding = FragmentRegisteredAddressBinding.inflate(inflater)
         binding.lifecycleOwner = this
 
+        val args = RegisteredAddressFragmentArgs.fromBundle(requireArguments())
+        val electionParameter = args.electionParameterOption
 
         //Setting up the spinner Adapter and binding
         val stateSpinner = binding.state
@@ -114,12 +116,13 @@ class RegisteredAddressFragment : Fragment(), AdapterView.OnItemSelectedListener
             } else {
                 regAddressViewModel.addressIsIncomplete()
             }
-
         }
 
         binding.buttonDone.setOnClickListener {
             Log.i(TAG_R, "Inside DONE Button click listener")
-            this.findNavController().navigateUp()
+            this.findNavController().
+            navigate(RegisteredAddressFragmentDirections.
+            actionRegisteredAddressFragmentToVoterInfoFragment(electionParameter))
         }
 
         Log.i(TAG4, "Exiting OnCreateView")

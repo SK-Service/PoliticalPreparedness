@@ -50,11 +50,12 @@
         android:name="com.example.android.politicalpreparedness.election.RegisteredAddressFragment"
         android:label="fragment_registered_address"
         tools:layout="@layout/fragment_registered_address">
+        <argument
+            android:name="election_parameter_option"
+            app:argType="com.example.android.politicalpreparedness.network.models.Election" />
         <action
             android:id="@+id/action_registeredAddressFragment_to_voterInfoFragment"
-            app:destination="@id/voterInfoFragment"
-            app:popUpTo="@+id/voterInfoFragment"
-            app:popUpToInclusive="true"/>
+            app:destination="@id/voterInfoFragment" />
     </fragment>
 
 </navigation>

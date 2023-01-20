@@ -27,6 +27,7 @@ import com.example.android.politicalpreparedness.election.TAG
 import com.example.android.politicalpreparedness.network.models.Address
 import com.google.android.gms.location.LocationServices
 import android.provider.Settings
+import androidx.core.app.ActivityCompat.requestPermissions
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.material.snackbar.Snackbar
 import java.util.*
@@ -329,7 +330,16 @@ class RepresentativeFragment: Fragment() , AdapterView.OnItemSelectedListener {
     }
 
     private fun requestPermissions() {
-        ActivityCompat.requestPermissions(
+//        ActivityCompat.requestPermissions(
+//            requireActivity(),
+//            arrayOf(
+//                Manifest.permission.ACCESS_COARSE_LOCATION,
+//                Manifest.permission.ACCESS_FINE_LOCATION
+//            ),
+//            permissionId
+//        )
+
+        requestPermissions(
             requireActivity(),
             arrayOf(
                 Manifest.permission.ACCESS_COARSE_LOCATION,
@@ -358,7 +368,7 @@ class RepresentativeFragment: Fragment() , AdapterView.OnItemSelectedListener {
         permissions: Array<String>,
         grantResults: IntArray
     ) {
-        Log.i(TAG_R, "Inside onRequestPermissionsResult")
+        Log.i(TAG_R, "Inside onRequestPermissionsResult--")
         Log.i(TAG_R, "requestCode:<${requestCode}>")
         Log.i(TAG_R, "Permissions:<${permissions}>")
         Log.i(TAG_R, "Permissions:<${grantResults}>")

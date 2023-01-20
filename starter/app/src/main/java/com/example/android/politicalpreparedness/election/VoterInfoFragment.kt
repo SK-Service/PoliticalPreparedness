@@ -90,7 +90,8 @@ class VoterInfoFragment : Fragment() {
         binding.stateEditIcon.setOnClickListener {
             Log.i(TAG3, "After Address Edit click, navigating to Registered Address")
             this.findNavController().navigate(
-                VoterInfoFragmentDirections.actionVoterInfoFragmentToRegisteredAddressFragment())
+                VoterInfoFragmentDirections.actionVoterInfoFragmentToRegisteredAddressFragment(
+                    selectedElection))
         }
 
         voterInfoViewModel.voterInfoAPICallStatus.observe(viewLifecycleOwner, Observer {

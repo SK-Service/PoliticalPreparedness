@@ -60,11 +60,25 @@ class VoterInfoViewModel(private val selectedElection: Election,
                 e.printStackTrace()
                 _voterInfoAPICallStatus.value = VoterInfoCivicApiStatus.ERROR
             }
+//which address to use
+            //extract the state from the division to see if the stored state is different from the
+            //state found in the election division entity
+            val division = selectedElection.division
+            val stateDelimiter = "state:"
+            val state = division.toString().substringAfter(stateDelimiter,"")
+                .substringBefore("/")
+            Log.i(TAG1, "State extracted from Division:<${state}>")
 
             try {
                 //Call VoterInfoRepo to get the latest voter info from google civic api
-                _voterInfo.value  = VoterInfoRepo(ElectionDatabase.getInstance(application))
-                    .refreshVoterInfo(selectedElection, address.toFormattedString())
+                if(state.equals(address?.state)) {
+                    _voterInfo.value  = VoterInfoRepo(ElectionDatabase.getInstance(application))
+                        .refreshVoterInfo(selectedElection, address.toFormattedString())
+                } else {
+                    _voterInfo.value  = VoterInfoRepo(ElectionDatabase.getInstance(application))
+                        .refreshVoterInfo(selectedElection, state)
+                }
+
 
                 if (!selectedElection.isSaved) {
                     Log.i(TAG1, "Changing Follow Election to false as isSaved is not true")

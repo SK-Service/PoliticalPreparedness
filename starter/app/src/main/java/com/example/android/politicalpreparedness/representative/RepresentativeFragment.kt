@@ -41,6 +41,10 @@ class RepresentativeFragment: Fragment() , AdapterView.OnItemSelectedListener {
     private var requestPermissionCount: Int = 0
     private  var locationBasedAddress = Address ("","","","","")
 
+    private var ACCESS_COARSE_LOCATION_1: Int = 0
+    private var ACCESS_FINE_LOCATION_2: Int = 1
+
+
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -330,23 +334,15 @@ class RepresentativeFragment: Fragment() , AdapterView.OnItemSelectedListener {
     }
 
     private fun requestPermissions() {
-//        ActivityCompat.requestPermissions(
-//            requireActivity(),
-//            arrayOf(
-//                Manifest.permission.ACCESS_COARSE_LOCATION,
-//                Manifest.permission.ACCESS_FINE_LOCATION
-//            ),
-//            permissionId
-//        )
 
         requestPermissions(
-            requireActivity(),
             arrayOf(
                 Manifest.permission.ACCESS_COARSE_LOCATION,
                 Manifest.permission.ACCESS_FINE_LOCATION
             ),
             permissionId
         )
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -359,6 +355,8 @@ class RepresentativeFragment: Fragment() , AdapterView.OnItemSelectedListener {
                 Log.i(TAG_R, "After Location Services Permission set in the Settings")
                 requestPermissions()
 //                repViewModel.locationPermissionNotGranted()
+            } else {
+                retrieveLocationAddress()
             }
         }
     }
@@ -370,9 +368,29 @@ class RepresentativeFragment: Fragment() , AdapterView.OnItemSelectedListener {
     ) {
         Log.i(TAG_R, "Inside onRequestPermissionsResult--")
         Log.i(TAG_R, "requestCode:<${requestCode}>")
-        Log.i(TAG_R, "Permissions:<${permissions}>")
-        Log.i(TAG_R, "Permissions:<${grantResults}>")
+        Log.i(TAG_R, "Printing Permissions:")
+        var j = 0
+        for(i in permissions) {
+            Log.i(TAG_R, "Permission - ${++j}: ${i}")
+        }
+        Log.i(TAG_R, "Printing grant results:")
+        var m = 0
+        for (n in grantResults) {
+            Log.i(TAG_R, "Grant Results - ${++m}: ${n}")
+        }
 
+        if (grantResults.isNotEmpty()) {
+            if (permissionId == 2 && grantResults[ACCESS_COARSE_LOCATION_1] ==0 &&
+                grantResults[ACCESS_FINE_LOCATION_2] == 0 ) {
+                binding.message.text = ""
+                retrieveLocationAddress()
+            } else {
+                binding.message.text = "To use location based search please grant permission"
+            }
+
+        } else {
+            binding.message.text = "To use location based search please grant permission"
+        }
 //        if (
 //            grantResults.isEmpty() ||
 //            grantResults[LOCATION_PERMISSION_INDEX] == PackageManager.PERMISSION_DENIED ||

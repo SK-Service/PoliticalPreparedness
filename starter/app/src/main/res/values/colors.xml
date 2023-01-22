@@ -9,4 +9,5 @@
     <color name="text_bluish_black">#3B499F</color>
     <color name="error_message_red">#FF0000</color>
     <color name="hyperlink">#3366CC</color>
+    <color name="button_blue">#002868</color>
 </resources>

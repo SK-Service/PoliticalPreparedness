@@ -1,14 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?><!--<layout xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
-<!--    xmlns:motion="http://schemas.android.com/tools"-->
-<!--    xmlns:tools="http://schemas.android.com/tools">-->
+<?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:motion="http://schemas.android.com/tools"
     xmlns:tools="http://schemas.android.com/tools">
+<!--<layout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools">-->
 
-    <!-- TODO: Add data binding node -->
     <data>
-
         <variable
             name="repviewmodel"
             type="com.example.android.politicalpreparedness.representative.RepresentativeViewModel" />
@@ -19,15 +18,15 @@
     </data>
 
     <!-- TODO: Add motion scene to hide form on vertical scroll. -->
-    <!--    <androidx.constraintlayout.motion.widget.MotionLayout-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="match_parent"-->
-    <!--        tools:context="com.example.android.politicalpreparedness.representative.RepresentativeFragment"-->
-    <!--        app:layoutDescription="@xml/fragment_representative_scene">-->
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context="com.example.android.politicalpreparedness.representative.RepresentativeFragment">
+        <androidx.constraintlayout.motion.widget.MotionLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context="com.example.android.politicalpreparedness.representative.RepresentativeFragment"
+            app:layoutDescription="@xml/fragment_representative_scene">
+<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        tools:context="com.example.android.politicalpreparedness.representative.RepresentativeFragment">-->
         <!-- TODO: Add visual styling and content -->
 
         <!-- TODO: Add data binding value -->
@@ -208,6 +207,6 @@
 
         <!-- TODO: Add visual styling and content -->
 
-        <!--    </androidx.constraintlayout.motion.widget.MotionLayout>-->
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.motion.widget.MotionLayout>
+<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
 </layout>

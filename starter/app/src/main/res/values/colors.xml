@@ -10,4 +10,5 @@
     <color name="error_message_red">#FF0000</color>
     <color name="hyperlink">#3366CC</color>
     <color name="button_blue">#002868</color>
+    <color name="button_ripple_sky_blue">#87CEEB</color>
 </resources>

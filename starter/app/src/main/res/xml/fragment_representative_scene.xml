@@ -11,8 +11,7 @@
         motion:motionInterpolator="linear">
         <OnSwipe
             motion:dragDirection="dragUp"
-            motion:touchAnchorId="@+id/representative_list_recycler"
-            motion:touchAnchorSide="bottom" />
+            motion:touchAnchorId="@+id/representative_list_recycler"/>
     </Transition>
 
     <ConstraintSet android:id="@+id/start">

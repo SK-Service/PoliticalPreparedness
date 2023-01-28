@@ -7,7 +7,7 @@
     <Transition
         motion:constraintSetEnd="@+id/end"
         motion:constraintSetStart="@+id/start"
-        motion:duration="1000"
+        motion:duration="500"
         motion:motionInterpolator="linear">
         <OnSwipe
             motion:dragDirection="dragUp"
@@ -133,14 +133,14 @@
             android:textColor="@color/text_bluish_black"
             android:textSize="24dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="My Representatives" />
 
 
         <Constraint
             android:id="@+id/representative_list_recycler"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="2dp"
             android:layout_marginBottom="8dp"
@@ -155,7 +155,4 @@
             tools:itemCount="10" />
 
     </ConstraintSet>
-<!--    <Transition-->
-<!--        app:constraintSetEnd="@id/end"-->
-<!--        app:constraintSetStart="@+id/start" />-->
 </MotionScene>

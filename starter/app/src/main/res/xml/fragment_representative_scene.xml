@@ -7,7 +7,7 @@
     <Transition
         motion:constraintSetEnd="@+id/end"
         motion:constraintSetStart="@+id/start"
-        motion:duration="500"
+        motion:duration="100"
         motion:motionInterpolator="linear">
         <OnSwipe
             motion:dragDirection="dragUp"
@@ -140,7 +140,7 @@
         <Constraint
             android:id="@+id/representative_list_recycler"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="2dp"
             android:layout_marginBottom="8dp"

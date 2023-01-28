@@ -29,6 +29,8 @@ import com.google.android.gms.location.LocationServices
 import android.provider.Settings
 import androidx.core.app.ActivityCompat.requestPermissions
 import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationResult
 import com.google.android.material.snackbar.Snackbar
 import java.util.*
 
@@ -264,30 +266,20 @@ class RepresentativeFragment: Fragment() , AdapterView.OnItemSelectedListener {
                 if (location != null) {
                     Log.i(
                         TAG_R, "location is not nul, LATITUDE:" +
-                                "${location.latitude}; LONGITUDE:${location.longitude}"
-                    )
-                    val geocoder = Geocoder(requireContext(), Locale.getDefault())
-                    val addressList =
-                        geocoder.getFromLocation(location.latitude, location.longitude, 1)
-                    if ((!addressList.isNullOrEmpty() && addressList.size > 0)) {
-                        Log.i(TAG_R, "Address List from Location is not empty")
-                        val geoAddress = addressList.get(0)
-                        val line1 = StringBuilder()
-                        for (i in 0 until geoAddress.maxAddressLineIndex) {
-                            line1.append(geoAddress.getAddressLine(i)).append("")
+                                "${location.latitude}; LONGITUDE:${location.longitude}")
+
+                    populateGeoCodeAddress(location)
+
+                } else {
+                    val locationCallback = object : LocationCallback() {
+                        @SuppressLint("MissingPermission")
+                        override fun onLocationResult(locationResult: LocationResult) {
+                            if (location != null) {
+                                populateGeoCodeAddress(location)
+                            }
                         }
-
-                        Log.i(TAG_R, "Geocode-Address Line 1:${line1.toString()}")
-                        Log.i(TAG_R, "Geocode-LOCALITY: ${geoAddress.locality}")
-                        Log.i(TAG_R, "Geocode-PostalCode: ${geoAddress.postalCode}")
-                        Log.i(TAG_R, "Geocode- adminArea${geoAddress.adminArea}")
-                        locationBasedAddress.zip = geoAddress.postalCode ?: ""
-                        locationBasedAddress.line1 = line1.toString() ?: ""
-                        locationBasedAddress.city = geoAddress.locality ?: ""
-                        locationBasedAddress.state = geoAddress.adminArea ?: ""
-
-                        repViewModel.locationAddressRetrievalComplete()
                     }
+                    mFusedLocationClient.requestLocationUpdates()
                 }
             }
         }
@@ -298,6 +290,36 @@ class RepresentativeFragment: Fragment() , AdapterView.OnItemSelectedListener {
         Log.i(TAG_R, "locationBasedAddress- adminArea${locationBasedAddress.state}")
     }
 
+    private fun populateGeoCodeAddress(location: Location) {
+
+        Log.i(
+            TAG_R, "populateGeoCodeAddress:" +
+                    "${location.latitude}; LONGITUDE:${location.longitude}"
+        )
+        val geocoder = Geocoder(requireContext(), Locale.getDefault())
+        val addressList =
+            geocoder.getFromLocation(location.latitude, location.longitude, 1)
+        if ((!addressList.isNullOrEmpty() && addressList.size > 0)) {
+            Log.i(TAG_R, "Address List from Location is not empty")
+            val geoAddress = addressList.get(0)
+            val line1 = StringBuilder()
+            for (i in 0 until geoAddress.maxAddressLineIndex) {
+                line1.append(geoAddress.getAddressLine(i)).append("")
+            }
+
+            Log.i(TAG_R, "Geocode-Address Line 1:${line1.toString()}")
+            Log.i(TAG_R, "Geocode-LOCALITY: ${geoAddress.locality}")
+            Log.i(TAG_R, "Geocode-PostalCode: ${geoAddress.postalCode}")
+            Log.i(TAG_R, "Geocode- adminArea${geoAddress.adminArea}")
+            locationBasedAddress.zip = geoAddress.postalCode ?: ""
+            locationBasedAddress.line1 = line1.toString() ?: ""
+            locationBasedAddress.city = geoAddress.locality ?: ""
+            locationBasedAddress.state = geoAddress.adminArea ?: ""
+
+            repViewModel.locationAddressRetrievalComplete()
+
+        }
+    }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, pos: Int, id: Long) {
            val stateString = parent?.getItemAtPosition(pos).toString()

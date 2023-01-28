@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- TODO: Add data binding node for Voter Info ViewModel -->
     <data>
         <variable
             name="election"
@@ -18,7 +17,6 @@
         android:layout_height="match_parent"
         tools:context="com.example.android.politicalpreparedness.MainActivity">
 
-        <!-- TODO: Add title to toolbar -->
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/election_name_toolbar"
             android:background="#B9BBB6"
@@ -114,11 +112,6 @@
             app:layout_constraintTop_toBottomOf="@id/state_locations"
             tools:text="https://www.poll.com/ballotinformation" />
 
-        <!-- TODO: Add visual styling and content -->
-
-        <!-- TODO: Add data binding -->
-
-        <!-- TODO: Add button to save election to Room -->
         <androidx.constraintlayout.widget.Group
             android:id="@+id/address_group"
             android:layout_width="wrap_content"
@@ -126,9 +119,7 @@
             app:constraint_referenced_ids="state_correspondence_header,address"
             app:layout_constraintStart_toStartOf="@id/election_date"/>
 
-        <!-- TODO: Add visual styling and content -->
 
-        <!-- TODO: Add data binding -->
         <TextView
             android:id="@+id/state_correspondence_header"
             android:layout_width="wrap_content"

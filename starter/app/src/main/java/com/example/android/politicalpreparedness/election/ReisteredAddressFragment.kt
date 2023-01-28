@@ -108,11 +108,12 @@ class RegisteredAddressFragment : Fragment(), AdapterView.OnItemSelectedListener
                                     binding.state.getSelectedItem().toString(),
                                     binding.zip.text.toString())
 
-            val isAddresGood = checkAddressGoodForSearch(address)
-            if (isAddresGood) {
+            val isAddressGood = checkAddressGoodForSearch(address)
+            if (isAddressGood) {
                 regAddressViewModel.resetAddressIsIncomplete()
 
                 regAddressViewModel.saveAddress(address)
+                regAddressViewModel.setAddressSavedInDB()
             } else {
                 regAddressViewModel.addressIsIncomplete()
             }
@@ -120,9 +121,19 @@ class RegisteredAddressFragment : Fragment(), AdapterView.OnItemSelectedListener
 
         binding.buttonDone.setOnClickListener {
             Log.i(TAG_R, "Inside DONE Button click listener")
-            this.findNavController().
-            navigate(RegisteredAddressFragmentDirections.
-            actionRegisteredAddressFragmentToVoterInfoFragment(electionParameter))
+            //Check to see if there is an address saved, if not, we cannot go back to
+            //VoterInfo. We'll go back to the election screen
+            if (regAddressViewModel.isAddressSavedInDB() == true ) {
+                regAddressViewModel.resetAddressSavedInDB()
+                this.findNavController().
+                navigate(RegisteredAddressFragmentDirections.
+                actionRegisteredAddressFragmentToVoterInfoFragment(electionParameter))
+
+            } else {
+                this.findNavController().navigate(
+                    RegisteredAddressFragmentDirections.
+                    actionRegisteredAddressFragmentToElectionsFragment2())
+            }
         }
 
         Log.i(TAG4, "Exiting OnCreateView")

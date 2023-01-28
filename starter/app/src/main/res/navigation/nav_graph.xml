@@ -55,7 +55,14 @@
             app:argType="com.example.android.politicalpreparedness.network.models.Election" />
         <action
             android:id="@+id/action_registeredAddressFragment_to_voterInfoFragment"
-            app:destination="@id/voterInfoFragment" />
+            app:destination="@id/voterInfoFragment"
+            app:popUpTo="@id/voterInfoFragment"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_registeredAddressFragment_to_electionsFragment2"
+            app:destination="@id/electionsFragment"
+            app:popUpTo="@id/electionsFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
 
 </navigation>

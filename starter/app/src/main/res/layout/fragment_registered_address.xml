@@ -108,8 +108,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/save_button"
-            android:backgroundTint="@color/button_blue"
-            android:textColor="@color/white"
             app:layout_constraintTop_toBottomOf="@id/zip" />
 
         <Button
@@ -117,8 +115,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/done_button"
-            android:backgroundTint="@color/button_blue"
-            android:textColor="@color/white"
             app:layout_constraintTop_toBottomOf="@id/button_save" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

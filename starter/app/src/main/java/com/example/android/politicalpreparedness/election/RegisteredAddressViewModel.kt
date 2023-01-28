@@ -37,8 +37,12 @@ class RegisteredAddressViewModel(dataSource: ElectionDao,
     val addressEnteredFlag: LiveData<Boolean>
         get() = _addressEnteredFlag
 
+    //Whether address is save Flag
+    private var _addressIsSavedInDB = MutableLiveData<Boolean>(false)
+    val addressIsSavedInDB: LiveData<Boolean>
+        get() = _addressIsSavedInDB
 
-    lateinit var address: Address
+    var address: Address? = Address("","","","","")
     init {
         Log.i(TAG1, "inside init - where VoterInfo data is fetched from google api")
 
@@ -71,6 +75,18 @@ class RegisteredAddressViewModel(dataSource: ElectionDao,
             RepresentativeRepo(getApplication(),
                 ElectionDatabase.getInstance(application1)).saveAddress( address)
         }
+    }
+
+    fun isAddressSavedInDB() : Boolean? {
+        return addressIsSavedInDB.value
+    }
+
+    fun setAddressSavedInDB(){
+        _addressIsSavedInDB.value = true
+    }
+
+    fun resetAddressSavedInDB(){
+        _addressIsSavedInDB.value = false
     }
 }
 

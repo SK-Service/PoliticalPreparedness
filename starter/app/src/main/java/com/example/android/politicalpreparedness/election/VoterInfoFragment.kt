@@ -55,7 +55,7 @@ class VoterInfoFragment : Fragment() {
 
         //Check whether the selected election whether from the upcoming list or the saved election
         //list is already present in the database of saved election
-        voterInfoViewModel.updateFollowElectionStatus(selectedElection)
+//        voterInfoViewModel.updateFollowElectionStatus(selectedElection)
 
         Log.i(TAG3, "followElection Value after upfate: " +
                                     "${voterInfoViewModel.followElection.value}")
@@ -104,6 +104,20 @@ class VoterInfoFragment : Fragment() {
                 binding.voterInfoErrorMessage.text = "At this time we are not able to load voting location and ballot information"
                 voterInfoViewModel.resetVoterInfoAPICallStatus()
 
+            }
+        })
+
+        voterInfoViewModel.cacheAddressNotAvailable.observe(viewLifecycleOwner, Observer {
+            kotlin.run {
+                Log.i(TAG3, "cacheAddressNotAvailable.observe")
+                Log.i(TAG3, "cacheAddressNotAvailable:<${it}>")
+                if(it == true) {
+                    Log.i(TAG3, "Instead of VoterInfo going to Address registration")
+                    //Let's fill up the registered address
+                    this.findNavController().navigate(
+                        VoterInfoFragmentDirections.actionVoterInfoFragmentToRegisteredAddressFragment(
+                            selectedElection))
+                }
             }
         })
 

@@ -45,7 +45,14 @@ class VoterInfoViewModel(private val selectedElection: Election,
     val followElection: LiveData<Boolean>
         get() = _followElection
 
-    var address = Address("","","","","")
+    //_cacheAddressAvailable - Keep track whether cached address is available to be used
+    // with voterinfo. The default value being true indicating cache not available
+    private var _cacheAddressNotAvailable = MutableLiveData<Boolean>()
+    val cacheAddressNotAvailable: LiveData<Boolean>
+        get() = _cacheAddressNotAvailable
+
+
+    var address: Address? = Address("","","","","")
     init {
         Log.i(TAG1, "inside init - where VoterInfo data is fetched from google api")
 
@@ -53,37 +60,58 @@ class VoterInfoViewModel(private val selectedElection: Election,
 
             _voterInfoAPICallStatus.value = VoterInfoCivicApiStatus.LOADING
             try {
+                    Log.i(TAG1, "Before retrieveAddress call")
+
                     address= VoterInfoRepo(ElectionDatabase.getInstance(application))
                     .retrieveAddress()
+
+                    Log.i(TAG1, "After retrieveAddress call")
+
+                    if (address == null ) {
+                        Log.i(TAG1, "Cached addressed has been retrieved")
+                        _cacheAddressNotAvailable.value = true
+                    } else {
+                        _cacheAddressNotAvailable.value = false
+                    }
             } catch (e: Exception){
                 Log.i(TAG1, "After VoterInfoRepo retrieve address call and inside catch exception")
                 e.printStackTrace()
                 _voterInfoAPICallStatus.value = VoterInfoCivicApiStatus.ERROR
             }
-//which address to use
-            //extract the state from the division to see if the stored state is different from the
-            //state found in the election division entity
-            val division = selectedElection.division
-            val stateDelimiter = "state:"
-            val state = division.toString().substringAfter(stateDelimiter,"")
-                .substringBefore("/")
-            Log.i(TAG1, "State extracted from Division:<${state}>")
+////which address to use
+//            //extract the state from the division to see if the stored state is different from the
+//            //state found in the election division entity
+//            val division = selectedElection.division
+//            Log.i(TAG1, "Division before substring extraction:<${division}>")
+//            val stateDelimiter = "state:"
+//            val state = division.toString().substringAfter(stateDelimiter,"")
+//                .substringBefore("/")
+//            Log.i(TAG1, "State extracted from Division:<${state}>")
+
 
             try {
                 //Call VoterInfoRepo to get the latest voter info from google civic api
-                if(state.equals(address?.state)) {
-                    _voterInfo.value  = VoterInfoRepo(ElectionDatabase.getInstance(application))
-                        .refreshVoterInfo(selectedElection, address.toFormattedString())
-                } else {
-                    _voterInfo.value  = VoterInfoRepo(ElectionDatabase.getInstance(application))
-                        .refreshVoterInfo(selectedElection, state)
+                    //_cacheAddressNotAvailable == false means that cache is available
+                Log.i(TAG1, "_cacheAddressNotAvailable:<${_cacheAddressNotAvailable.value}>")
+                if(_cacheAddressNotAvailable.value == false ) {
+                    Log.i(TAG1, "Under this condition we'll like to retrieve VoterInfo from civic api")
+                    _voterInfo.value  = address?.let {
+                        VoterInfoRepo(ElectionDatabase.getInstance(application))
+                            .refreshVoterInfo(selectedElection, it.toFormattedString())
+                    }
+//                    //reset the _cacheAddressAvailable flag to its initial/original state
+//                    _cacheAddressNotAvailable.value = true
                 }
+//                else {
+//                    _voterInfo.value  = VoterInfoRepo(ElectionDatabase.getInstance(application))
+//                        .refreshVoterInfo(selectedElection, selectedElection.division.toString())
+//                }
 
-
-                if (!selectedElection.isSaved) {
-                    Log.i(TAG1, "Changing Follow Election to false as isSaved is not true")
-                    _followElection.value = false
-                }
+                updateFollowElectionStatus(selectedElection)
+//                if (!selectedElection.isSaved) {
+//                    Log.i(TAG1, "Changing Follow Election to false as isSaved is not true")
+//                    _followElection.value = false
+//                }
 
                 _voterInfoAPICallStatus.value = VoterInfoCivicApiStatus.DONE
 
@@ -129,7 +157,13 @@ class VoterInfoViewModel(private val selectedElection: Election,
             val electionSaved = VoterInfoRepo (ElectionDatabase.getInstance(application))
                 .isElectionSaved(selectedElection)
 
+            Log.i(TAG1, "updateFollowElectionStatus -electionSaved:" +
+                    " ${electionSaved}")
+
             _followElection.value = electionSaved
+
+            Log.i(TAG1, "updateFollowElectionStatus -_followElection.value:" +
+                    " ${_followElection.value}")
         }
     }
 

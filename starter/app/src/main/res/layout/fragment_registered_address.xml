@@ -117,5 +117,30 @@
             android:text="@string/done_button"
             app:layout_constraintTop_toBottomOf="@id/button_save" />
 
+        <ScrollView
+            android:layout_width="344dp"
+            android:layout_height="248dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="64dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.485"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button_done">
+
+            <TextView
+                android:id="@+id/registered_address_usage_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/terms_and_condition"
+                android:text="@string/registered_address_usage"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="parent"
+                tools:text="Registered address usage text is available for users review" />
+        </ScrollView>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

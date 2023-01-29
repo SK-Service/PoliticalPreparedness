@@ -19,7 +19,6 @@ import com.example.android.politicalpreparedness.election.adapter.ElectionListen
 
 class ElectionsFragment: Fragment() {
 
-    //TODO: Declare ViewModel
     private val electionViewModel: ElectionsViewModel by lazy {
             ViewModelProvider(this).get(ElectionsViewModel::class.java)
     }
@@ -32,29 +31,6 @@ class ElectionsFragment: Fragment() {
 
         binding.lifecycleOwner = this
 
-//        activity?.onBackPressedDispatcher?.addCallback(this, object: OnBackPressedCallback(true){
-//            override fun handleOnBackPressed() {
-//                if (shouldInterceptBackPress()) {
-////                    Toast.makeText(requireContext(),
-////                        "Back press intercepted in:${this@ElectionsFragment}",
-////                        Toast.LENGTH_SHORT).show()
-//                    electionViewModel.retrieveElectionsFromRepos()
-//                }else {
-//                    isEnabled = false
-//                    activity?.onBackPressed()
-//                }
-//            }
-//        })
-
-//        //Bind the ElectionRecyclerAdapter to the layout view - which references the RecyclerView
-//        binding.upcomingElectionRecycler.adapter = ElectionListAdapter(
-//            ElectionListener{
-//                electionViewModel.displayElectiondDetails(it)
-//            } )
-//        Log.i("ElectionsFragment",
-//                    "Adapter: ${binding.upcomingElectionRecycler.adapter ?: "value null"}")
-
-        //TODO: Add ViewModel values and create ViewModel
         //Get hold of the application context
         val application = requireNotNull(this.activity).application
         //Get hold of the datasource
@@ -64,7 +40,6 @@ class ElectionsFragment: Fragment() {
         //Get hold of the ViewModel
         val electionViewModel = ViewModelProvider(this, viewModelFactory).get(ElectionsViewModel::class.java)
 
-//        binding.electionViewModel = electionViewModel
         Log.i("ElectionsFragment", "Setting the listOfElection Observer")
         electionViewModel.listOfElection.observe(viewLifecycleOwner,
             Observer {
@@ -84,9 +59,6 @@ class ElectionsFragment: Fragment() {
                 }
             })
 
-        //TODO: Add binding values
-
-        //TODO: Link elections to voter info
         electionViewModel.navigateToVoterInfo.observe(viewLifecycleOwner,
                 Observer {
                     Log.i(TAG, "Inside the electionViewModel.navigateToVoterInfo.observe")
@@ -99,24 +71,12 @@ class ElectionsFragment: Fragment() {
                         Log.i(TAG, "display voter info complete is called and set to null")
                     }
                 })
-
-        //TODO: Initiate recycler adapters
-
-        //TODO: Populate recycler adapters
-
-
         return binding.root
-
     }
 
     override fun onResume() {
         super.onResume()
         electionViewModel.retrieveElectionsFromRepos()
     }
-
-    //TODO: Refresh adapters when fragment loads
-    //Defaulting shouldInterceptBackPress() to true to ensure that back button press is always
-    //handled with special condition of retrieving the election list from the repos
-    fun shouldInterceptBackPress() = true
 
 }

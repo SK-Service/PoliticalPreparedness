@@ -50,7 +50,6 @@ class RegisteredAddressFragment : Fragment(), AdapterView.OnItemSelectedListener
             stateSpinner.adapter = adapter
         }
 
-        //TODO: Add ViewModel values and create ViewModel
         //Get hold of the application context
         val application = requireNotNull(this.activity).application
         //Get hold of the datasource
@@ -97,7 +96,6 @@ class RegisteredAddressFragment : Fragment(), AdapterView.OnItemSelectedListener
                     }
                 }
         })
-
 
         binding.buttonSave.setOnClickListener {
             Log.i(TAG_R, "Inside SAVE Button click listener")

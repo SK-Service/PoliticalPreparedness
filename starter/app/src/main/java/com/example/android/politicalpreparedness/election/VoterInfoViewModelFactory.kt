@@ -7,7 +7,6 @@ import com.example.android.politicalpreparedness.database.ElectionDao
 import com.example.android.politicalpreparedness.network.models.Election
 import java.lang.IllegalArgumentException
 
-//TODO: Create Factory to generate VoterInfoViewModel with provided election datasource
 class VoterInfoViewModelFactory(private val selectedElection : Election,
                                 private val dataSource: ElectionDao,
                                 private val application: Application): ViewModelProvider.Factory {

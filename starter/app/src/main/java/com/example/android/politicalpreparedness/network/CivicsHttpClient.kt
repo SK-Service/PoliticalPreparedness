@@ -9,8 +9,6 @@ import okhttp3.OkHttpClient
 class CivicsHttpClient: OkHttpClient() {
 
     companion object {
-
-         //TODO: Place your API Key Here
         const val API_KEY = BuildConfig.API_KEY
 
          fun getClient(): OkHttpClient {

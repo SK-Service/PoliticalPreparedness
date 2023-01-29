@@ -24,12 +24,6 @@ class VoterInfoViewModel(private val selectedElection: Election,
                          private val dataSource: ElectionDao,
                          private val application: Application) : ViewModel() {
 
-    //TODO: Add live data to hold voter info
-   //To hold the selected election through app lifecycle
-//    private var _selectedElection = MutableLiveData<Election>()
-//    val selectedElection: LiveData<Election>
-//        get() = _selectedElection
-
     private var _voterInfo = MutableLiveData<VoterInfo>()
     val voterInfo: LiveData<VoterInfo>
         get() = _voterInfo
@@ -78,16 +72,6 @@ class VoterInfoViewModel(private val selectedElection: Election,
                 e.printStackTrace()
                 _voterInfoAPICallStatus.value = VoterInfoCivicApiStatus.ERROR
             }
-////which address to use
-//            //extract the state from the division to see if the stored state is different from the
-//            //state found in the election division entity
-//            val division = selectedElection.division
-//            Log.i(TAG1, "Division before substring extraction:<${division}>")
-//            val stateDelimiter = "state:"
-//            val state = division.toString().substringAfter(stateDelimiter,"")
-//                .substringBefore("/")
-//            Log.i(TAG1, "State extracted from Division:<${state}>")
-
 
             try {
                 //Call VoterInfoRepo to get the latest voter info from google civic api
@@ -99,19 +83,10 @@ class VoterInfoViewModel(private val selectedElection: Election,
                         VoterInfoRepo(ElectionDatabase.getInstance(application))
                             .refreshVoterInfo(selectedElection, it.toFormattedString())
                     }
-//                    //reset the _cacheAddressAvailable flag to its initial/original state
-//                    _cacheAddressNotAvailable.value = true
+
                 }
-//                else {
-//                    _voterInfo.value  = VoterInfoRepo(ElectionDatabase.getInstance(application))
-//                        .refreshVoterInfo(selectedElection, selectedElection.division.toString())
-//                }
 
                 updateFollowElectionStatus(selectedElection)
-//                if (!selectedElection.isSaved) {
-//                    Log.i(TAG1, "Changing Follow Election to false as isSaved is not true")
-//                    _followElection.value = false
-//                }
 
                 _voterInfoAPICallStatus.value = VoterInfoCivicApiStatus.DONE
 
@@ -141,7 +116,6 @@ class VoterInfoViewModel(private val selectedElection: Election,
      fun unFollowElection () {
         viewModelScope.launch {
             Log.i(TAG1, "Election ID:${selectedElection.id}, isSaved:${selectedElection.isSaved}")
-//            selectedElection.isSaved = false
             VoterInfoRepo(ElectionDatabase.getInstance(application)).
             deleteElectionFollowing(selectedElection)
             _followElection.value = false

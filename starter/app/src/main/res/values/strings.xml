@@ -7,7 +7,19 @@
     <string name="done_button">DONE</string>
     <string name="find_my_representatives_launch_button">Find My Representatives</string>
     <string name="upcoming_elections_button">Upcoming Elections</string>
+    <string name="registered_address_usage">Registered address is required to pull up
+    the relevant information using the Google CIVIC API. If you do not enter your address that
+    is relevant for your election of choice here, relevant information will not be available.
 
-    <!-- TODO: Add necessary string values -->
+    We do not use your address for any other purpose. It is used for pulling in the ballot information,
+    and the voting location information. The same address is used for searching your representatives,
+    however, we give you an option to change and edit your search and we\'ll save it as the
+    registered address information
+
+    The address you provide on this screen or the representative search screen are not stored anywhere
+    else. It is stored on your phone following the Android Security standards</string>
+    <string name="a_voting_image_showing">A voting image showing</string>
+    <string name="saved_elections_heading">Saved Elections</string>
+    <string name="upcoming_elections_heading">Upcoming Elections</string>
 
 </resources>

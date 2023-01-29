@@ -35,7 +35,7 @@ fun bindElectionList (recyclerview: RecyclerView, electionViewModel: ElectionsVi
 
     val adapter = recyclerview.adapter as ElectionListAdapter
     Log.i("BindngAdapter-listElection", "After getting hold of Adapter\n")
-//@TODO - Handle when there are no election - may be we can add No Election to the list
+
     if (electionViewModel?.listOfElection != null) {
         Log.i("BindngAdapter-listElection", "election list is not null\n")
         adapter.submitList(electionViewModel?.listOfElection.value )
@@ -56,7 +56,7 @@ fun bindSavedElectionList (recyclerview: RecyclerView, electionViewModel: Electi
     val adapter = recyclerview.adapter as ElectionListAdapter
     Log.i("BindngAdapter-bindSavedElectionList", "After getting hold of Adapter\n")
 
-    //@TODO - Handle when there are no saved election - may be we can add No Election to the list
+
     if (electionViewModel?.listOfSavedElections != null) {
         Log.i("BindngAdapter-listSavedElection", "Saved Elections is not null\n")
         adapter.submitList(electionViewModel?.listOfSavedElections.value )

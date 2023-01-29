@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- TODO: Add node to connect Election ViewModel -->
     <data>
         <variable
             name="electionViewModel"
@@ -15,22 +14,19 @@
         android:layout_height="match_parent"
         tools:context="com.example.android.politicalpreparedness.ElectionFragment">
 
-        <!-- TODO: Add Upcoming Election Recycler and Header -->
-
         <TextView
             android:id="@+id/textView"
-            style="@style/AlternateTextStyle"
+            style="@style/election_list_heading"
             android:layout_width="380dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
-            android:text="Upcoming Elections"
-            android:textSize="24sp"
-            android:textStyle="bold"
+            android:text="@string/upcoming_elections_heading"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Upcoming Elections"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/upcoming_election_recycler"
@@ -48,20 +44,17 @@
             app:spanCount="1"
             tools:itemCount="10" />
 
-        <!-- TODO: Add Saved Election Recycler and Header -->
-
         <TextView
             android:id="@+id/saved_election_text_view"
-            style="@style/AlternateTextStyle"
+            style="@style/election_list_heading"
             android:layout_width="380dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="256dp"
-            android:text="Saved Elections"
-            android:textSize="24sp"
-            android:textStyle="bold"
+            android:text="@string/saved_elections_heading"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            tools:text="Saved Elections"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/saved_election_recycler"

@@ -8,7 +8,6 @@ import com.example.android.politicalpreparedness.network.models.Election
 import com.example.android.politicalpreparedness.representative.RepresentativeViewModel
 import java.lang.IllegalArgumentException
 
-//TODO: Create Factory to generate VoterInfoViewModel with provided election datasource
 class RegisteredAddressViewModelFactory(private val dataSource: ElectionDao,
                                         private val application: Application): ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {

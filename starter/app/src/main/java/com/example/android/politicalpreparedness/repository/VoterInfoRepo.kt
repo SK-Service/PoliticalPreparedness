@@ -46,20 +46,6 @@ class VoterInfoRepo (private val database: ElectionDatabase) {
                     }
                 }
 
-////@TODO TO BE DELETED CODE - START
-////        //@TODO - TO BE DELETED - Instantiating two election objects
-//            Log.i(TAG2, "Instantiating State")
-//                val electionAdministrationBody: AdministrationBody = AdministrationBody("Secretary of State", "",
-//                   "https://voterstatus.sos.ca.gov", "https://www.sos.ca.gov/elections/ballot-status/wheres-my-ballot/",
-//                            Address("","", "","","") )
-//                val state: State = State("California", electionAdministrationBody )
-//                val election: Election = Election(1, "NYC State Presidency Primary",
-//                    Date("11/20/2022"), false,
-//                    Division("011", "county1", "NYC") )
-//                voterInfoResponse = VoterInfoResponse(election = election, state = listOf(state))
-
-//@TODO TO BE DELETED CODE - END
-
             } catch (e: Exception) {
                 //HTTP Exception are not reflected back to the caller
                 // Any other system error the caller should handle

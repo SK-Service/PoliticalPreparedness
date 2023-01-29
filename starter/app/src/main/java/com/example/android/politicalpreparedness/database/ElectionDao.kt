@@ -9,30 +9,17 @@ import com.example.android.politicalpreparedness.network.models.SavedElection
 @Dao
 interface ElectionDao {
 
-    //TODO: Add insert query
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(vararg elections: Election)
 
-    //TODO: Add select all election query
     @Query ("select * from election_table")
     fun getElectionList() : List<Election>
-
-    //TODO: Update isSave on Election Entity
-//    @Query("UPDATE election_table SET isSaved = :isSaved WHERE id = :id")
-//    fun  updateElectionFollowingStatus(isSaved: Boolean, id: Int)
-
-    //TODO: Add select single election query
-
-    //TODO: Add delete query
-
-    //TODO: Add clear query
 
 }
 
 @Dao
 interface SavedElectionDao {
 
-    //TODO: Add insert query
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addSavedElection(elections: SavedElection)
 
@@ -51,7 +38,6 @@ interface SavedElectionDao {
 @Dao
 interface SavedAddressDao {
 
-    //TODO: Add insert query
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addAddress(address: Address)
 

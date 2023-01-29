@@ -40,27 +40,15 @@ class RepresentativeRepo (private val application: Application,
                 //The state in this app is represented as "State - Abbreviation"
                 // Example: Oklahoma - OK
                 //This to extract the OK
-//                val address1 = address.copy()
-//                address1.state = address1.state
+
                 Log.i(TAG, "Formatted Address:<${address.toFormattedString()}>")
                 //Call Google CIVIC API
                 val representativeResponse = CivicsApi.electionRetrofitService.
                                 getCivicRepresentatives(address.toFormattedString())
-//                val responseJSONObject = CivicsApi.electionRetrofitService.
-//                getCivicRepresentatives(address.toFormattedString())
+
                 Log.i(TAG, "After the Civic API call")
                 Log.i(TAG, "No Database insert exist yet")
 
-                //TODO - TO BE DELETED - HARD CODED JSON
-//                val repProfileJsonString: String = loadTestRepreentativeProfile(application)
-
-//                val repProfileJsonString = responseJSONObject.toString()
-//                val representativeListFromCivic = getCiviRepAPIRepresentativeResponse(
-//                                                    JSONObject(repProfileJsonString))
-
-                //Response has got offices and for each office,there are one ore more official
-                //object
-//                representativeLists = getRepresentativesProfile (representativeListFromCivic)
                 representativeLists = getRepresentativesProfile (representativeResponse)
             } catch (e: Exception) {
                 //HTTP Exception are not reflected back to the caller
@@ -168,9 +156,6 @@ fun loadTestRepreentativeProfile(application: Application): String {
 fun getCiviRepAPIRepresentativeResponse(input: JSONObject) : RepresentativeResponse {
     Log.i(TAG_Repo1, "Inside getCiviRepAPIRepresentativeResponse")
 
-    //Extract the Office objects from the JSON
-//    var officeJsonObjects = input.getJSONObject("offices")
-   // val officeJsonArray = officeJsonObjects.getJSONArray("offices")
     val officeJsonArray = input.getJSONArray("offices")
     val officeArray = ArrayList<Office>()
 
@@ -199,9 +184,7 @@ fun getCiviRepAPIRepresentativeResponse(input: JSONObject) : RepresentativeRespo
     Log.i(TAG_Repo1, "Size of the Office-List:${officeList.size}")
 
     //Extrat the Official objects from the JSON
-//    var officialJsonObjects = input.getJSONObject("officials")
     val officialArray = ArrayList<Official>()
-//    val officialJsonArray = officialJsonObjects.getJSONArray("officials")
     val officialJsonArray = input.getJSONArray("officials")
 
     Log.i(TAG_Repo1, "Before Official For-Loop")

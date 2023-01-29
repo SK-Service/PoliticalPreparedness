@@ -19,7 +19,6 @@ class ElectionListAdapter(private val clickListener: ElectionListener): ListAdap
                             LayoutInflater.from(parent.context)))
     }
 
-    //TODO: Bind ViewHolder
     override fun onBindViewHolder(holder: ElectionViewHolder, position: Int) {
         val election =getItem(position)
         Log.i(TAG, "inside onBindViewHolder")
@@ -35,10 +34,8 @@ class ElectionListAdapter(private val clickListener: ElectionListener): ListAdap
         holder.bind(election)
     }
 
-    //TODO: Add companion object to inflate ViewHolder (from)
 }
 
-//TODO: Create ElectionViewHolder
 /**The ElectionViewHolder constructor takes the binding variable from the associated Election
 List Item, which gives access to full Election **/
 class ElectionViewHolder(private val binding:ElectionViewItemListBinding) :
@@ -52,7 +49,6 @@ class ElectionViewHolder(private val binding:ElectionViewItemListBinding) :
     }
 }
 
-//TODO: Create ElectionDiffCallback
 /**
  * Allows the RecyclerView to determine which items have changed when the [List] of [Asteroid]
  * has been updated.
@@ -66,7 +62,6 @@ object ElectionDiffCallback: DiffUtil.ItemCallback<Election>() {
     }
 }
 
-//TODO: Create ElectionListener
 /**
  * Click Listener to handle click on the recycler view item
  */

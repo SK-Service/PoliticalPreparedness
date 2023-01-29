@@ -17,13 +17,11 @@ import com.squareup.moshi.Json
 import kotlinx.coroutines.launch
 import java.util.*
 
-//TODO: Construct ViewModel and provide election datasource
 enum class ElectionCivicApiStatus {LOADING, ERROR, DONE }
 const val TAG = "ElectionsViewModel"
 class ElectionsViewModel(datasource: ElectionDao, application: Application):
                                                     AndroidViewModel(application) {
 
-    //TODO: Create live data val for upcoming elections
     //Managed data for list of elections
     private var _listOfElections = MutableLiveData<MutableList<Election>>(mutableListOf())
     val listOfElection: LiveData<MutableList<Election>>
@@ -44,10 +42,6 @@ class ElectionsViewModel(datasource: ElectionDao, application: Application):
     val navigateToVoterInfo: LiveData<Election>
         get() = _navigateToVoterInfo
 
-    //TODO: Create live data val for saved elections
-
-    //TODO: Create val and functions to populate live data for upcoming elections from the API and saved elections from local database
-
     //init is called to populate the database or cache at the start, with the list of elections
     // and also populate the list of saved elections if there are any
     init {
@@ -67,22 +61,6 @@ class ElectionsViewModel(datasource: ElectionDao, application: Application):
                                                     asElectionList().toMutableList()
 
                 Log.i(TAG, "Saved Elections ${_listOfSavedElections.value?.size}")
-
-//                Log.i(TAG, "Filter out the elections with isSavedAsTrue")
-//                val filteredList = listOfElection.value?.filter{it.isSaved}
-//                if (filteredList != null) {
-//                    _listOfSavedElections.value = filteredList.toMutableList()
-//                }
-//                Log.i(TAG, "completed filtering of saved list of elections")
-//    //@TODO - TO BE DELETE - HARD CODED DATA
-//        //@TODO - TO BE DELETED - Instantiating two election objects
-//            Log.i(TAG, "Instantiating election 1 NYC & election 2 Ohio")
-//                val election1: Election = Election(1, "NYC State Presidency Primary",
-//                            Date("11/20/2022"), Division("011", "county1", "NYC") )
-//                val election2: Election = Election(2, "Ohio State Presidency Primary",
-//                    Date("11/29/2022"), Division("022", "county2", "Ohio") )
-//                Log.i( TAG, "assigning list to listOfElections.value")
-//                _listOfElections.value = mutableListOf(election1, election2)
 
                 _civicAPICallStatus.value = ElectionCivicApiStatus.DONE
             } catch (e: Exception){
@@ -122,22 +100,6 @@ class ElectionsViewModel(datasource: ElectionDao, application: Application):
                     asElectionList().toMutableList()
 
                     Log.i(TAG, "Saved Elections ${_listOfSavedElections.value?.size}")
-
-//                Log.i(TAG, "Filter out the elections with isSavedAsTrue")
-//                val filteredList = listOfElection.value?.filter{it.isSaved}
-//                if (filteredList != null) {
-//                    _listOfSavedElections.value = filteredList.toMutableList()
-//                }
-//                Log.i(TAG, "completed filtering of saved list of elections")
-//    //@TODO - TO BE DELETE - HARD CODED DATA
-//        //@TODO - TO BE DELETED - Instantiating two election objects
-//            Log.i(TAG, "Instantiating election 1 NYC & election 2 Ohio")
-//                val election1: Election = Election(1, "NYC State Presidency Primary",
-//                            Date("11/20/2022"), Division("011", "county1", "NYC") )
-//                val election2: Election = Election(2, "Ohio State Presidency Primary",
-//                    Date("11/29/2022"), Division("022", "county2", "Ohio") )
-//                Log.i( TAG, "assigning list to listOfElections.value")
-//                _listOfElections.value = mutableListOf(election1, election2)
 
                     _civicAPICallStatus.value = ElectionCivicApiStatus.DONE
                 } catch (e: Exception){

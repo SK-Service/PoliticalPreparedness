@@ -19,7 +19,7 @@ class RepresentativeViewModel(datasource: ElectionDao, application: Application)
     AndroidViewModel(application) {
 
     val application1 = application
-    //TODO: Create live data val for upcoming elections
+
     //Managed data for list of elections
     private var _listOfRepresentatives = MutableLiveData<MutableList<RepresentativeProfile>>(mutableListOf())
     val listOfRepresentatives: LiveData<MutableList<RepresentativeProfile>>
@@ -89,8 +89,6 @@ class RepresentativeViewModel(datasource: ElectionDao, application: Application)
             var repList: List<RepresentativeProfile>
             _civicRepAPICallStatus.value = RepresentativeCivicApiStatus.LOADING
             try {
-//                Log.i(TAG_RVM, "Address Validity:${checkAddressGoodForSearch(address)}")
-//                if (checkAddressGoodForSearch(address)) {
                     //Reset address entered check flag to true, which is the initial state
                     _addressEnteredFlag.value = true
                     repList = RepresentativeRepo(getApplication(), ElectionDatabase.getInstance(application1))
@@ -99,15 +97,7 @@ class RepresentativeViewModel(datasource: ElectionDao, application: Application)
                     Log.i(TAG_RVM, "Size of _listOfRepresentatives.value: " +
                                     "${_listOfRepresentatives.value!!.size}")
 
-                    //TODO - Save the address in a table and also add the address to the LiveData
                     //Consider it a valid address if list of representatives are returned
-
-
-//                } else {
-//                    //addressEnteredFlag value is false when button is clicked without zip
-//                        // or address line 1 or city
-//                    _addressEnteredFlag.value = false
-//                }
 
                 Log.i(TAG_RVM, "Representative List ${_listOfRepresentatives.value?.size}")
 

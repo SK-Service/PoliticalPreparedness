@@ -2,5 +2,7 @@
 <resources>
     <dimen name="default_padding">8dp</dimen>
     <dimen name="button_text_size">20sp</dimen>
+    <dimen name="notice_text_size">18sp</dimen>
 
+    <item name="notice_line_spacing" type="dimen" format="float">1.3</item>
 </resources>

@@ -18,7 +18,6 @@ import com.squareup.picasso.Picasso
 fun fetchImage(view: ImageView, src: String?) {
     src?.let {
         val uri = src.toUri().buildUpon().scheme("https").build()
-        //TODO: Add Glide call to load image and circle crop - user ic_profile as a placeholder and for errors.
     }
 }
 
@@ -49,7 +48,6 @@ fun bindRepresentativeList (recyclerview: RecyclerView, representativeViewModel:
     val adapter = recyclerview.adapter as RepresentativeListAdapter
     Log.i("BindngAdapter-listRepresentatives", "After getting hold of Adapter\n")
 
-    //@TODO - Handle when there are no saved election - may be we can add No Election to the list
     if (representativeViewModel?.listOfRepresentatives?.value != null) {
         Log.i("BindngAdapter-listRepresentatives", "List of representatives is not null\n")
         if(!representativeViewModel?.listOfRepresentatives?.value!!.isEmpty()) {
@@ -80,8 +78,7 @@ fun bindDetailsStatusImage(imageView: ImageView, repProfileImageURL: String) {
 
 fun ImageView.loadImage( url: String?) {
     Log.i("BindingAdapter", "Inside loadImage<${url}>")
-//    val urlHTTPS = url?.replace("http:", "https:")
-//    Log.i("BindingAdapter", "HTTPS URL<${urlHTTPS}>")
+
     Picasso.get().load(url)
         .placeholder(R.drawable.ic_profile)
         .error(R.drawable.ic_profile)

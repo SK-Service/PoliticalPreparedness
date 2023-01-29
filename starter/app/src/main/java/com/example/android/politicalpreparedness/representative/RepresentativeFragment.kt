@@ -73,7 +73,6 @@ class RepresentativeFragment: Fragment() , AdapterView.OnItemSelectedListener {
             stateSpinner.adapter = adapter
         }
 
-        //TODO: Add ViewModel values and create ViewModel
         //Get hold of the application context
         val application = requireNotNull(this.activity).application
         //Get hold of the datasource
@@ -115,7 +114,7 @@ class RepresentativeFragment: Fragment() , AdapterView.OnItemSelectedListener {
                 }else if (it == RepresentativeCivicApiStatus.DONE) {
                     binding.message.text = ""
                 } else if (it == RepresentativeCivicApiStatus.LOADING) {
-//                    TODO - implement loading image when the status is loading
+
                 }
             })
 
@@ -209,16 +208,6 @@ class RepresentativeFragment: Fragment() , AdapterView.OnItemSelectedListener {
                   }
             })
 
-//        repViewModel.locationPermissionGranted.observe(viewLifecycleOwner, Observer {
-//            run {
-//                Log.i(TAG_R, "inside locationPermissionGranted.observe")
-//                if (it == true &&
-//                    repViewModel.repButtonClickedType.value.equals("LOCATION")) {
-//                    retrieveLocationAddress()
-//                }
-//            }
-//        })
-
         return binding.root
 
     }
@@ -227,14 +216,14 @@ class RepresentativeFragment: Fragment() , AdapterView.OnItemSelectedListener {
         Log.i(TAG_R, "Inside retrieveAddressFromLocationDetection")
         if (isLocationEnabled()) {
             Log.i(TAG_R, "Location services are enabled")
-//                repViewModel.locationPermissionGranted()
+
             if (checkPermissions()) {
                 Log.i(TAG_R, "Permission Check Successful - call retrieve location address")
                 retrieveLocationAddress()
             }else {
                 Log.i(TAG_R, "Location services enabled but no permission granted - request permission")
                 requestPermissions()
-//                repViewModel.locationPermissionNotGranted()
+
                 Log.i(TAG_R, "After requesting permission - retrieveLocationAddress")
                 retrieveLocationAddress()
             }
@@ -413,32 +402,7 @@ class RepresentativeFragment: Fragment() , AdapterView.OnItemSelectedListener {
         } else {
             binding.message.text = "To use location based search please grant permission"
         }
-//        if (
-//            grantResults.isEmpty() ||
-//            grantResults[LOCATION_PERMISSION_INDEX] == PackageManager.PERMISSION_DENIED ||
-//            (requestCode == REQUEST_FOREGROUND_AND_BACKGROUND_PERMISSION_RESULT_CODE &&
-//                    grantResults[BACKGROUND_LOCATION_PERMISSION_INDEX] ==
-//                    PackageManager.PERMISSION_DENIED))
-//        {
-//            Log.i("SaveReminderFrag", "Access is denied and snackbar will be thrown" +
-//                    "Location services must be enabled to use the app")
-//            Snackbar.make(
-//                binding.saveReminder,
-//                com.google.android.gms.location.R.string.location_required_error,
-//                Snackbar.LENGTH_INDEFINITE
-//            )
-//                .setAction(com.google.android.gms.location.R.string.settings) {
-//                    startActivity(Intent().apply {
-//                        action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
-//                        data = Uri.fromParts("package", BuildConfig.APPLICATION_ID, null)
-//                        flags = Intent.FLAG_ACTIVITY_NEW_TASK
-//                    })
-//                }.show()
-//        } else {
-//            Log.i("SaveReminderFrag", "Permission is not denied - check location setting " +
-//                    "and start Geofence")
-//            checkDeviceLocationSettingsAndStartGeofence()
-//        }
+
     }
 
 }

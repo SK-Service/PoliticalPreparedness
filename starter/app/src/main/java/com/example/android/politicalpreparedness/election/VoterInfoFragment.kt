@@ -24,7 +24,6 @@ class VoterInfoFragment : Fragment() {
         val binding = FragmentVoterInfoBinding.inflate(inflater)
         binding.lifecycleOwner = this
 
-        //TODO: Add ViewModel values and create ViewModel
         //Get hold of the application context
         val application = requireNotNull(this.activity).application
         //Get hold of the datasource
@@ -50,15 +49,6 @@ class VoterInfoFragment : Fragment() {
                     binding.voterInfoViewModel = voterInfoViewModel
                 }
         })
-        Log.i(TAG3, "followElection Value before update: " +
-                                    "${voterInfoViewModel.followElection.value}")
-
-        //Check whether the selected election whether from the upcoming list or the saved election
-        //list is already present in the database of saved election
-//        voterInfoViewModel.updateFollowElectionStatus(selectedElection)
-
-        Log.i(TAG3, "followElection Value after upfate: " +
-                                    "${voterInfoViewModel.followElection.value}")
 
         voterInfoViewModel.followElection.observe(viewLifecycleOwner, Observer {
                     if (it != null) {

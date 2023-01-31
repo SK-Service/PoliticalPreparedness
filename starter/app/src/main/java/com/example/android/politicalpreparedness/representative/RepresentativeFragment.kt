@@ -258,29 +258,6 @@ class RepresentativeFragment: Fragment() , AdapterView.OnItemSelectedListener {
                     populateGeoCodeAddress(location)
 
                 } else {
-                    // TODO: Step 1.3, Create a LocationRequest.
-                    val locationRequest = LocationRequest.create().apply {
-                        // Sets the desired interval for active location updates. This interval is inexact. You
-                        // may not receive updates at all if no location sources are available, or you may
-                        // receive them less frequently than requested. You may also receive updates more
-                        // frequently than requested if other applications are requesting location at a more
-                        // frequent interval.
-                        //
-                        // IMPORTANT NOTE: Apps running on Android 8.0 and higher devices (regardless of
-                        // targetSdkVersion) may receive updates less frequently than this interval when the app
-                        // is no longer in the foreground.
-                        interval = TimeUnit.SECONDS.toMillis(60)
-
-                        // Sets the fastest rate for active location updates. This interval is exact, and your
-                        // application will never receive updates more frequently than this value.
-                        fastestInterval = TimeUnit.SECONDS.toMillis(30)
-
-                        // Sets the maximum time when batched location updates are delivered. Updates may be
-                        // delivered sooner than this interval.
-                        maxWaitTime = TimeUnit.MINUTES.toMillis(2)
-
-                        priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-                    }
 
                     val locationCallback = object : LocationCallback() {
                         @SuppressLint("MissingPermission")
@@ -290,7 +267,7 @@ class RepresentativeFragment: Fragment() , AdapterView.OnItemSelectedListener {
                             }
                         }
                     }
-                    mFusedLocationClient.requestLocationUpdates(locationRequest, )
+                    mFusedLocationClient.requestLocationUpdates( )
                 }
             }
         }

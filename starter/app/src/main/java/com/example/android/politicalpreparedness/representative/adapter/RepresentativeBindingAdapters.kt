@@ -50,12 +50,12 @@ fun bindRepresentativeList (recyclerview: RecyclerView, representativeViewModel:
 
     if (representativeViewModel?.listOfRepresentatives?.value != null) {
         Log.i("BindngAdapter-listRepresentatives", "List of representatives is not null\n")
-        if(!representativeViewModel?.listOfRepresentatives?.value!!.isEmpty()) {
+        if(!representativeViewModel.listOfRepresentatives.value!!.isEmpty()) {
             Log.i("BindngAdapter-listRepresentatives", "List of representatives is not null and not empty\n")
             Log.i("BindngAdapter-listRepresentatives",
-                "Value:<${representativeViewModel?.listOfRepresentatives?.value}>\n")
+                "Value:<${representativeViewModel.listOfRepresentatives.value}>\n")
 
-            adapter.submitList(representativeViewModel?.listOfRepresentatives.value )
+            adapter.submitList(representativeViewModel.listOfRepresentatives.value )
         }
 
     }

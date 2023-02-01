@@ -32,7 +32,7 @@ class VoterInfoRepo (private val database: ElectionDatabase) {
                 if (voterInfoResponse.state != null) {
                     val voterInfoState = getVoterInfoState(voterInfoResponse.state!!)
                     if (voterInfoState != null ) {
-                        voterInfo.stateName = voterInfoState.name?:""
+                        voterInfo.stateName = voterInfoState.name
                         voterInfo.ballotInfoURL = voterInfoState.electionAdministrationBody.ballotInfoUrl?: ""
                         voterInfo.votingLocationURL = voterInfoState.electionAdministrationBody.votingLocationFinderUrl?: ""
                         voterInfo.address = voterInfoState.electionAdministrationBody.correspondenceAddress?.toFormattedString()

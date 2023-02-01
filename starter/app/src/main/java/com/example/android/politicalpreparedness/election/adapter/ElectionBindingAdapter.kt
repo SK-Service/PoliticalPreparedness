@@ -38,7 +38,7 @@ fun bindElectionList (recyclerview: RecyclerView, electionViewModel: ElectionsVi
 
     if (electionViewModel?.listOfElection != null) {
         Log.i("BindngAdapter-listElection", "election list is not null\n")
-        adapter.submitList(electionViewModel?.listOfElection.value )
+        adapter.submitList(electionViewModel.listOfElection.value )
     }
 }
 
@@ -59,7 +59,7 @@ fun bindSavedElectionList (recyclerview: RecyclerView, electionViewModel: Electi
 
     if (electionViewModel?.listOfSavedElections != null) {
         Log.i("BindngAdapter-listSavedElection", "Saved Elections is not null\n")
-        adapter.submitList(electionViewModel?.listOfSavedElections.value )
+        adapter.submitList(electionViewModel.listOfSavedElections.value )
     }
 }
 
@@ -70,7 +70,7 @@ fun bindClickableTextLocation(textView: TextView, textUrl: String?) {
     if (textUrl.isNullOrEmpty())
         return
     val text = "State Locations"
-    textView.setText(text)
+    textView.text = text
 
     val spannableString = SpannableString(text)
     val clickableSpan: ClickableSpan = object : ClickableSpan() {
@@ -98,7 +98,7 @@ fun bindClickableTextBallot(textView: TextView, textUrl: String?) {
     if (textUrl.isNullOrEmpty())
         return
     val text = "State Ballots"
-    textView.setText(text)
+    textView.text = text
 
     val spannableString = SpannableString(text)
     val clickableSpan: ClickableSpan = object : ClickableSpan() {

@@ -8,15 +8,14 @@ import android.content.pm.PackageManager
 import android.location.Geocoder
 import android.location.Location
 import android.location.LocationManager
-import android.net.Uri
 import android.os.Bundle
+import android.os.Looper
 import android.util.Log
 import android.view.*
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -26,11 +25,8 @@ import com.example.android.politicalpreparedness.databinding.FragmentRepresentat
 import com.example.android.politicalpreparedness.election.TAG
 import com.example.android.politicalpreparedness.network.models.Address
 import android.provider.Settings
-import androidx.core.app.ActivityCompat.requestPermissions
 import com.google.android.gms.location.*
-import com.google.android.material.snackbar.Snackbar
 import java.util.*
-import java.util.concurrent.TimeUnit
 
 const val TAG_R = "RepresentativeFragment"
 class RepresentativeFragment: Fragment() , AdapterView.OnItemSelectedListener {
@@ -43,6 +39,7 @@ class RepresentativeFragment: Fragment() , AdapterView.OnItemSelectedListener {
 
     private var ACCESS_COARSE_LOCATION_1: Int = 0
     private var ACCESS_FINE_LOCATION_2: Int = 1
+    private val callback = Callback()
 
 
     override fun onCreateView(inflater: LayoutInflater,
@@ -166,7 +163,7 @@ class RepresentativeFragment: Fragment() , AdapterView.OnItemSelectedListener {
             val address = Address(binding.addressLine1.text.toString(),
                                 binding.addressLine2.text.toString(),
                                 binding.city.text.toString(),
-                                binding.state.getSelectedItem().toString(),
+                                binding.state.selectedItem.toString(),
                                 binding.zip.text.toString())
             val isAddresGood = repViewModel.checkAddressGoodForSearch(address)
             if (isAddresGood) {
@@ -259,15 +256,14 @@ class RepresentativeFragment: Fragment() , AdapterView.OnItemSelectedListener {
 
                 } else {
 
-                    val locationCallback = object : LocationCallback() {
-                        @SuppressLint("MissingPermission")
-                        override fun onLocationResult(locationResult: LocationResult) {
-                            if (location != null) {
-                                populateGeoCodeAddress(location)
-                            }
-                        }
+                    val request = LocationRequest.create().apply {
+                        priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+                        interval = 10_000 // 10 seconds
                     }
-                    mFusedLocationClient.requestLocationUpdates( )
+                    mFusedLocationClient.requestLocationUpdates(
+                                                request,
+                                                callback,
+                                                Looper.getMainLooper() )
                 }
             }
         }
@@ -276,6 +272,14 @@ class RepresentativeFragment: Fragment() , AdapterView.OnItemSelectedListener {
         Log.i(TAG_R, "locationBasedAddress-LOCALITY: ${locationBasedAddress.city}")
         Log.i(TAG_R, "locationBasedAddress-PostalCode: ${locationBasedAddress.zip}")
         Log.i(TAG_R, "locationBasedAddress- adminArea${locationBasedAddress.state}")
+    }
+
+    private inner class Callback : LocationCallback() {
+        override fun onLocationResult(locationResult: LocationResult) {
+            if (locationResult.lastLocation != null) {
+                populateGeoCodeAddress(locationResult.lastLocation)
+            }
+        }
     }
 
     private fun populateGeoCodeAddress(location: Location) {
@@ -295,12 +299,12 @@ class RepresentativeFragment: Fragment() , AdapterView.OnItemSelectedListener {
                 line1.append(geoAddress.getAddressLine(i)).append("")
             }
 
-            Log.i(TAG_R, "Geocode-Address Line 1:${line1.toString()}")
+            Log.i(TAG_R, "Geocode-Address Line 1:$line1")
             Log.i(TAG_R, "Geocode-LOCALITY: ${geoAddress.locality}")
             Log.i(TAG_R, "Geocode-PostalCode: ${geoAddress.postalCode}")
             Log.i(TAG_R, "Geocode- adminArea${geoAddress.adminArea}")
             locationBasedAddress.zip = geoAddress.postalCode ?: ""
-            locationBasedAddress.line1 = line1.toString() ?: ""
+            locationBasedAddress.line1 = line1.toString()
             locationBasedAddress.city = geoAddress.locality ?: ""
             locationBasedAddress.state = geoAddress.adminArea ?: ""
 

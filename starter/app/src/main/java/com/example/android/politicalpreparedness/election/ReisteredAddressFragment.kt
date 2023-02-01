@@ -103,7 +103,7 @@ class RegisteredAddressFragment : Fragment(), AdapterView.OnItemSelectedListener
             val address = Address(binding.addressLine1.text.toString(),
                                     binding.addressLine2.text.toString(),
                                     binding.city.text.toString(),
-                                    binding.state.getSelectedItem().toString(),
+                                    binding.state.selectedItem.toString(),
                                     binding.zip.text.toString())
 
             val isAddressGood = checkAddressGoodForSearch(address)

@@ -41,7 +41,6 @@
             app:layout_constraintTop_toBottomOf="@id/election_name_toolbar"
             tools:text="Error Message" />
 
-        <!-- TODO: Add visual styling -->
         <TextView
             android:id="@+id/election_date"
             android:layout_width="match_parent"
@@ -52,14 +51,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/election_name_toolbar"
             tools:text="Wed Dec 15 00:00:00 EDT 2022" />
-
-        <!-- TODO: Add visual styling and content -->
-
-        <!-- TODO: Add click binding to open web URL -->
-        <!-- TODO: Add visual styling and content -->
-
-        <!-- TODO: Add click binding to open web URL -->
-        <!-- TODO: Add visual styling and content -->
 
         <LinearLayout
             android:id="@+id/state_header_block"

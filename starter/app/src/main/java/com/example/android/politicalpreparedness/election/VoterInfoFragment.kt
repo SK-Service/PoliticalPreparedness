@@ -63,12 +63,12 @@ class VoterInfoFragment : Fragment() {
         binding.buttonFollowElectionToggle.setOnClickListener { view: View? ->
             kotlin.run {
                 Log.i(TAG3, "inside the button follow election toggle on click listener")
-                if (voterInfoViewModel.followElection?.value == true) {
+                if (voterInfoViewModel.followElection.value == true) {
                     Log.i(TAG3, "Change Follow to UnFollow")
 
                     voterInfoViewModel.unFollowElection()
                     binding.buttonFollowElectionToggle.text = "Follow Election"
-                } else if ( voterInfoViewModel.followElection?.value == false) {
+                } else if ( voterInfoViewModel.followElection.value == false) {
                     Log.i(TAG3, "Change UnFollow to Follow")
 
                     voterInfoViewModel.followElection()

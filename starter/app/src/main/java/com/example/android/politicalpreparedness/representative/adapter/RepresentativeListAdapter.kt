@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.representatives_view_item_list.view.*
 
 const val TAG = "RepresentativeRecycler"
 
-class RepresentativeListAdapter() :
+class RepresentativeListAdapter :
     ListAdapter<RepresentativeProfile, RepresentativeViewHolder>
         (RepresentativeDiffCallback) {
 

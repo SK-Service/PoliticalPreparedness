@@ -132,7 +132,8 @@ private fun getRepresentativesProfile(representativeResponse : RepresentativeRes
                 urls = official.urls
             }
 
-            val repProfile = RepresentativeProfile(id, profileImageURL!!,titleName,name, party!!, channels!!, urls)
+            val repProfile = RepresentativeProfile(id, profileImageURL,titleName,name, party!!,
+                channels, urls)
             representativeProfileArray.add(repProfile)
             id++
         }
@@ -168,7 +169,7 @@ fun getCiviRepAPIRepresentativeResponse(input: JSONObject) : RepresentativeRespo
         val division = adapter.divisionFromJson(divisionId)
         val officialIndices = officeJson.getJSONArray("officialIndices")
         Log.i(TAG_Repo1, "officialIndices array size:${officialIndices.length()}")
-        Log.i(TAG_Repo1, "officialIndices:${officialIndices.toString()}")
+        Log.i(TAG_Repo1, "officialIndices:$officialIndices")
         var officialIndicesArray = arrayListOf<Int>()
         for (j in 0 until officialIndices.length()) {
             Log.i(TAG_Repo1, "Inside the for loop to extract official index int-array:[j]=${j}")

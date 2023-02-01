@@ -1,6 +1,6 @@
-package com.example.android.politicalpreparedness.election;
+package com.example.android.politicalpreparedness.election
 
-import android.app.Activity;
+import android.app.Activity
 import android.content.Intent.getIntent
 import android.os.Bundle
 import android.util.Log
@@ -13,7 +13,7 @@ class WebViewActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_web_view)
-        val intent = getIntent()
+        val intent = intent
         val textUrl = intent.getStringExtra("URL")
 
         Log.i("WebViewActivity", "URL to open: ${textUrl}")
